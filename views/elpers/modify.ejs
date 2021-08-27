@@ -1,0 +1,38 @@
+ <% layout('layouts/boilerplate') %> 
+<div class="row">
+    <h1 class="text-center">Modify <%= elper.title %></h1>
+    <div class="col-6 offset-3">
+      <form method="POST" action="/elpers/<%= elper._id %>?_method=PUT" novalidate class="validated">
+        <div class="mb-3">
+        <label for="title" class="form-label">Elp Camp Title</label>
+        <input type="text" class="form-control" name="title" placeholder="elp camp title" value="<%= elper.title %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">location</label>
+        <input type="text" name="location" placeholder="location for elp camp" class="form-control" value="<%= elper.location %> " required>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Describe your Elp camp</label>
+      
+        <textarea name="description"cols="15" rows="5" placeholder="Describe your Elp Camp!" class="form-control" required><%= elper.description %></textarea>
+      </div>
+      <div class="mb-3" >
+        <label for="price" class="form-label">Cost ₹/mo</label>
+        <input class="form-control" type="number" name="price" value="<%= elper.price %>" required>
+      </div>
+      <div class="mb-3" >
+        <label for="img" class="form-label">Upload Or enter a link of your image example "https://myimageshouldbethis.com?image=ad8238afdjka13"</label>
+       
+        <input type="text" class="form-control" value="<%= elper.img %>" name="img" required>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-info" style="color: white">Submit</button>
+        </div>
+    </form>
+    
+    </div>
+  </div>
+  
+    <a href="/elpers/<%= elper._id %>" class="card-footer my-5 btn bg-dark navbar-dark text-muted">Go Back</a>
+</body>
+</html>

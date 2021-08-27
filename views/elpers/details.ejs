@@ -1,0 +1,62 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="row">
+    <div class="col-6">
+        <div class="card mb-3">
+            <img src="<%= elper.img %>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= elper.title %></h5>
+              <p class="card-text"><%= elper.description ? elper.description : ' no description' %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= elper.price %> ₹ / Night</li>
+              <li class="list-group-item text-muted" ><%= elper.location %></li>
+            </ul>
+            <div class="card-body">
+              <a href="/elpers/<%= elper._id %>/modify" class="card-link btn btn-info">Modify</a>
+              <form class="d-inline" method="POST" action="/elpers/<%= elper._id %>?_method=DELETE">
+                <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+          </div>
+          
+          <a href="/elpers" class=" my-5 btn bg-dark navbar-dark text-muted">Go Back</a>
+    </div>
+
+
+<div class="col-6">
+  <h2>Leave a review</h2>
+<form method="POST" action="/elpers/<%= elper._id %>/reviews" novalidate class="validated mb-3">
+<div class="mb-3" >
+  <label for="rating" class="form-label">Rate</label>
+  <input  type="range" name="rating" class="form-range" min="1" max="5" required>
+</div>
+<div class="mb-3">
+  <label class="form-label" for="review">Write A Review</label>
+  <textarea class="form-control" name="review"cols="20" rows="2" placeholder="Describe your Elp Camp Experience"  required></textarea>
+<div class="valid-feedback">
+<h6>Looks good!</h6>
+</div>
+</div> 
+<div class="mb-3">
+  <button class="btn btn-success">Submit</button>
+  </div>
+</form>
+
+  <h3>Reviews</h3>
+  <%   for(let review of elper.review){ %>
+    <div class="mb-3 card">
+     <div class="card-body">
+      <h5 class="card-title">Rating: <%= review.rating %></h5>
+      <p class="card-text">Review: <%= review.review %> </p>
+      <form action="/elpers/<%= elper._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+          <button class="btn btn-sm btn-danger">Delete</button>
+      </form>
+      </div>
+    </div>
+      <% } %> 
+</div>  
+
+
+
+</div>

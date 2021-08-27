@@ -1,0 +1,35 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="row">
+  <h1 class="text-center">Registration</h1>
+  <div class="col-6 offset-3">
+    <form method="POST" action="/user/register" novalidate class="validated">
+      <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" name="email" placeholder="xyz@gmail.com (obviously not this exact email)" required>
+      <div class="valid-feedback">
+        <h6>Looks good!</h6>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" name="username" placeholder="Username" class="form-control" required>
+<div class="valid-feedback">
+  <h6>Looks good!</h6>
+</div>
+    </div>
+<div class="mb-3">
+     <label for="password" class="form-label">Password</label>
+     <input type="password" name="password" placeholder=" " class="form-control" required>
+ <div class="valid-feedback">
+    <h6>Looks good!</h6>
+</div>
+    </div>
+    <div class="mb-3">
+      <button class=" btn btn-success">Submit</button>
+      </div>
+  </form>
+  <a href="/elpers" class="card-footer my-5 btn bg-dark navbar-dark text-muted">Go Back</a>
+  </div>
+</div>
+

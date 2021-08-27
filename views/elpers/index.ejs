@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate') %> 
+<body>
+    <div>
+    <ol>
+    <%   for(let elp of elpers){ %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="<%= elp.img %>" alt="" class="img-fluid">    
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= elp.title %></h5>
+                        <p class="card-text"><%= elp.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted"><%= elp.location %></small>
+                        </p>
+                        <p class="card-text text-muted"><%= elp.price %> ₹/day</p>
+                        <a href="/elpers/<%= elp._id %>" class="btn btn-primary">View <%= elp.title %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %> 
+    
+</div>
+

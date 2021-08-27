@@ -1,0 +1,27 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const Review = require('./review')
+const elperSchema = new Schema({
+    title: String, 
+    price: Number,
+    img: String,
+    description: String,
+    location: String,
+    review:[{
+        type: Schema.Types.ObjectId, 
+        ref: 'Review'
+    }]
+});
+
+elperSchema.post('findOneAndDelete', async function(elpCamp) {
+    if(elpCamp.review.length) {
+         await Review.deleteMany({
+            _id: 
+            { 
+                $in: elpCamp.review
+            } 
+        });
+    }
+});
+
+module.exports = mongoose.model('Elper', elperSchema);
