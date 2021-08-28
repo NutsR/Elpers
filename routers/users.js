@@ -30,7 +30,7 @@ router.post('/register', wrapAsync(async(req, res) => {
     req.login(registered, err => {
         if(err) next(err)
         req.flash('success', 'Welcome to Elpers Camp be Sure to Elp everyone So you can get elp aswell')
-        req.session.loggedIn = true;
+        req.session.loggedIn = req.user._id;
         res.redirect('/elpers')
     } )
     } catch(err){
@@ -42,8 +42,8 @@ router.post('/register', wrapAsync(async(req, res) => {
 
 router.post('/login', passport.authenticate('local', {failureFlash: true}),wrapAsync(async(req, res) => {
     req.flash('success' , 'Elp Camp needs your elp once again')
-    const redirectUrl = req.session.redirectTo || '/elpers'
-    req.session.loggedIn = true;
+    const redirectUrl = req.session.redirectTo || '/elpers' 
+    req.session.loggedIn = req.user._id;
     delete req.session.redirectTo
     res.redirect(redirectUrl);
 }))

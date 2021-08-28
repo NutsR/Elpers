@@ -4,6 +4,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const { reviewSchema } = require('../views/errors/validateSchema');
 const Elper = require('../models/elper.js');
 const Review = require('../models/review.js');
+const {isLoggedIn} = require('../middleware/authLogin');
 
 const validateReviews = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body)
@@ -17,10 +18,11 @@ const validateReviews = (req, res, next) => {
 
 // Review Routes
 
-router.post('/:Id/reviews/', validateReviews ,wrapAsync(async(req, res) => {
+router.post('/:Id/reviews', isLoggedIn, validateReviews ,wrapAsync(async(req, res) => {
     const { Id } = req.params;
     const elper = await Elper.findById(Id)
     const review = new Review(req.body);
+    review.user = req.user._id;
     elper.review.push(review)
     await elper.save()
     await review.save()

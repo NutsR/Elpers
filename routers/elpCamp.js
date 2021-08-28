@@ -4,6 +4,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const { elperSchema } = require('../views/errors/validateSchema');
 const { isLoggedIn } = require('../middleware/authLogin')
 const Elper = require('../models/elper.js');
+const isAuthor = require('../middleware/authOwner');
 
 const validateElpers = (req, res, next) => {
     const { error } = elperSchema.validate(req.body)
@@ -30,16 +31,22 @@ router.get('/create', isLoggedIn, (req,res) => {
 
 router.get('/:id', wrapAsync(async (req, res, next) => {
    const { id } = req.params;
-    const elper = await Elper.findById( id ).populate('review');
+    const elper = await Elper.findById( id )
+	.populate({
+	path: 'review',
+	populate: {path:'user'}
+	})
+	.populate('user');
+console.log(elper)
     if(!elper){
         req.flash('error', 'page requested not found')
-       return res.redirect('/elpers');
+       return res.redirect(`/elpers/${id}`);
     }
     res.render('elpers/details', { elper });
 }));
 
 
-router.get('/:id/modify', wrapAsync(async (req,res) => {
+router.get('/:id/modify', isAuthor,wrapAsync(async (req,res) => {
         const { id } = req.params;
          const elper = await Elper.findById( id );
          if(!elper){
@@ -52,20 +59,21 @@ router.get('/:id/modify', wrapAsync(async (req,res) => {
 
 router.post('/', isLoggedIn, validateElpers ,wrapAsync(async (req,res) => {
     const elpCamp = new Elper(req.body)
+   elpCamp.user = req.user._id
     await elpCamp.save()
     req.flash('success', 'ElpCamp succesfully created')
     res.redirect(`/elpers/${elpCamp._id}`);
 }));
 
-router.put('/:id', isLoggedIn, validateElpers ,wrapAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, isAuthor, validateElpers ,wrapAsync(async (req, res) => {
     const { id } = req.params;
-   const elperModified = await Elper.findByIdAndUpdate(id,req.body);
+const elperModified = await Elper.findByIdAndUpdate(id,req.body);
     req.flash('success', 'ElpCamp successfully modified')
     res.redirect(`/elpers/${elperModified._id}`);
 }));
 
 
-router.delete('/:id', isLoggedIn, wrapAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, isAuthor, wrapAsync(async (req, res) => {
     const { id } = req.params;
    await Elper.findByIdAndDelete(id);
     res.redirect(`/elpers`);

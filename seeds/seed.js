@@ -32,6 +32,7 @@ const seedDB = async () => {
         
        const random400 = Math.floor(Math.random() * 406 );
        const elp = new Elper({
+	user: '6128f6e15241f91d9a5d7ad7',
         title: `${descript} ${place}` ,
         img: 'https://source.unsplash.com/collection/483251/1600x900' ,
         price: `${Math.floor(Math.random() * 1000 ) + 100}`,
