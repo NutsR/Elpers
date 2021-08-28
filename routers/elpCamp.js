@@ -37,10 +37,9 @@ router.get('/:id', wrapAsync(async (req, res, next) => {
 	populate: {path:'user'}
 	})
 	.populate('user');
-console.log(elper)
     if(!elper){
         req.flash('error', 'page requested not found')
-       return res.redirect(`/elpers/${id}`);
+       return res.redirect(`/elpers`);
     }
     res.render('elpers/details', { elper });
 }));
