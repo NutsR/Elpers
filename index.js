@@ -11,7 +11,7 @@ const flash = require('connect-flash');
 const engine = require('ejs-mate');
 const app = express();
 const {isLoggedIn} = require('./middleware/authLogin');
-
+//Free comment
 // require routes
 const elpRoutes = require('./routers/elpCamp');
 const reviewRoutes = require('./routers/review')
