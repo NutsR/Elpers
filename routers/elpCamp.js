@@ -4,7 +4,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const { elperSchema } = require('../views/errors/validateSchema');
 const { isLoggedIn } = require('../middleware/authLogin')
 const Elper = require('../models/elper.js');
-const isAuthor = require('../middleware/authOwner');
+const { isAuthor }= require('../middleware/authOwner');
 
 const validateElpers = (req, res, next) => {
     const { error } = elperSchema.validate(req.body)

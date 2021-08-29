@@ -50,11 +50,14 @@
   <%   for(let review of elper.review){ %>
     <div class="mb-3 card">
      <div class="card-body">
-      <h5 class="card-title">Username:<strong> <%= review.user.username%></strong>,  Rating: <%= review.rating %></h5>
-      <p class="card-text">Review: <%= review.review %> </p>
+      <h5 class="card-title">Rating: <%= review.rating %></h5>
+      <h6 class="card-subtitle muted"><%=review.user.username%></h6>
+	<p class="card-text">Review: <%= review.review %> </p>
+<%if(loggedIn && review.user._id.equals(loggedIn)) {%>
       <form action="/elpers/<%= elper._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
           <button class="btn btn-sm btn-danger">Delete</button>
       </form>
+<%}%>
       </div>
     </div>
       <% } %> 

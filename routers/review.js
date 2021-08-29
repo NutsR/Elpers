@@ -5,6 +5,7 @@ const { reviewSchema } = require('../views/errors/validateSchema');
 const Elper = require('../models/elper.js');
 const Review = require('../models/review.js');
 const {isLoggedIn} = require('../middleware/authLogin');
+const { isReviewAuthor } = require('../middleware/authOwner');
 
 const validateReviews = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body)
@@ -30,14 +31,14 @@ router.post('/:Id/reviews', isLoggedIn, validateReviews ,wrapAsync(async(req, re
     res.redirect(`/elpers/${elper._id}`)
 }));
 
-router.put('/:elperId/reviews/:reviewId', validateReviews, wrapAsync(async(req, res) => {
+router.put('/:elperId/reviews/:reviewId', isLoggedIn, isReviewAuthor, validateReviews, wrapAsync(async(req, res) => {
     const {elperId, reviewId} = req.params;
     const elper = await Elper.findById(elperId)
     const review = await Elper.findByIdAndUpdate(reviewId, req.body)
     res.redirect(`/elpers/${elper._id}`);
 }));
 
-router.delete('/:elperId/reviews/:reviewId', wrapAsync(async(req, res) => {
+router.delete('/:elperId/reviews/:reviewId', isLoggedIn, isReviewAuthor, wrapAsync(async(req, res) => {
     const {elperId, reviewId} = req.params;
     const elper = await Elper.findById(elperId)
     await Elper.findByIdAndUpdate(elperId, { $pull: { review: reviewId } });
