@@ -8,7 +8,7 @@ const { isLoggedIn } = require('../middleware/authLogin');
 const userCtrl = require('../controller/user');
 
 router.route('/register')
-.get( userCtrl.renderRegister))
+.get( userCtrl.renderRegister)
 .post(wrapAsync(userCtrl.registerUser));
 
 router.post('/login', passport.authenticate('local', {failureFlash: true}),wrapAsync(userCtrl.loginUser));

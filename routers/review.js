@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const wrapAsync = require('../utils/wrapAsync');
-const require {validateReviews} = require('../middleware/validate');
+const {validateReviews} = require('../middleware/validate');
 const Elper = require('../models/elper.js');
 const Review = require('../models/review.js');
 const {isLoggedIn} = require('../middleware/authLogin');
