@@ -15,7 +15,7 @@ const {validateElpers} = require('../middleware/validate');
 
 router.route('/')
 .get(wrapAsync(elpCtrl.elpHome))
-.post( isLoggedIn, validateElpers , uploadArray('images'),wrapAsync(elpCtrl.createElpCamp))
+.post( isLoggedIn, upload.array('images'),validateElpers, wrapAsync(elpCtrl.createElpCamp))
 
 router.get('/create', isLoggedIn, elpCtrl.renderCreate);
 

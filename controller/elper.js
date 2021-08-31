@@ -36,7 +36,7 @@ const renderEdit = async (req,res) => {
 const createElpCamp = async (req,res) => {
     const elpCamp = new Elper(req.body)
     elpCamp.images = req.files.map(f => ({url: f.path, filename: f.filename}) )
-   elpCamp.user = req.user._id
+    elpCamp.user = req.user._id
     await elpCamp.save()
     req.flash('success', 'ElpCamp succesfully created')
     res.redirect(`/elpers/${elpCamp._id}`);

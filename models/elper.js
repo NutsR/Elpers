@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Review = require('./review')
 const elperSchema = new Schema({
-    title: String, 
+    title: String,
     price: Number,
     images:[{
     	url: String,
-    	filename: String			
+    	filename: String
     },
   ],
     description: String,

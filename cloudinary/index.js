@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-cloudinary-storage');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 cloudinary.config({
 				cloud_name:process.env.api_name,
@@ -9,9 +9,9 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
 				cloudinary,
-			  params:{  	
+			  params:{
 			    	folder: 'ElpCamp',
-				   allowedFormats : ['jpeg', 'png', 'jpg'];
+				   allowedFormats : ['jpeg', 'png', 'jpg']
 			}
 });
 
