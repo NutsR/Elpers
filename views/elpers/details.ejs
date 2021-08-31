@@ -3,7 +3,9 @@
 <div class="row">
     <div class="col-6">
         <div class="card mb-3">
-            <img src="<%= elper.img %>" class="card-img-top" alt="...">
+        				<%=elper.images.forEach(img => {%>
+            <img src="<%= img.url %>" class="card-img-top" alt="...">
+            <%= }) %>
             <div class="card-body">
               <h5 class="card-title"><%= elper.title %> <%=elper.user.username%></h5>
               <p class="card-text"><%= elper.description ? elper.description : ' no description' %></p>

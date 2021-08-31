@@ -4,7 +4,11 @@ const Review = require('./review')
 const elperSchema = new Schema({
     title: String, 
     price: Number,
-    img: String,
+    images:[{
+    	url: String,
+    	filename: String			
+    },
+  ],
     description: String,
     location: String,
     user:{

@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const { storage } = require('../cloudinary/index');
+const upload = multer({ storage })
+
 const wrapAsync = require('../utils/wrapAsync');
 const { isLoggedIn } = require('../middleware/authLogin');
 const Elper = require('../models/elper.js');
@@ -11,7 +15,7 @@ const {validateElpers} = require('../middleware/validate');
 
 router.route('/')
 .get(wrapAsync(elpCtrl.elpHome))
-.post( isLoggedIn, validateElpers ,wrapAsync(elpCtrl.createElpCamp))
+.post( isLoggedIn, validateElpers , uploadArray('images'),wrapAsync(elpCtrl.createElpCamp))
 
 router.get('/create', isLoggedIn, elpCtrl.renderCreate);
 

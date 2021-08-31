@@ -3,7 +3,7 @@
 <div class="row">
   <h1 class="text-center">New Elp Camp</h1>
   <div class="col-6 offset-3">
-    <form method="POST" action="/elpers" novalidate class="validated">
+    <form method="POST" action="/elpers" novalidate class="validated" enctype="multipart/form-data">
       <div class="mb-3">
       <label for="title" class="form-label">Elp Camp Title</label>
       <input type="text" class="form-control" name="title" placeholder="elp camp title" required>
@@ -33,8 +33,8 @@
 </div>
     </div>
     <div class="mb-3" >
-      <label for="img" class="form-label">Upload Or enter a link of your image example "https://myimageshouldbethis.com?image=ad8238afdjka13"</label>
-      <input type="text" class="form-control" name="img" required>
+      <label for="images" class="form-label">Upload Or enter a link of your image example "https://myimageshouldbethis.com?image=ad8238afdjka13"</label>
+      <input type="file" class="form-control" name="images" required multiple>
 <div class="valid-feedback">
   <h6>Looks good!</h6>
 </div>
