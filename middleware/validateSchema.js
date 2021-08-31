@@ -3,7 +3,6 @@ const Joi = require('joi');
 const elperSchema = Joi.object({
     title: Joi.string().required(),
     price: Joi.number().required().min(20),
-    img: Joi.string().required(),
     description: Joi.string().required(),
     location: Joi.string().required()
 })
