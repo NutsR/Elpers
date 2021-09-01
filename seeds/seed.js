@@ -15,6 +15,18 @@ mongoose.connect('mongodb://127.0.0.1:27017/elpCamp',{
     useUnifiedTopology: true
 } );
 
+
+function makeid(length) { 
+let result = ''; 
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; 
+const charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+   result += characters.charAt(Math.floor(Math.random() *     charactersLength)); 
+      } 
+   return result; 
+  }
+const name = makeid(10);
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -34,7 +46,7 @@ const seedDB = async () => {
        const elp = new Elper({
 	user: '6128f6e15241f91d9a5d7ad7',
         title: `${descript} ${place}` ,
-        img: 'https://source.unsplash.com/collection/483251/1600x900' ,
+        images:[ { url:'https://source.unsplash.com/collection/483251/1600x900', filename: name}]
         price: `${Math.floor(Math.random() * 1000 ) + 100}`,
         description: 'Random text based on your feedback actually we do not really  take your feedback if we like it then we call it a feedback else needless troll no critism allowed here',
         location: `${citiesDB[random400].city}, ${citiesDB[random400].admin_name}`
