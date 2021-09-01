@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Review = require('./review')
+const imageSchema = new Schema({
+			url: String,
+    	filename: String
+});
+imageSchema.virtuals('thumbnail').get(function(){
+				return this.url.replace('/upload', '/upload/w=200')
+})
+
 const elperSchema = new Schema({
     title: String,
     price: Number,
-    images:[{
-    	url: String,
-    	filename: String
-    },
-  ],
+    images:[imageSchema],
     description: String,
     location: String,
     user:{

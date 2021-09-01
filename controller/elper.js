@@ -1,4 +1,5 @@
 const Elper = require('../models/elper.js')
+const { cloudinary } = require('../cloudinary/index')
 const elpHome = async (req, res) => {
 const elpers = await Elper.find({});
 res.render('elpers/index', { elpers });   
@@ -53,6 +54,12 @@ const elperModified = await Elper.findByIdAndUpdate(id, req.body);
     const imageUpload = req.files.map(f => ({url: f.path, filename: f.filename}))
     elper.images.push(...imageUpload);
     await elper.save();
+    if(req.body.deleteImage){
+    for(let imgs of req.body.deleteImage){
+     await cloudinary.uploader.destroy(imgs)
+    }
+    				elper.updateOne({ $pull: { images: { filename {$in req.body.deleteImage } } } }')
+    }
     res.redirect(`/elpers/${id}`)
 }
 

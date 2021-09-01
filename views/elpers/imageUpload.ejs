@@ -8,10 +8,15 @@
         <input type="file" class="form-control" name="images" required mutiple>
    <br>
   <h3>Images</h3>
-   <% elper.images.forEach((img) => { %>			
+   <% elper.images.forEach((img, i) => { %>			
 	<div>
-         <img width="65%" src="<%= img.url %>" alt="n">
+         <img src="<%= img.thumbnail %>" alt="n">
+         
+         <div class="form-check-inline">
+        <input type="checkbox" name:"deleteImage[] id="image-<%=i%>" value="<%=img.filename%>">
          </div>
+          <label for-image-<%=i%>">Delete Image</label>
+        </div>
      <% }) %>
         
       </div>
