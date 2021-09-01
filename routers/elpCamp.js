@@ -21,9 +21,13 @@ router.get('/create', isLoggedIn, elpCtrl.renderCreate);
 
 router.route('/:id')
 .get(wrapAsync(elpCtrl.renderDetails))
-.put(isLoggedIn, isAuthor, validateElpers ,wrapAsync(elpCtrl.editElpCamp))
+.put(isLoggedIn, isAuthor, validateElpers,wrapAsync(elpCtrl.editElpCamp))
 .delete(isLoggedIn, isAuthor, wrapAsync(elpCtrl.deleteElpCamp))
 
+router.put('/:id/upload', isLoggedIn, isAuthor, upload.array('images'), wrapAsync(elpCtrl.editElpCamp))
+
 router.get('/:id/modify', isAuthor,wrapAsync(elpCtrl.renderEdit));
+
+router.get('/:id/images', isAuthor, wrapAsync(elpCtrl.renderImageUpload))
 module.exports = router;
 
