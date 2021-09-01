@@ -44,9 +44,22 @@ const createElpCamp = async (req,res) => {
 
 const editElpCamp = async (req, res) => {
     const { id } = req.params;
-const elperModified = await Elper.findByIdAndUpdate(id,req.body);
+    if(!req.files){
+const elperModified = await Elper.findByIdAndUpdate(id, req.body);
     req.flash('success', 'ElpCamp successfully modified')
-    res.redirect(`/elpers/${elperModified._id}`);
+   return res.redirect(`/elpers/${elperModified._id}`);
+    }
+    const elper = await Elper.findById(id); 
+    const imageUpload = req.files.map(f => ({url: f.path, filename: f.filename}))
+    elper.images.push(...imageUpload);
+    await elper.save();
+    res.redirect(`/elpers/${id}`)
+}
+
+const renderImageUpload = async(req, res) => {
+				const { id } = req.params;
+				const elper = await Elper.findById(id);
+				res.render('elper/imageUpload', { elper });
 }
 
 const deleteElpCamp = async (req, res) => {
@@ -54,4 +67,4 @@ const deleteElpCamp = async (req, res) => {
    await Elper.findByIdAndDelete(id);
     res.redirect(`/elpers`);
 }
-module.exports = { elpHome, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, deleteElpCamp};
+module.exports = { elpHome, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, renderImageUpload, deleteElpCamp};
