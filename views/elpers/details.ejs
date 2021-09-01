@@ -5,11 +5,12 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
 <% elper.images.forEach((img, i) => {%>
-    <div class="carousel-item <%= i === 1 ? 'active' : '' %>">
+    <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
       <img class="d-block w-100" src="<%=img.url%>" alt="First slide">
    </div>
 <% }) %>
   </div>
+<% if(elper.images.length > 1) {%>
 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
@@ -18,6 +19,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+<% } %>
 </div>
         <div class="card mb-3">
                        <div class="card-body">
@@ -31,7 +33,8 @@
 	<% if(loggedIn && elper.user._id.equals(loggedIn)) { %>
             <div class="card-body">
               <a href="/elpers/<%= elper._id %>/modify" class="card-link btn btn-info">Modify</a>
-              <form class="d-inline" method="POST" action="/elpers/<%= elper._id %>?_method=DELETE">
+             <a href="/elpers/<%=elper._id%>/images" class="card-link btn btn-info my-3">Images</a>
+ <form class="d-inline" method="POST" action="/elpers/<%= elper._id %>?_method=DELETE">
                 <button class="btn btn-danger">Delete</button>
                 </form>
             </div>

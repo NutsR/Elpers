@@ -26,8 +26,8 @@ router.route('/:id')
 
 router.put('/:id/upload', isLoggedIn, isAuthor, upload.array('images'), wrapAsync(elpCtrl.editElpCamp))
 
-router.get('/:id/modify', isAuthor,wrapAsync(elpCtrl.renderEdit));
+router.get('/:id/modify',isLoggedIn,  isAuthor,wrapAsync(elpCtrl.renderEdit));
 
-router.get('/:id/images', isAuthor, wrapAsync(elpCtrl.renderImageUpload))
+router.get('/:id/images', isLoggedIn, isAuthor, wrapAsync(elpCtrl.renderImageUpload))
 module.exports = router;
 

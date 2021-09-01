@@ -59,7 +59,7 @@ const elperModified = await Elper.findByIdAndUpdate(id, req.body);
 const renderImageUpload = async(req, res) => {
 				const { id } = req.params;
 				const elper = await Elper.findById(id);
-				res.render('elper/imageUpload', { elper });
+				res.render('elpers/imageUpload', { elper });
 }
 
 const deleteElpCamp = async (req, res) => {

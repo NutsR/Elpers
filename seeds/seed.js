@@ -46,7 +46,7 @@ const seedDB = async () => {
        const elp = new Elper({
 	user: '6128f6e15241f91d9a5d7ad7',
         title: `${descript} ${place}` ,
-        images:[ { url:'https://source.unsplash.com/collection/483251/1600x900', filename: name}]
+        images:[ { url:'https://source.unsplash.com/collection/483251/1600x900', filename: name}],
         price: `${Math.floor(Math.random() * 1000 ) + 100}`,
         description: 'Random text based on your feedback actually we do not really  take your feedback if we like it then we call it a feedback else needless troll no critism allowed here',
         location: `${citiesDB[random400].city}, ${citiesDB[random400].admin_name}`
