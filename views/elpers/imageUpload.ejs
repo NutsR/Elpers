@@ -5,7 +5,7 @@
       <form method="POST" action="/elpers/<%= elper._id %>/upload?_method=PUT" novalidate class="validated" enctype="multipart/form-data">
       <div class="mb-3" >
         <label for="images" class="form-label">Upload Or enter a link of your image example "https://myimageshouldbethis.com?image=ad8238afdjka13"</label>
-        <input type="file" class="form-control" name="images" required>
+        <input type="file" class="form-control" name="images" required mutiple>
    <br>
   <h3>Images</h3>
    <% elper.images.forEach((img) => { %>			
