@@ -5,8 +5,8 @@ const imageSchema = new Schema({
 			url: String,
     	filename: String
 });
-imageSchema.virtuals('thumbnail').get(function(){
-				return this.url.replace('/upload', '/upload/w=200')
+imageSchema.virtual('thumbnail').get(function(){
+				return this.url.replace('/upload', '/upload/w_200')
 })
 
 const elperSchema = new Schema({
@@ -14,6 +14,18 @@ const elperSchema = new Schema({
     price: Number,
     images:[imageSchema],
     description: String,
+    geometry: {
+       	type: {
+         type: String,
+         enum:['Point'],
+         required: true
+     },
+       coordinates: {
+	  type: [Number],
+	   required: true
+	}
+	   },
+
     location: String,
     user:{
 	type: Schema.Types.ObjectId,

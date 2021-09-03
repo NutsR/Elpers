@@ -1,5 +1,10 @@
 const Elper = require('../models/elper.js')
 const { cloudinary } = require('../cloudinary/index')
+const  mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
+const mapboxToken = process.env.mapbox_token;
+const geocoding = mbxGeocoding({ accessToken: mapboxToken });
+
+
 const elpHome = async (req, res) => {
 const elpers = await Elper.find({});
 res.render('elpers/index', { elpers });   
@@ -35,6 +40,11 @@ const renderEdit = async (req,res) => {
 }
 
 const createElpCamp = async (req,res) => {
+    const geoLocation = await geocoding.forwardGeocode({
+   query: req.body.location,
+   limit : 2
+}).send()
+   req.body.geometry = geoLocation.body.features[0].geometry
     const elpCamp = new Elper(req.body)
     elpCamp.images = req.files.map(f => ({url: f.path, filename: f.filename}) )
     elpCamp.user = req.user._id
@@ -58,7 +68,7 @@ const elperModified = await Elper.findByIdAndUpdate(id, req.body);
     for(let imgs of req.body.deleteImage){
      await cloudinary.uploader.destroy(imgs)
     }
-    				elper.updateOne({ $pull: { images: { filename {$in req.body.deleteImage } } } }')
+    			await elper.updateOne({ $pull: { images: { filename: {$in: req.body.deleteImage } } } } )
     }
     res.redirect(`/elpers/${id}`)
 }
