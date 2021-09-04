@@ -17,6 +17,7 @@ const flash = require('connect-flash');
 const engine = require('ejs-mate');
 const app = express();
 const {isLoggedIn} = require('./middleware/authLogin');
+const Elper = require('./models/elper')
 //Free comment
 // require routes
 const elpRoutes = require('./routers/elpCamp');
@@ -83,7 +84,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 //Routes
 app.get('/', (req, res) => {
-    res.redirect('/elpers');
+  const elpers = await Elper.find({});
+    res.render('elpers/home', { elpers })
 });
 app.use('/u(ser)?', userRoutes);
 app.use('/elpers', elpRoutes, reviewRoutes);

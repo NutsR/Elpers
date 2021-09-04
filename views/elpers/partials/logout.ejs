@@ -1,0 +1,12 @@
+  <form id="logout" action="/u/logout" method="POST">
+    <li class="nav-item">
+      <a class="nav-link" id="submit">Logout</a>
+    </li>
+    </form>
+    
+<script>
+  const logoutForm = document.querySelector('#logout');
+  document.querySelector('#submit').addEventListener('click',() => {
+    logoutForm.submit();
+  })
+</script>
