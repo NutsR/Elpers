@@ -1,7 +1,7 @@
  <% layout('layouts/boilerplate') %> 
 <div class="row">
     <h1 class="text-center">Modify <%= elper.title %></h1>
-    <div class="col-6 offset-3">
+    <div class="col-md-6 offset-md-3">
       <form method="POST" action="/elpers/<%= elper._id %>?_method=PUT" novalidate class="validated">
         <div class="mb-3">
         <label for="title" class="form-label">Elp Camp Title</label>

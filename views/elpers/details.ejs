@@ -46,6 +46,7 @@
 
 
 <div class="col-6">
+  <div id='map' class="map-details"></div>
 <%if(loggedIn){ %> 
  <h2>Leave a review</h2>
 <form method="POST" action="/elpers/<%= elper._id %>/reviews" novalidate class="validated mb-3">
@@ -88,7 +89,6 @@
 </div>
 
 
-<div id='map' style='width: 400px; height: 300px;'></div>
 <script>
 const token = '<%-process.env.mapbox_token%>';
 const coord = <%-JSON.stringify(elper)%>

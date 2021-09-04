@@ -5,6 +5,8 @@
     center: coord.geometry.coordinates,
     zoom: 15
   });
+  
+  map.addControl(new mapboxgl.NavigationControl());
 
  new mapboxgl.Marker({
 	color: "#00008b"
