@@ -83,7 +83,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 //Routes
-app.get('/', (req, res) => {
+app.get('/', async(req, res) => {
   const elpers = await Elper.find({});
     res.render('elpers/home', { elpers })
 });
