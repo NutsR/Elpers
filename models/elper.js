@@ -9,6 +9,8 @@ imageSchema.virtual('thumbnail').get(function(){
 				return this.url.replace('/upload', '/upload/w_200')
 })
 
+const opts =  { toJSON : {virtuals: true} }
+
 const elperSchema = new Schema({
     title: String,
     price: Number,
@@ -35,7 +37,12 @@ const elperSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Review'
     }]
-});
+}, opts);
+
+elperSchema.virtual('properties.popupText').get(function(){
+return `<h5>${this.title}</h5><p>${this.location} <a href="/elpers/${this._id}">View more...</a></p>`
+})
+
 
 elperSchema.post('findOneAndDelete', async function(elpCamp) {
     if(elpCamp.review.length) {

@@ -89,5 +89,9 @@
 
 
 <div id='map' style='width: 400px; height: 300px;'></div>
-<script>const coord = <%-JSON.stringify(elper)%>.geometry.coordinates</script>
+<script>
+const token = '<%-process.env.mapbox_token%>';
+const coord = <%-JSON.stringify(elper)%>
+</script>
 <script src="/javascript/mapbox.js"></script>
+
