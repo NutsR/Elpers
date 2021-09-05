@@ -17,6 +17,8 @@ router.route('/')
 .get(wrapAsync(elpCtrl.elpHome))
 .post( isLoggedIn, upload.array('images'),validateElpers, wrapAsync(elpCtrl.createElpCamp))
 
+router.get('/search',wrapAsync( elpCtrl.searchCamp));
+
 router.get('/create', isLoggedIn, elpCtrl.renderCreate);
 
 router.route('/:id')

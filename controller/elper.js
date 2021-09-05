@@ -3,12 +3,23 @@ const { cloudinary } = require('../cloudinary/index')
 const  mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const mapboxToken = process.env.mapbox_token;
 const geocoding = mbxGeocoding({ accessToken: mapboxToken });
-
+let elperIds =[];
 
 const elpHome = async (req, res) => {
-const elpers = await Elper.find({});
+const elpers = await Elper.find({_ids: {$nin: elperIds}})
+
 res.render('elpers/index', { elpers });   
 }
+
+const searchCamp = async (req, res) => {
+if(req.query.search){
+const elpers = await Elper.find({location:{$regex: req.query.search, $options: 'i'}})
+return res.render('elpers/index', { elpers })
+}
+req.flash('error', 'no search params')
+res.redirect('/elpers')
+}
+
 
 const renderCreate = (req,res) => {
     res.render('elpers/create');
@@ -42,7 +53,7 @@ const renderEdit = async (req,res) => {
 const createElpCamp = async (req,res) => {
     const geoLocation = await geocoding.forwardGeocode({
    query: req.body.location,
-   limit : 2
+   limit : 1
 }).send()
    req.body.geometry = geoLocation.body.features[0].geometry
     const elpCamp = new Elper(req.body)
@@ -54,6 +65,11 @@ const createElpCamp = async (req,res) => {
 }
 
 const editElpCamp = async (req, res) => {
+   const geoLocation = await geocoding.forwardGeocode({
+   query: req.body.location,
+   limit : 1
+}).send()
+   req.body.geometry = geoLocation.body.features[0].geometry
     const { id } = req.params;
     if(!req.files){
 const elperModified = await Elper.findByIdAndUpdate(id, req.body);
@@ -84,4 +100,4 @@ const deleteElpCamp = async (req, res) => {
    await Elper.findByIdAndDelete(id);
     res.redirect(`/elpers`);
 }
-module.exports = { elpHome, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, renderImageUpload, deleteElpCamp};
+module.exports = { elpHome,searchCamp, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, renderImageUpload, deleteElpCamp};

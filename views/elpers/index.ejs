@@ -1,8 +1,14 @@
 <% layout('layouts/boilerplate') %> 
-<div id="map" class="map-cluster"></div>
-    <div>
-    <ol>
-    <%   for(let elp of elpers){ %>
+<div id="map" class="map-cluster mb-3"></div>
+    <div> 
+<div class="card-body my-3">
+ <form action="/elpers/search?" method="get">
+<label class="card-title" for="search">Search</label>
+          <input type="text" name="search">
+          <button class="btn btn-primary">Sumbit</button>
+       </form>
+</div>
+  <% if(elpers instanceof Array){ for(let elp of elpers){ %>
         <div class="card mb-3">
             <div class="row">
                 <div class="col-md-4">
@@ -21,12 +27,31 @@
                 </div>
             </div>
         </div>
-        <% } %> 
-    
+        <% } }else { %>
+    <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="<%= elpers.images[0].url %>" alt="" class="img-fluid">    
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= elpers.title %></h5>
+                        <p class="card-text"><%= elpers.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted"><%= elpers.location %></small>
+                        </p>
+                        <p class="card-text text-muted"><%= elpers.price %> ₹/day</p>
+                        <a href="/elpers/<%= elpers._id %>" class="btn btn-primary">View <%= elpers.title %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
 </div>
 
 <script>
 const token = '<%-process.env.mapbox_token%>'
+const elp = <%- JSON.stringify(elpers) %>
 const elpers = {features: <%- JSON.stringify(elpers) %>}
 </script>
 <script src="/javascript/clusterMap.js"></script>
