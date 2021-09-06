@@ -48,7 +48,11 @@
         </div>
     <% } %>
 </div>
-
+<form id="noredirect" action="/elpers" method="get">
+<%limit += 20%>
+<input type="hidden" name="limit" value=<%=limit%>>
+<button class="btn btn-secondary">Load more</button>
+</form>
 <script>
 const token = '<%-process.env.mapbox_token%>'
 const elp = <%- JSON.stringify(elpers) %>

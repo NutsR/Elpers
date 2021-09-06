@@ -5,10 +5,15 @@ const mapboxToken = process.env.mapbox_token;
 const geocoding = mbxGeocoding({ accessToken: mapboxToken });
 let elperIds =[];
 
-const elpHome = async (req, res) => {
-const elpers = await Elper.find({_ids: {$nin: elperIds}})
+const elpHome = async (req, res) => { 
 
-res.render('elpers/index', { elpers });   
+let limit = 20;
+if(req.query.limit){
+ limit = parseInt(req.query.limit)
+console.log(limit)
+ }
+const elpers = await Elper.find({}).limit(limit)
+res.render('elpers/index', { elpers, limit });
 }
 
 const searchCamp = async (req, res) => {
@@ -17,7 +22,7 @@ const elpers = await Elper.find({location:{$regex: req.query.search, $options: '
 return res.render('elpers/index', { elpers })
 }
 req.flash('error', 'no search params')
-res.redirect('/elpers')
+res.end()
 }
 
 
