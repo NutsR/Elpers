@@ -21,19 +21,19 @@
   </button>
 <% } %>
 </div>
-        <div class="card mb-3">
+        <div class="card mb-3 bg-dark text-light">
                        <div class="card-body">
               <h5 class="card-title"><%= elper.title %> <%=elper.user.username%></h5>
               <p class="card-text"><%= elper.description ? elper.description : ' no description' %></p>
             </div>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush bg-dark text-light">
               <li class="list-group-item"><%= elper.price %> ₹ / Night</li>
               <li class="list-group-item text-muted" ><%= elper.location %></li>
             </ul>
 	<% if(loggedIn && elper.user._id.equals(loggedIn)) { %>
             <div class="card-body">
               <a href="/elpers/<%= elper._id %>/modify" class="card-link btn btn-info">Modify</a>
-             <a href="/elpers/<%=elper._id%>/images" class="card-link btn btn-info my-3">Images</a>
+             <a href="/elpers/<%=elper._id%>/images" class="card-link btn btn-info mx-auto my-3">Images</a>
  <form class="d-inline" method="POST" action="/elpers/<%= elper._id %>?_method=DELETE">
                 <button class="btn btn-danger">Delete</button>
                 </form>
@@ -45,7 +45,7 @@
     </div>
 
 
-<div class="col-6">
+<div class="col-6 bg-dark text-light">
   <div id='map' class="map-details"></div>
 <%if(loggedIn){ %> 
  <h2>Leave a review</h2>
@@ -68,7 +68,7 @@
 <% } %>
   <h3>Reviews</h3>
   <%   for(let review of elper.review){ %>
-    <div class="mb-3 card">
+    <div class="mb-3 card bg-dark text-light">
      <div class="card-body">
       <h5 class="card-title">Rating: <%= review.rating %></h5>
       <h6 class="card-subtitle muted"><%=review.user.username%></h6>

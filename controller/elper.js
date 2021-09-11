@@ -4,9 +4,7 @@ const  mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const mapboxToken = process.env.mapbox_token;
 const geocoding = mbxGeocoding({ accessToken: mapboxToken });
 let elperIds =[];
-
 const elpHome = async (req, res) => { 
-
 let limit = 20;
 if(req.query.limit){
  limit = parseInt(req.query.limit)
@@ -22,9 +20,14 @@ const elpers = await Elper.find({location:{$regex: req.query.search, $options: '
 return res.render('elpers/index', { elpers })
 }
 req.flash('error', 'no search params')
-res.end()
+res.redirect('/elpers');
+return;
 }
 
+const postSearch = (req, res) => {
+console.log(req.body)
+res.send({'result': 'value'});
+}
 
 const renderCreate = (req,res) => {
     res.render('elpers/create');
@@ -70,13 +73,13 @@ const createElpCamp = async (req,res) => {
 }
 
 const editElpCamp = async (req, res) => {
+    const { id } = req.params;
+    if(!req.files){
    const geoLocation = await geocoding.forwardGeocode({
    query: req.body.location,
    limit : 1
 }).send()
    req.body.geometry = geoLocation.body.features[0].geometry
-    const { id } = req.params;
-    if(!req.files){
 const elperModified = await Elper.findByIdAndUpdate(id, req.body);
     req.flash('success', 'ElpCamp successfully modified')
    return res.redirect(`/elpers/${elperModified._id}`);
@@ -105,4 +108,4 @@ const deleteElpCamp = async (req, res) => {
    await Elper.findByIdAndDelete(id);
     res.redirect(`/elpers`);
 }
-module.exports = { elpHome,searchCamp, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, renderImageUpload, deleteElpCamp};
+module.exports = { elpHome,searchCamp, postSearch, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, renderImageUpload, deleteElpCamp};

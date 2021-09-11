@@ -17,7 +17,9 @@ router.route('/')
 .get(wrapAsync(elpCtrl.elpHome))
 .post( isLoggedIn, upload.array('images'),validateElpers, wrapAsync(elpCtrl.createElpCamp))
 
-router.get('/search',wrapAsync( elpCtrl.searchCamp));
+router.route('/search')
+.get(wrapAsync( elpCtrl.searchCamp))
+.post(wrapAsync(elpCtrl.postSearch))
 
 router.get('/create', isLoggedIn, elpCtrl.renderCreate);
 

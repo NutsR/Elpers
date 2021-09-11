@@ -40,7 +40,7 @@ const elperSchema = new Schema({
 }, opts);
 
 elperSchema.virtual('properties.popupText').get(function(){
-return `<h5>${this.title}</h5><p>${this.location} <a href="/elpers/${this._id}">View more...</a></p>`
+return `<h5>${this.title}</h5><p>${this.location} <a style="color: black;"  href="/elpers/${this._id}">View more...</a></p>`
 })
 
 

@@ -7,7 +7,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const path = require('path');
-
+const cors = require('cors')
 // express helpers **maybe not sure what to call these**
 const session = require('express-session');
 const passport = require('passport');
@@ -25,7 +25,11 @@ const reviewRoutes = require('./routers/review')
 const userRoutes = require('./routers/users')
 
 // Utilities
-const OnError = require('./utils/OnError');
+const OnError = require('./utils/OnError');/*
+app.use(cors({
+  origin : 'http://localhost:3000',
+  credentials: true, // <= Accept credentials (cookies) sent by the client
+}))*/
 
 // models
 const User = require('./models/user')
@@ -45,11 +49,12 @@ db.once('open', () => {
 
 // Middleware stuff and app.set and engine
 app.use(methodOverride('_method'));
-app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json())
+
 
 app.use(session({
-        // name: 'free cookies',
+        name: 'free cookies',
         secret: 'idgafsodgaf',
         resave: true,
         httpOnly: true,
@@ -71,10 +76,15 @@ passport.deserializeUser(User.deserializeUser());
 app.use(flash());
 app.use((req, res, next) => {
     res.locals.loggedIn = req.session.loggedIn;
+console.log(res.locals.loggedIn)
     res.locals.notice = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 })
+
+app.use(express.urlencoded({extended: true}));
+
+
 
 //engine and view
 app.engine('ejs', engine);

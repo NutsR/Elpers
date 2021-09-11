@@ -9,7 +9,7 @@
        </form>
 </div>
   <% if(elpers instanceof Array){ for(let elp of elpers){ %>
-        <div class="card mb-3">
+        <div class="card mb-3 text-light bg-dark">
             <div class="row">
                 <div class="col-md-4">
                     <img src="<%= elp.images[0].url %>" alt="" class="img-fluid">    
@@ -28,7 +28,7 @@
             </div>
         </div>
         <% } }else { %>
-    <div class="card mb-3">
+    <div class="card mb-3 bg-dark text-light">
             <div class="row">
                 <div class="col-md-4">
                     <img src="<%= elpers.images[0].url %>" alt="" class="img-fluid">    
@@ -48,14 +48,11 @@
         </div>
     <% } %>
 </div>
-<form id="noredirect" action="/elpers" method="get">
-<%limit += 20%>
-<input type="hidden" name="limit" value=<%=limit%>>
-<button class="btn btn-secondary">Load more</button>
-</form>
+
+<input type="text" name="result" onkeyup="searchResults(this)">
+<script src="/javascript/search.js"></script>
 <script>
 const token = '<%-process.env.mapbox_token%>'
-const elp = <%- JSON.stringify(elpers) %>
 const elpers = {features: <%- JSON.stringify(elpers) %>}
 </script>
 <script src="/javascript/clusterMap.js"></script>
