@@ -1,13 +1,13 @@
 <% layout('layouts/boilerplate') %> 
-<div id="map" class="map-cluster mb-3"></div>
-    <div> 
+<div id="map" class="map-cluster text-dark  mb-3"></div>
+
 <div class="card-body my-3">
  <form action="/elpers/search?" method="get">
 <label class="card-title" for="search">Search</label>
           <input type="text" name="search">
           <button class="btn btn-primary">Sumbit</button>
        </form>
-</div>
+      
   <% if(elpers instanceof Array){ for(let elp of elpers){ %>
         <div class="card mb-3 text-light bg-dark">
             <div class="row">
@@ -48,9 +48,11 @@
         </div>
     <% } %>
 </div>
-
-<input type="text" name="result" onkeyup="searchResults(this)">
-<script src="/javascript/search.js"></script>
+ <button id="page-1" class="btn btn-secondary">Load more</button>
+<script>let currentPage = parseInt('<%-page%>');
+        console.log(currentPage)
+</script>
+<script src="/javascript/infScroll.js"></script>
 <script>
 const token = '<%-process.env.mapbox_token%>'
 const elpers = {features: <%- JSON.stringify(elpers) %>}

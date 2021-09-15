@@ -46,7 +46,7 @@
 
 
 <div class="col-6 bg-dark text-light">
-  <div id='map' class="map-details"></div>
+  <div id='map' class="map-details text-dark"></div>
 <%if(loggedIn){ %> 
  <h2>Leave a review</h2>
 <form method="POST" action="/elpers/<%= elper._id %>/reviews" novalidate class="validated mb-3">
@@ -74,20 +74,33 @@
       <h6 class="card-subtitle muted"><%=review.user.username%></h6>
 	<p class="card-text">Review: <%= review.review %> </p>
 <%if(loggedIn && review.user._id.equals(loggedIn)) {%>
+      <button id="btn<%=review._id%>" class="btn btn-dark">Edit</button>
       <form action="/elpers/<%= elper._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
           <button class="btn btn-sm btn-danger">Delete</button>
       </form>
 <%}%>
       </div>
     </div>
+   <div id="hidden<%=review._id%>" style="display: none;">
+ <form action="/elpers/<%=elper._id%>/reviews/<%=review._id%>?_method=PUT" method="POST">
+   <label for="review">Edit Review</label>
+    <input type="text" value="<%=review.review%>" name="review">
+    <button class="btn btn-secondary">Submit</button>
+</form>
+</div>
+<script>
+    document.getElementById('btn<%=review._id%>').addEventListener('click', () => {
+        document.getElementById('hidden<%=review._id%>').style.display = 'block'
+})
+</script>
       <% } %> 
+
 
 </div>  
 
 
 
 </div>
-
 
 <script>
 const token = '<%-process.env.mapbox_token%>';

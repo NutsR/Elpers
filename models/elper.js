@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Review = require('./review')
 const imageSchema = new Schema({
 			url: String,
@@ -55,4 +56,5 @@ elperSchema.post('findOneAndDelete', async function(elpCamp) {
     }
 });
 
+elperSchema.plugin(mongoosePaginate)
 module.exports = mongoose.model('Elper', elperSchema);

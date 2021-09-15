@@ -18,6 +18,7 @@ const engine = require('ejs-mate');
 const app = express();
 const {isLoggedIn} = require('./middleware/authLogin');
 const Elper = require('./models/elper')
+const mongoSanitize = require('express-mongo-sanitize');
 //Free comment
 // require routes
 const elpRoutes = require('./routers/elpCamp');
@@ -50,7 +51,8 @@ db.once('open', () => {
 // Middleware stuff and app.set and engine
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json())
+app.use(mongoSanitize())
+
 
 
 app.use(session({
@@ -76,13 +78,13 @@ passport.deserializeUser(User.deserializeUser());
 app.use(flash());
 app.use((req, res, next) => {
     res.locals.loggedIn = req.session.loggedIn;
-console.log(res.locals.loggedIn)
     res.locals.notice = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 })
-
+app.use(express.json())
 app.use(express.urlencoded({extended: true}));
+
 
 
 
@@ -92,6 +94,10 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.post('/route', (req, res) => {
+console.log(req.body);
+ res.send({result: 'value'})
+});
 //Routes
 app.get('/', async(req, res) => {
   const elpers = await Elper.find({});

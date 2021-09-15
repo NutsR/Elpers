@@ -12,6 +12,14 @@ const createReview = async(req, res) => {
     res.redirect(`/elpers/${elper._id}`)
 }
 
+
+const updateReview = async(req, res) => {
+const {elperId, reviewId} = req.params;
+const review = await Review.findByIdAndUpdate(reviewId, req.body)
+req.flash('success', 'updated')
+res.redirect(`/elpers/${elperId}`)
+}
+
 const deleteReview = async(req, res) => {
     const {elperId, reviewId} = req.params;
     const elper = await Elper.findById(elperId)
@@ -21,4 +29,4 @@ const deleteReview = async(req, res) => {
     res.redirect(`/elpers/${elper._id}`);
 }
 
-module.exports = { createReview, deleteReview }
+module.exports = { createReview, deleteReview, updateReview }

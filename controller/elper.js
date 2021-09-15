@@ -6,12 +6,10 @@ const geocoding = mbxGeocoding({ accessToken: mapboxToken });
 let elperIds =[];
 const elpHome = async (req, res) => { 
 let limit = 20;
-if(req.query.limit){
- limit = parseInt(req.query.limit)
-console.log(limit)
- }
-const elpers = await Elper.find({}).limit(limit)
-res.render('elpers/index', { elpers, limit });
+const elper = await Elper.paginate({},{ page: 1, limit: limit})
+const elpers = elper.docs;
+const page = elper.page
+res.render('elpers/index', { elpers, limit , page});
 }
 
 const searchCamp = async (req, res) => {
@@ -24,10 +22,13 @@ res.redirect('/elpers');
 return;
 }
 
-const postSearch = (req, res) => {
-console.log(req.body)
-res.send({'result': 'value'});
+const postSearch = async (req, res) => {
+const limit = 20;
+if(req.body.page){
+const elper = await Elper.paginate({}, { page: req.body.page, limit: limit});
+return res.json(elper)
 }
+};
 
 const renderCreate = (req,res) => {
     res.render('elpers/create');
