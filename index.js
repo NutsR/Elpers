@@ -2,7 +2,6 @@ if(process.env.NODE_ENV !== 'production'){
 				require('dotenv').config()
 }
 
-const helpme = "just kidding test var"
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
