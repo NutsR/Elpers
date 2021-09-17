@@ -13,11 +13,12 @@ res.render('elpers/index', { elpers, limit , page});
 }
 
 const searchCamp = async (req, res) => {
-if(req.query.search){
+if(req.query.search.length >= 3){
+const page = false;
 const elpers = await Elper.find({location:{$regex: req.query.search, $options: 'i'}})
-return res.render('elpers/index', { elpers })
+return res.render('elpers/index', { elpers, page })
 }
-req.flash('error', 'no search params')
+req.flash('error', 'Please enter a more specific location')
 res.redirect('/elpers');
 return;
 }
@@ -29,6 +30,17 @@ const elper = await Elper.paginate({}, { page: req.body.page, limit: limit});
 return res.json(elper)
 }
 };
+
+const sortElpers = async(req, res) => {
+if(req.body.page){
+const elpers = await Elper.paginate({},{ page: req.body.page, limit: 20, sort: req.body.sort})
+res.send(elpers)
+} else {
+const elpers = await Elper.paginate({}, {page: 1, limit: 20, sort: req.body.sort});
+res.send(elpers);
+}
+}
+
 
 const renderCreate = (req,res) => {
     res.render('elpers/create');
@@ -109,4 +121,4 @@ const deleteElpCamp = async (req, res) => {
    await Elper.findByIdAndDelete(id);
     res.redirect(`/elpers`);
 }
-module.exports = { elpHome,searchCamp, postSearch, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, renderImageUpload, deleteElpCamp};
+module.exports = { elpHome,searchCamp, postSearch, sortElpers, renderCreate, renderDetails, renderEdit, createElpCamp, editElpCamp, renderImageUpload, deleteElpCamp};

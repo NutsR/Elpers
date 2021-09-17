@@ -21,6 +21,8 @@ router.route('/search')
 .get(wrapAsync( elpCtrl.searchCamp))
 .post(wrapAsync(elpCtrl.postSearch))
 
+router.post('/sortElpers', wrapAsync(elpCtrl.sortElpers));
+
 router.get('/create', isLoggedIn, elpCtrl.renderCreate);
 
 router.route('/:id')

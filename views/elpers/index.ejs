@@ -3,11 +3,22 @@
 
 <div class="card-body my-3">
  <form action="/elpers/search?" method="get">
-<label class="card-title" for="search">Search</label>
+<label class="card-title" for="search">Enter Location to Search</label>
           <input type="text" name="search">
-          <button class="btn btn-primary">Sumbit</button>
+          <button class="btn btn-primary">Submit</button>
        </form>
-      
+<br>
+      <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Filter By:
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><button id="price-low" class="dropdown-item">Sort By Price(Low to High)</button></li>
+  </ul>
+</div>
+<script> let currentPage; </script>
+<br>
+<section class="section-elp">
   <% if(elpers instanceof Array){ for(let elp of elpers){ %>
         <div class="card mb-3 text-light bg-dark">
             <div class="row">
@@ -47,13 +58,18 @@
             </div>
         </div>
     <% } %>
+   </section>
 </div>
- <button id="page-1" class="btn btn-secondary">Load more</button>
-<script>let currentPage = parseInt('<%-page%>');
+<script src="/javascript/sortFilter.js"></script>
+<br>
+<section class="infScroll">
+ <button id="page-1" class="btn btn-secondary mx-auto">Load more</button>
+<script> currentPage = parseInt('<%-page%>');
         console.log(currentPage)
 </script>
 <script src="/javascript/infScroll.js"></script>
-<script>
+</section>
+<script>  
 const token = '<%-process.env.mapbox_token%>'
 const elpers = {features: <%- JSON.stringify(elpers) %>}
 </script>

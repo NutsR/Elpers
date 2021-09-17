@@ -31,7 +31,7 @@ if(data.hasNextPage){
             </div>
         </div>`;
   div.innerHTML = newElper;
-document.querySelector('.card-body').append(div)
+document.querySelector('.section-elp').append(div)
 	})
 } else {
 const endLine = document.createElement('h6').innerText = 'no more camps';

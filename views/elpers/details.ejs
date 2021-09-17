@@ -27,8 +27,8 @@
               <p class="card-text"><%= elper.description ? elper.description : ' no description' %></p>
             </div>
             <ul class="list-group list-group-flush bg-dark text-light">
-              <li class="list-group-item"><%= elper.price %> ₹ / Night</li>
-              <li class="list-group-item text-muted" ><%= elper.location %></li>
+              <li class="list-group-item bg-dark text-light"><%= elper.price %> ₹ / Night</li>
+              <li class="list-group-item text-muted bg-dark text-light" ><%= elper.location %></li>
             </ul>
 	<% if(loggedIn && elper.user._id.equals(loggedIn)) { %>
             <div class="card-body">
