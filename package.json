@@ -8,9 +8,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.13.2",
+    "cloudinary": "^1.27.1",
+    "mongoose": "^6.0.12",
+    "multiparty": "^4.2.2",
     "next": "12.0.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-map-gl": "^6.1.17",
+    "streamifier": "^0.1.1"
   },
   "devDependencies": {
     "eslint": "7.32.0",
