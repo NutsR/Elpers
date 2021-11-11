@@ -2,19 +2,23 @@ import Link from "next/dist/client/link";
 import styles from "./header.module.css";
 function Header() {
 	return (
-		<nav className={styles.header}>
-			<span className={styles.navItem}>
+		<ul className={styles.header}>
+			<li className={styles.navItem}>
 				<Link style={{ margin: "25px 25px" }} href="/">
-					Home
+					<a className={styles.link}>Home</a>
 				</Link>
-			</span>
-			<span className={styles.navItem}>
-				<Link href="/elpers/create"> Create</Link>
-			</span>
-			<span className={`${styles.navItem} ${styles.login}`}>
-				<Link href="/elpers/create"> Login </Link>
-			</span>
-		</nav>
+			</li>
+			<li className={styles.navItem}>
+				<Link href="/elpers/create">
+					<a className={styles.link}>Create</a>
+				</Link>
+			</li>
+			<li className={`${styles.navItem} ${styles.login}`}>
+				<Link href="/elpers/create">
+					<a className={styles.link}>Login</a>
+				</Link>
+			</li>
+		</ul>
 	);
 }
 

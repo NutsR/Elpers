@@ -1,6 +1,6 @@
 import { getElperById } from "../api/elpers/[id]";
 import { useEffect, useState } from "react";
-import styles from "./id.module.css";
+import styles from "../../styles/id.module.css";
 import Link from "next/link";
 import DetailedMap from "../../components/mapbox/details.map";
 function PostDetails({ elpCamp }) {

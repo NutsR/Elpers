@@ -1,10 +1,12 @@
 import "../styles/globals.css";
 import Header from "../components/header/header";
+import Footer from "../components/footer/footer";
 const Layout = ({ children }) => {
 	return (
 		<div className="layout">
 			<Header />
 			{children}
+			<Footer />
 		</div>
 	);
 };

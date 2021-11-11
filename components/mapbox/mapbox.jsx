@@ -31,7 +31,7 @@ function Map({ elpers }) {
 			<MapGL
 				mapboxApiAccessToken="pk.eyJ1IjoiYmxha2VucjAxIiwiYSI6ImNrdDFyZ3ZrZTBkOHMydm56Yjk3MGkwbnMifQ.G5bp_EBof1-WDjZ-WtRFcQ"
 				{...viewport}
-				width="100vw"
+				width="97.4vw"
 				height="65vh"
 				onViewportChange={setViewport}
 				mapStyle="mapbox://styles/mapbox/dark-v10"

@@ -1,21 +1,10 @@
 .map {
 	text-align: center;
-	display: flex;
 	margin: 0px 10px 0px 10px;
-	box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
 }
-.sidebar {
-	background-color: rgba(35, 55, 75, 0.9);
-	color: #fff;
-	padding: 6px 12px;
-	font-family: monospace;
-	z-index: 1;
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: 12px;
-	border-radius: 4px;
-}
+
+
 @media screen and (max-width: 800px) {
 	.map {
 		width: 100%;
