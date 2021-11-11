@@ -1,4 +1,3 @@
-import dbConnect from "../../../lib/connection";
 import Elper from "../../../models/elpCamp";
 import multiparty from "multiparty";
 import fs from "fs";
@@ -12,7 +11,6 @@ export const config = {
 };
 
 export const getElpers = async () => {
-	await dbConnect();
 	/* find all the data in our database */
 	const result = await Elper.find({});
 	const elpCamps = JSON.parse(JSON.stringify(result));

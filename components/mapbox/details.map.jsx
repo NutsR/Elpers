@@ -1,28 +1,27 @@
 import { useState, useMemo } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
-import styles from "./mapbox.module.css";
+import styles from "./detail.module.css";
 import Image from "next/image";
-function Map({ elpers }) {
+function DetailedMap({ elpers, height, width }) {
 	const [popupInfo, setPopupInfo] = useState(null);
 	const [viewport, setViewport] = useState({
-		latitude: elpers[0].geometry.coordinates[1],
-		longitude: elpers[0].geometry.coordinates[0],
+		latitude: elpers.geometry.coordinates[1],
+		longitude: elpers.geometry.coordinates[0],
 		zoom: 8,
 	});
 
 	const markers = useMemo(
-		() =>
-			elpers.map((camp) => (
-				<div key={camp._id}>
-					<Marker
-						latitude={camp.geometry.coordinates[1]}
-						longitude={camp.geometry.coordinates[0]}
-						onClick={() => setPopupInfo(camp)}
-					>
-						<Image src="/pin256x256.png" alt="me" width="30" height="30" />
-					</Marker>
-				</div>
-			)),
+		() => (
+			<div>
+				<Marker
+					latitude={elpers.geometry.coordinates[1]}
+					longitude={elpers.geometry.coordinates[0]}
+					onClick={() => setPopupInfo(elpers)}
+				>
+					<Image src="/pin256x256.png" alt="me" width="30" height="30" />
+				</Marker>
+			</div>
+		),
 		[elpers]
 	);
 
@@ -31,8 +30,8 @@ function Map({ elpers }) {
 			<MapGL
 				mapboxApiAccessToken="pk.eyJ1IjoiYmxha2VucjAxIiwiYSI6ImNrdDFyZ3ZrZTBkOHMydm56Yjk3MGkwbnMifQ.G5bp_EBof1-WDjZ-WtRFcQ"
 				{...viewport}
-				width="100vw"
-				height="65vh"
+				width={width}
+				height={height}
 				onViewportChange={setViewport}
 				mapStyle="mapbox://styles/mapbox/dark-v10"
 			>
@@ -63,5 +62,5 @@ function Map({ elpers }) {
 	);
 }
 
-export default Map;
+export default DetailedMap;
 /* */

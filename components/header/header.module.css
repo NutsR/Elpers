@@ -1,0 +1,33 @@
+.header {
+	margin-bottom: 10px;
+	padding: 10px;
+    display: flex;
+}
+
+.navItem:first-child {
+	font-size: 30px;
+}
+
+.navItem {
+	font-size: 25px;
+	color: #9297a1;
+	margin-right: 10px;
+    align-self: center;
+}
+.navItem:hover {
+	color: black;
+}
+.login {
+    flex: 1;
+    justify-content: space-between;
+	text-align: end;
+}
+
+@media screen and (max-width: 800px){
+	.navItem{
+		font-size: 20px;
+	}
+	.navItem:first-child{
+		font-size: 22px;
+	}
+}

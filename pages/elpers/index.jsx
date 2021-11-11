@@ -9,27 +9,23 @@ function Post({ elpCamps, error }) {
 	if (!elpCamps) return <div>Loading</div>;
 	return (
 		<div>
-			<hr />
-
+			<Map elpers={elpCamps} />
 			<div className={styles.main}>
-				{elpCamps.length}
 				{elpCamps.map((post) => (
 					<div className={styles.item} key={post._id}>
-						<h5>{post.title}</h5>
-						<img
-							style={{ width: "25%", height: "20%" }}
-							src={post.images[0].url}
-							alt="post describing"
-						/>
-						<Link href={`/elpers/${post._id}`}>See more</Link>
+						<h5 className={styles.title}>{post.title}</h5>
+						<div className={styles.imageCtrl}>
+							<img
+								style={{ width: "inherit", height: "inherit" }}
+								src={post.images[0].url}
+								alt="post describing"
+							/>
+						</div>
+						<Link href={`/elpers/${post._id}`}>
+							<button className={styles.btn}>View More</button>
+						</Link>
 					</div>
 				))}
-			</div>
-			<div>
-				<Link style={{ margin: "25px 25px" }} href="/">
-					Home
-				</Link>
-				<Link href="/elpers/create">Create</Link>
 			</div>
 		</div>
 	);
