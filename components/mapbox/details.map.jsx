@@ -7,7 +7,7 @@ function DetailedMap({ elpers, height, width }) {
 	const [viewport, setViewport] = useState({
 		latitude: elpers.geometry.coordinates[1],
 		longitude: elpers.geometry.coordinates[0],
-		zoom: 8,
+		zoom: 16,
 	});
 
 	const markers = useMemo(

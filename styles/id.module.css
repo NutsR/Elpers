@@ -1,61 +1,40 @@
-.container{
-    display: flex;
-    justify-content: center;   
-    margin-top: 10px; 
+.container {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
 }
 
-.card{
-    box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.2);
-    margin: 0 30px;
+.card {
+	box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.2);
+	margin: 0 30px;
 }
-.imageCtrl{ 
-    width: 65vh;
+.imageCtrl {
+	width: 65vh;
 }
-.content{
-    margin-left: 10px;
+.content {
+	margin-left: 10px;
 }
-.title{
-    font-size: 20px;
-    font-weight:600;
-    margin-bottom: unset;
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: unset;
 }
-.textContent{
-    font-size: 18px;
-    
+.textContent {
+	font-size: 18px;
 }
-.price{
-    display: block;
-    margin: 20px 10px 5px 10px;
+.price {
+	display: block;
+	margin: 20px 10px 5px 10px;
 }
 .location {
-    color: #9aa1ad;
+	color: #696f78;
 }
-.btn{
-    border: none;
-    background-color: darkgray;
-    color: aliceblue;
-    padding: 15px 32px;
-    margin: 10px;
-    font-size: 15px;
-    font-weight: 600;
-}
-.btn:hover{
-    box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
+
 @media screen and (max-width: 800px) {
-    .container{
-        flex-direction: column;
-        align-items: center;
-        justify-content: unset;
-    }
-    .map{
-            margin-right: 50px;
-    }
-    .card{
-        margin: 0px 5px 20px 5px;
-    }
-    .imageCtrl{
-        width: 40vh;
-    }
+	.card {
+		margin: 0px 5px 20px 0px;
+	}
+	.imageCtrl {
+		width: 50vw;
+	}
 }

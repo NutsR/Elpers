@@ -22,7 +22,7 @@ function Post({ elpCamps, error }) {
 							/>
 						</div>
 						<Link href={`/elpers/${post._id}`}>
-							<button className={styles.btn}>View More</button>
+							<button className="btn-primary">View More</button>
 						</Link>
 					</div>
 				))}

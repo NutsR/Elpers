@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import FormInput from "../../components/form";
 import { initialState } from "../../initialState/initialState";
 import Router from "next/router";
+import Swal from "sweetalert2";
 // Reducer
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -38,7 +39,9 @@ function ElperForm() {
 	// Handle Submit
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const exist = Object.keys(state).every((key) => state[key]);
+		const exist = Object.keys(state).every((key) => {
+			return state[key];
+		});
 
 		// Check if values exist
 		if (exist) {
@@ -55,13 +58,28 @@ function ElperForm() {
 				});
 				const data = await res.json();
 				if ((data.success = true)) {
+					Swal.fire({
+						position: "top-end",
+						icon: "success",
+						title: "Your work has been saved",
+						showConfirmButton: false,
+						timer: 1500,
+					});
 					Router.push("/elpers");
 				}
 			} catch (err) {
-				console.log(err);
+				Swal.fire({
+					icon: "error",
+					title: "error",
+					text: `${err.message}`,
+				});
 			}
 		} else {
-			console.log("nope");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Some Fields are still empty",
+			});
 		}
 	};
 	// Render form

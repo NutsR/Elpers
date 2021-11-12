@@ -20,19 +20,8 @@
 .item:hover {
 	box-shadow: 8px 8px 16px 8px rgba(0, 0, 0, 0.2);
 }
-.btn {
-	background-color: #0459e0;
-	color: white;
-	align-self: end;
-	border: 2px solid white;
-	margin: 10px;
-	padding: 15px 32px;
-	cursor: pointer;
-	font-weight: bold;
-}
-.btn:hover {
-	box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.2);
-}
+
+
 .title {
 	font-weight: bold;
 	font-size: 15px;

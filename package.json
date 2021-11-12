@@ -17,7 +17,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-map-gl": "^6.1.17",
-    "streamifier": "^0.1.1"
+    "streamifier": "^0.1.1",
+    "sweetalert2": "^11.1.10"
   },
   "devDependencies": {
     "eslint": "7.32.0",

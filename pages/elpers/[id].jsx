@@ -29,14 +29,16 @@ function PostDetails({ elpCamp }) {
 					</div>
 				</div>
 				<Link href="/elpers">
-					<button className={styles.btn}>Go Back</button>
+					<button className="btn">Go Back</button>
 				</Link>
+				<button className="btn-info">Edit</button>
+				<button className="btn-danger">Delete</button>
 			</div>
 			<div className={styles.map}>
 				<DetailedMap
 					elpers={elpCamp}
-					width={size ? "36vw" : "65vw"}
-					height={"40.6vh"}
+					width={size ? "36vw" : "45vw"}
+					height={size ? "40.6vh" : "23.2vh"}
 				/>
 				<h5 className={styles.title}>Reviews</h5>
 				<div>

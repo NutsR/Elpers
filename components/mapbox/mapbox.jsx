@@ -1,8 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./mapbox.module.css";
 import Image from "next/image";
 function Map({ elpers }) {
+	const [size, setSize] = useState(true);
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.innerWidth > 800 ? setSize(true) : setSize(false);
+		}
+	}, []);
 	const [popupInfo, setPopupInfo] = useState(null);
 	const [viewport, setViewport] = useState({
 		latitude: elpers[0].geometry.coordinates[1],
@@ -32,7 +38,7 @@ function Map({ elpers }) {
 				mapboxApiAccessToken="pk.eyJ1IjoiYmxha2VucjAxIiwiYSI6ImNrdDFyZ3ZrZTBkOHMydm56Yjk3MGkwbnMifQ.G5bp_EBof1-WDjZ-WtRFcQ"
 				{...viewport}
 				width="97.4vw"
-				height="65vh"
+				height={size ? "65vh" : "33.5vh"}
 				onViewportChange={setViewport}
 				mapStyle="mapbox://styles/mapbox/dark-v10"
 			>
