@@ -52,10 +52,13 @@ function ElperForm() {
 			formdata.append("elpcamp", JSON.stringify(state));
 			// Try catch
 			try {
-				const res = await fetch(`${NEXT_PUBLIC_DOMAIN}/api/elpers`, {
-					method: "POST",
-					body: formdata,
-				});
+				const res = await fetch(
+					`${process.env.NEXT_PUBLIC_DOMAIN}/api/elpers`,
+					{
+						method: "POST",
+						body: formdata,
+					}
+				);
 				const data = await res.json();
 				if ((data.success = true)) {
 					Swal.fire({
