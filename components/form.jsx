@@ -7,7 +7,7 @@ function FormInput({ handleChange, handleSubmit, value }) {
 					<label htmlFor="title" className="formLabel">
 						<input
 							type="text"
-							minlength="5"
+							minLength="5"
 							className="inputControl"
 							name="title"
 							placeholder=" "
@@ -24,7 +24,7 @@ function FormInput({ handleChange, handleSubmit, value }) {
 					<label htmlFor="location" className="formLabel">
 						<input
 							type="text"
-							minlength="3"
+							minLength="3"
 							name="location"
 							className="inputControl"
 							placeholder=" "
@@ -41,7 +41,7 @@ function FormInput({ handleChange, handleSubmit, value }) {
 					<label htmlFor="description" className="formLabel">
 						<textarea
 							name="description"
-							minlength="5"
+							minLength="5"
 							cols="15"
 							rows="5"
 							placeholder=" "
