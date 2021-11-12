@@ -52,7 +52,7 @@ function ElperForm() {
 			formdata.append("elpcamp", JSON.stringify(state));
 			// Try catch
 			try {
-				const res = await fetch("http://localhost:3000/api/elpers", {
+				const res = await fetch(`${NEXT_PUBLIC_DOMAIN}/api/elpers`, {
 					method: "POST",
 					body: formdata,
 				});
