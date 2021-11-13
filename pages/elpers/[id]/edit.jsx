@@ -52,39 +52,8 @@ function EditCamp({ elpCamp }) {
 			}
 			formdata.append("elpcamp", JSON.stringify(state));
 			// Try catch
-			try {
-				const res = await fetch(
-					`${process.env.NEXT_PUBLIC_DOMAIN}/api/elpers`,
-					{
-						method: "POST",
-						body: formdata,
-					}
-				);
-				const data = await res.json();
-				if ((data.success = true)) {
-					Swal.fire({
-						position: "top-end",
-						icon: "success",
-						title: "Your work has been saved",
-						showConfirmButton: false,
-						timer: 1500,
-					});
-					Router.push("/elpers");
-				}
-			} catch (err) {
-				Swal.fire({
-					icon: "error",
-					title: "error",
-					text: `${err.message}`,
-				});
+		
 			}
-		} else {
-			Swal.fire({
-				icon: "error",
-				title: "Oops...",
-				text: "Some Fields are still empty",
-			});
-		}
 	};
 	// Render form
 	return (
