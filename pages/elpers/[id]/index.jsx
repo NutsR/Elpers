@@ -1,8 +1,10 @@
-import { getElperById } from "../api/elpers/[id]";
+import { getElperById } from "../../api/elpers/[id]";
 import { useEffect, useState } from "react";
-import styles from "../../styles/id.module.css";
+import styles from "../../../styles/id.module.css";
 import Link from "next/link";
-import DetailedMap from "../../components/mapbox/details.map";
+import Router from "next/router";
+import DetailedMap from "../../../components/mapbox/details.map";
+import Swal from "sweetalert2";
 function PostDetails({ elpCamp }) {
 	const [size, setSize] = useState(true);
 	useEffect(() => {
@@ -10,6 +12,42 @@ function PostDetails({ elpCamp }) {
 			window.innerWidth > 800 ? setSize(true) : setSize(false);
 		}
 	}, []);
+	const handleDelete = async () => {
+		try {
+			const res = await fetch(
+				`${process.env.NEXT_PUBLIC_DOMAIN}/api/elpers/${elpCamp._id}`,
+				{
+					method: "DELETE",
+				}
+			);
+			const data = await res.json();
+			if (data.success) {
+				Swal.fire({
+					icon: "success",
+					title: "ElpCamp Deleted",
+					text: "Elpcamp has been deleted",
+				});
+				Router.push(`/elpers`);
+			}
+		} catch (error) {
+			Swal.fire({ icon: "error", title: "error", text: error.message });
+		}
+	};
+	const handleConfirm = () => {
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				handleDelete();
+			}
+		});
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.card}>
@@ -31,8 +69,12 @@ function PostDetails({ elpCamp }) {
 				<Link href="/elpers">
 					<button className="btn">Go Back</button>
 				</Link>
-				<button className="btn-info">Edit</button>
-				<button className="btn-danger">Delete</button>
+				<Link href={`/elpers/${elpCamp._id}/edit`}>
+					<button className="btn-info">Edit</button>
+				</Link>
+				<button className="btn-danger" onClick={handleConfirm}>
+					Delete
+				</button>
 			</div>
 			<div className={styles.map}>
 				<DetailedMap

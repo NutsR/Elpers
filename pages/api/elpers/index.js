@@ -2,6 +2,7 @@ import Elper from "../../../models/elpCamp";
 import multiparty from "multiparty";
 import fs from "fs";
 import cloudinary from "../../../lib/cloudinary";
+import dbConnect from "../../../lib/connection";
 import streamifier from "streamifier";
 import geocodeLocation from "../../../lib/mapbox";
 export const config = {
@@ -12,6 +13,7 @@ export const config = {
 
 export const getElpers = async () => {
 	/* find all the data in our database */
+	await dbConnect();
 	const result = await Elper.find({});
 	const elpCamps = JSON.parse(JSON.stringify(result));
 	return elpCamps;
@@ -24,6 +26,7 @@ export default async function handler(req, res) {
 			return res.status(200).json(elpers);
 		case "POST":
 			try {
+				await dbConnect();
 				const data = await new Promise((resolve, reject) => {
 					const form = new multiparty.Form();
 					form.parse(req, (err, fields, files) => {
@@ -52,6 +55,7 @@ export default async function handler(req, res) {
 							elpCamp.images.push({
 								url: result.url,
 								filename: result.original_filename,
+								publicId: result.public_id,
 							});
 							await elpCamp.save();
 						}

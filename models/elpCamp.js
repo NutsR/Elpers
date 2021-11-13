@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
-
+import cloudinary from "../lib/cloudinary";
 const { Schema } = mongoose;
 const imageSchema = new Schema({
 	url: String,
 	filename: String,
+	publicId: String,
 });
 imageSchema.virtual("thumbnail").get(function () {
 	return this.url.replace("/upload", "/upload/w_200");
@@ -47,6 +48,11 @@ elperSchema.virtual("properties.popupText").get(function () {
 });
 
 elperSchema.post("findOneAndDelete", async function (elpCamp) {
+	if (elpCamp.images.length) {
+		for (let image of elpCamp.images) {
+			await cloudinary.uploader.destroy(image.publicId);
+		}
+	}
 	if (elpCamp.review.length) {
 		await Review.deleteMany({
 			_id: {

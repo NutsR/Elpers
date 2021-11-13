@@ -13,7 +13,6 @@ function Post({ elpCamps, error }) {
 			<div className={styles.main}>
 				{elpCamps.map((post) => (
 					<div className={styles.item} key={post._id}>
-						<h5 className={styles.title}>{post.title}</h5>
 						<div className={styles.imageCtrl}>
 							<img
 								style={{ width: "inherit", height: "inherit" }}
@@ -21,9 +20,18 @@ function Post({ elpCamps, error }) {
 								alt="post describing"
 							/>
 						</div>
-						<Link href={`/elpers/${post._id}`}>
-							<button className="btn-primary">View More</button>
-						</Link>
+						<div className={styles.content}>
+							<div className={styles.innerContent}>
+								<h5 className={styles.title}>{post.title}</h5>
+
+								<p className={styles.description}>{post.description}</p>
+								<div className={styles.btnCtrl}>
+									<Link href={`/elpers/${post._id}`}>
+										<button className="btn-primary">View More</button>
+									</Link>
+								</div>
+							</div>
+						</div>
 					</div>
 				))}
 			</div>

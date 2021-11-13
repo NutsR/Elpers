@@ -1,5 +1,8 @@
 import styles from "../styles/form.module.css";
 function FormInput({ handleChange, handleSubmit, value }) {
+	if (!value) {
+		return <div>No ElpCamp Found</div>;
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.card}>
@@ -12,6 +15,7 @@ function FormInput({ handleChange, handleSubmit, value }) {
 							name="title"
 							placeholder=" "
 							required
+							value={value.title ? value.title : ""}
 							onChange={handleChange}
 						/>
 						<span className="placeholderText">Elp Camp Title</span>
@@ -28,6 +32,7 @@ function FormInput({ handleChange, handleSubmit, value }) {
 							name="location"
 							className="inputControl"
 							placeholder=" "
+							value={value.location ? value.location : ""}
 							required
 							onChange={handleChange}
 						/>
@@ -46,6 +51,7 @@ function FormInput({ handleChange, handleSubmit, value }) {
 							rows="5"
 							placeholder=" "
 							className="inputControl"
+							value={value.description ? value.description : ""}
 							required
 							onChange={handleChange}
 						></textarea>
@@ -62,6 +68,7 @@ function FormInput({ handleChange, handleSubmit, value }) {
 							type="number"
 							name="price"
 							placeholder=" "
+							value={value.price ? value.price : ""}
 							required
 							onChange={handleChange}
 						/>
@@ -71,24 +78,26 @@ function FormInput({ handleChange, handleSubmit, value }) {
 						<h6>Looks good!</h6>
 					</div>
 				</div>
-				<div className={styles.inputArea}>
-					<label htmlFor="images" className={styles.customLabel}>
-						Upload Image Prefer Landscape images
-					</label>
-					<input
-						type="file"
-						className="inputControl"
-						size="60"
-						id="images"
-						name="images"
-						required
-						multiple
-						onChange={handleChange}
-					/>
-					<div className={styles.validFeedback}>
-						<h6>Looks good!</h6>
+				{value.images instanceof Array && value.images[0].url ? null : (
+					<div className={styles.inputArea}>
+						<label htmlFor="images" className={styles.customLabel}>
+							Upload Image Prefer Landscape images
+						</label>
+						<input
+							type="file"
+							className="inputControl"
+							size="60"
+							id="images"
+							name="images"
+							required
+							multiple
+							onChange={handleChange}
+						/>
+						<div className={styles.validFeedback}>
+							<h6>Looks good!</h6>
+						</div>
 					</div>
-				</div>
+				)}
 				<div className={styles.inputArea}>
 					<button onClick={handleSubmit} className="btn-success">
 						Submit

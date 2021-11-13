@@ -1,7 +1,8 @@
 import { useReducer } from "react";
-import FormInput from "../../components/form";
-import { initialState } from "../../initialState/initialState";
+import FormInput from "../../../components/form";
+import { initialState } from "../../../initialState/initialState";
 import Router from "next/router";
+import { getElperById } from "../../api/elpers/[id]";
 import Swal from "sweetalert2";
 // Reducer
 const reducer = (state, action) => {
@@ -18,7 +19,7 @@ const reducer = (state, action) => {
 	}
 };
 
-function ElperForm() {
+function EditCamp({ elpCamp }) {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	// Handle Change
@@ -96,15 +97,24 @@ function ElperForm() {
 					marginTop: "0px",
 				}}
 			>
-				Create New ElpCamp
+				Edit Camp
 			</h2>
 			<FormInput
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
-				value={state}
+				value={elpCamp}
 			/>
 		</>
 	);
 }
 
-export default ElperForm;
+export const getServerSideProps = async ({ params: { id } }) => {
+	const elpCamp = await getElperById(id);
+	return {
+		props: {
+			elpCamp,
+		},
+	};
+};
+
+export default EditCamp;
