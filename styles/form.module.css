@@ -49,10 +49,10 @@
 
 @media screen and (max-width: 800px) {
 	.inputArea textarea {
-		width: 100%;
+		width: 100vw;
 		height: 120px;
 	}
 	.card {
-		max-width: 100%;
+		max-width: 100vw;
 	}
 }
