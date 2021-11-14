@@ -2,6 +2,7 @@ import { getElperById } from "../../api/elpers/[id]";
 import { useEffect, useState } from "react";
 import styles from "../../../styles/id.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import Router from "next/router";
 import DetailedMap from "../../../components/mapbox/details.map";
 import Swal from "sweetalert2";
@@ -52,8 +53,9 @@ function PostDetails({ elpCamp }) {
 		<div className={styles.container}>
 			<div className={styles.card}>
 				<div className={styles.imageCtrl}>
-					<img
-						style={{ width: "inherit", height: "inherit" }}
+					<Image
+						className={styles.image}
+						layout="fill"
 						src={elpCamp.images[0].url}
 						alt="post describing"
 					/>

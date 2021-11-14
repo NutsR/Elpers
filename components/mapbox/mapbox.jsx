@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./mapbox.module.css";
 import Image from "next/image";
+import Link from "next/link";
 function Map({ elpers }) {
 	const [size, setSize] = useState(true);
 	useEffect(() => {
@@ -54,13 +55,18 @@ function Map({ elpers }) {
 					>
 						<div>
 							<div>
-								<b>{popupInfo.title}</b> {popupInfo.location}
+								<b>{popupInfo.title}</b>
 							</div>
-							<img
-								style={{ width: "200px" }}
+							<Image
+								width={50}
+								height={50}
+								layout={"responsive"}
 								src={popupInfo.images[0].url}
 								alt="location"
 							/>
+							<Link href={`/elpers/${popupInfo._id}`}>
+								<span>View More</span>
+							</Link>
 						</div>
 					</Popup>
 				)}

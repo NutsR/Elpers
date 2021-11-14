@@ -4,8 +4,8 @@
 }
 
 .item {
-	padding: 2px 16px;
-	margin: 0 30px;
+	padding: 15px 32px;
+	margin: 25px 30px;
 	max-width: 55%;
 	display: table;
 	table-layout: auto;
@@ -17,10 +17,19 @@
 .imageCtrl {
 	width: 300px;
 	height: 250px;
-	object-fit: cover;
-	display: table-cell;
+	display: block;
+	margin: auto;
 }
 
+.imageCtrl > span{
+		position: unset !important;
+}
+.image{
+	object-fit: cover;
+	width: 100% !important;
+	position: relative !important;
+	height: 35vh !important;
+}
 .content {
 	display: table-cell;
 	vertical-align: top;
@@ -74,10 +83,18 @@
 		align-items: center;
 	}
 	.imageCtrl{
+		position: relative;
 		width: 50vw;
 		height: 25vh;
+		max-width: 50vw;
+		max-height: 25vh;
 	}
-
+	.image{
+		object-fit: cover;
+		width: 100% !important;
+		position: relative !important;
+		height: 35vh !important;
+	}
 	.item {
 		box-shadow: unset;
 	}

@@ -11,6 +11,17 @@
 .imageCtrl {
 	width: 65vh;
 }
+.imageCtrl > span {
+        position: unset !important;
+        height: 100%;
+}
+.image {
+	object-fit: contain;
+	width: auto !important;
+	position: relative !important;
+	height: 100% !important;
+}
+
 .content {
 	margin-left: 10px;
 }

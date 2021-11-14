@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getElpers } from "../api/elpers";
 import Map from "../../components/mapbox/mapbox";
 import styles from "../../styles/elper.module.css";
+import Image from "next/image";
 function Post({ elpCamps, error }) {
 	if (error) {
 		return <div>{error.message}</div>;
@@ -14,8 +15,9 @@ function Post({ elpCamps, error }) {
 				{elpCamps.map((post) => (
 					<div className={styles.item} key={post._id}>
 						<div className={styles.imageCtrl}>
-							<img
-								style={{ width: "inherit", height: "inherit" }}
+							<Image
+								layout="fill"
+								className={styles.image}
 								src={post.images[0].url}
 								alt="post describing"
 							/>
