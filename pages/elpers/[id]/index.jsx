@@ -16,7 +16,7 @@ function PostDetails({ elpCamp }) {
 	const handleDelete = async () => {
 		try {
 			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_DOMAIN}/api/elpers/${elpCamp._id}`,
+				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers/${elpCamp._id}`,
 				{
 					method: "DELETE",
 				}

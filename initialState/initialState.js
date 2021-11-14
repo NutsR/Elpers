@@ -8,4 +8,5 @@ const initialState = {
 	review: [],
 	geometry: { type: "Point" },
 };
+
 export { initialState };

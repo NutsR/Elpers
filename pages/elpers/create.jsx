@@ -53,7 +53,7 @@ function ElperForm() {
 			// Try catch
 			try {
 				const res = await fetch(
-					`/api/elpers`,
+					`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers`,
 					{
 						method: "POST",
 						body: formdata,

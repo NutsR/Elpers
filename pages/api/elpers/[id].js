@@ -1,5 +1,6 @@
 import Elpers from "../../../models/elpCamp";
 import dbConnect from "../../../lib/connection.js";
+import geocodeLocation from "../../../lib/mapbox";
 
 export const getElperById = async (id) => {
 	await dbConnect();
@@ -16,6 +17,18 @@ export default async function handler(req, res) {
 		case "GET":
 			const elpCamp = await getElperById(id);
 			return res.status(200).json(elpCamp);
+
+		case "PUT":
+			const data = JSON.parse(req.body);
+			try {
+				await dbConnect();
+				const geoLocation = await geocodeLocation(data.location);
+				data.geometry = geoLocation.body.features[0].geometry;
+				const elpCamp = await Elpers.findByIdAndUpdate(id, data);
+				return res.status(201).json({ success: true });
+			} catch (error) {
+				return res.status(400).json(error);
+			}
 
 		case "DELETE":
 			try {

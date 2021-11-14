@@ -9,6 +9,7 @@
 	max-width: 55%;
 	display: table;
 	table-layout: auto;
+	border-radius: 10px;
 }
 .item:hover {
 	box-shadow: 8px 8px 16px 8px rgba(0, 0, 0, 0.2);
@@ -23,7 +24,8 @@
 
 .imageCtrl > span{
 		position: unset !important;
-}
+		border-radius: 7px;
+	}
 .image{
 	object-fit: cover;
 	width: 100% !important;

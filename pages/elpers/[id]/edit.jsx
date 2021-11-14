@@ -1,6 +1,5 @@
 import { useReducer } from "react";
 import FormInput from "../../../components/form";
-import { initialState } from "../../../initialState/initialState";
 import Router from "next/router";
 import { getElperById } from "../../api/elpers/[id]";
 import Swal from "sweetalert2";
@@ -9,28 +8,16 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case "change":
 			return { ...state, [action.name]: (state[action.name] = action.payload) };
-		case "image_change":
-			return {
-				...state,
-				images: [...state.images, action.payload[0]],
-			};
 		default:
 			return { state };
 	}
 };
 
 function EditCamp({ elpCamp }) {
-	const [state, dispatch] = useReducer(reducer, initialState);
+	const [state, dispatch] = useReducer(reducer, elpCamp);
 
 	// Handle Change
 	const handleChange = (e) => {
-		if (e.target.name === "images") {
-			return dispatch({
-				type: "image_change",
-				name: e.target.name,
-				payload: e.target.files,
-			});
-		}
 		dispatch({
 			type: "change",
 			name: e.target.name,
@@ -40,50 +27,34 @@ function EditCamp({ elpCamp }) {
 	// Handle Submit
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const exist = Object.keys(state).every((key) => {
-			return state[key];
-		});
 
-		// Check if values exist
-		if (exist) {
-			let formdata = new FormData();
-			for (let i = 0; i < state.images.length; i++) {
-				formdata.append(`photos`, state.images[i]);
-			}
-			formdata.append("elpcamp", JSON.stringify(state));
-			// Try catch
-			try {
-				const res = await fetch(
-					`${process.env.NEXT_PUBLIC_DOMAIN}/api/elpers`,
-					{
-						method: "POST",
-						body: formdata,
-					}
-				);
-				const data = await res.json();
-				if ((data.success = true)) {
-					Swal.fire({
-						position: "top-end",
-						icon: "success",
-						title: "Your work has been saved",
-						showConfirmButton: false,
-						timer: 1500,
-					});
-					Router.push("/elpers");
+		try {
+			const editData = {
+				...elpCamp,
+				title: state.title,
+				location: state.location,
+				description: state.description,
+				price: state.price,
+			};
+			const res = await fetch(
+				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers/${elpCamp._id}`,
+				{
+					method: "PUT",
+					body: JSON.stringify(editData),
 				}
-			} catch (err) {
+			);
+			const data = await res.json();
+			if (data.success) {
 				Swal.fire({
-					icon: "error",
-					title: "error",
-					text: `${err.message}`,
+					icon: "success",
+					title: "Success",
+					showConfirmButton: false,
+					timer: 1500,
 				});
+				Router.push(`/elpers/${elpCamp._id}`);
 			}
-		} else {
-			Swal.fire({
-				icon: "error",
-				title: "Oops...",
-				text: "Some Fields are still empty",
-			});
+		} catch (error) {
+			Swal.fire({ icon: "error", title: "error occured", text: error.message });
 		}
 	};
 	// Render form
@@ -102,7 +73,7 @@ function EditCamp({ elpCamp }) {
 			<FormInput
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
-				value={elpCamp}
+				value={state}
 			/>
 		</>
 	);
