@@ -74,6 +74,7 @@ function EditCamp({ elpCamp }) {
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 				value={state}
+				title={`Editing ${elpCamp.title}`}
 			/>
 		</>
 	);
