@@ -1,0 +1,54 @@
+.container {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+        margin-left: 20px;
+}
+
+.card {
+	margin: 0 30px;
+}
+.imageCtrl {
+	width: 65vh;
+	
+}
+.imageCtrl > span {
+        position: unset !important;
+        height: 100%;
+		border-radius: 10px;
+}
+.image {
+	object-fit: contain;
+	width: auto !important;
+	position: relative !important;
+	height: 100% !important;
+}
+
+.content {
+	margin-left: 10px;
+}
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: unset;
+}
+.textContent {
+	font-size: 18px;
+}
+.price {
+	display: block;
+	margin: 20px 10px 5px 10px;
+}
+.location {
+	color: #696f78;
+}
+
+@media screen and (max-width: 800px) {
+	.card {
+		margin: 0px 5px 20px 0px;
+		box-shadow: unset;
+	}
+	.imageCtrl {
+		width: 50vw;
+	}
+}
