@@ -42,14 +42,11 @@
 	color: #696f78;
 }
 
+
 @media screen and (max-width: 800px) {
-	.container{
-	box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.2);
-		
-	}
+	
 	.card {
-		margin: 0px 5px 20px 0px;
-		box-shadow: unset;
+		margin: 0px 5px 20px 20px;
 	}
 	.imageCtrl {
 		width: 50vw;

@@ -84,11 +84,10 @@ function PostDetails({ elpCamp }) {
 					width={size ? "36vw" : "45vw"}
 					height={size ? "40.6vh" : "23.2vh"}
 				/>
-				<h5 className={styles.title}>Reviews</h5>
-				<div>
-					Reviews :{" "}
+				<div className={styles.reviews}>
+					<h5 className={styles.title}>Reviews</h5>
 					{elpCamp.review.map((el) => (
-						<p key={el._id}>{el.review}</p>
+						<span key={el._id}>{el.review}</span>
 					))}
 				</div>
 			</div>

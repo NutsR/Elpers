@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 				await dbConnect();
 				const geoLocation = await geocodeLocation(data.location);
 				data.geometry = geoLocation.body.features[0].geometry;
-				const elpCamp = await Elpers.findByIdAndUpdate(id, data);
+				await Elpers.findByIdAndUpdate(id, data);
 				return res.status(201).json({ success: true });
 			} catch (error) {
 				return res.status(400).json(error);
