@@ -41,7 +41,7 @@ function Map({ elpers, token }) {
 				width="98.8vw"
 				height={size ? "65vh" : "33.5vh"}
 				onViewportChange={setViewport}
-				mapStyle="mapbox://styles/mapbox/dark-v10"
+				mapStyle="mapbox://styles/mapbox/dark-v10?optimize=true"
 			>
 				{markers}
 				{popupInfo && (
@@ -64,7 +64,7 @@ function Map({ elpers, token }) {
 								src={popupInfo.images[0].url}
 								alt="location"
 							/>
-							<Link href={`/elpers/${popupInfo._id}`}>
+							<Link href={`/elpers/${popupInfo._id}`} passHref>
 								<span>View More</span>
 							</Link>
 						</div>

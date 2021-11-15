@@ -3,11 +3,10 @@ import { getElpers } from "../api/elpers";
 import Map from "../../components/mapbox/mapbox";
 import styles from "../../styles/elper.module.css";
 import Image from "next/image";
-function Post({ elpCamps, error, isLoading = true }) {
+function Post({ elpCamps, error }) {
 	if (error) {
 		return <div>{error.message}</div>;
 	}
-	if (isLoading) return <div>Loading</div>;
 	return (
 		<div>
 			<Map elpers={elpCamps} token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} />
@@ -28,7 +27,7 @@ function Post({ elpCamps, error, isLoading = true }) {
 
 								<p className={styles.description}>{post.description}</p>
 								<div className={styles.btnCtrl}>
-									<Link href={`/elpers/${post._id}`}>
+									<Link href={`/elpers/${post._id}`} passHref>
 										<button className="btn-primary">View More</button>
 									</Link>
 								</div>
@@ -44,7 +43,7 @@ function Post({ elpCamps, error, isLoading = true }) {
 export async function getServerSideProps() {
 	try {
 		const elpCamps = await getElpers();
-		return { props: { elpCamps, isLoading: false } };
+		return { props: { elpCamps } };
 	} catch (err) {
 		return { props: { error: err } };
 	}

@@ -33,7 +33,7 @@ function DetailedMap({ elpers, height, width, token }) {
 				width={width}
 				height={height}
 				onViewportChange={setViewport}
-				mapStyle="mapbox://styles/mapbox/dark-v10"
+				mapStyle="mapbox://styles/mapbox/dark-v10?optimize=true"
 			>
 				{markers}
 				{popupInfo && (
@@ -47,10 +47,15 @@ function DetailedMap({ elpers, height, width, token }) {
 					>
 						<div>
 							<div>
-								<b>{popupInfo.title}</b> {popupInfo.location}
+								<h5 style={{ padding: "0px", margin: "0px" }}>
+									{popupInfo.title}
+								</h5>
+								{popupInfo.location}
 							</div>
-							<img
-								style={{ width: "200px" }}
+							<Image
+								width={50}
+								height={50}
+								layout={"responsive"}
 								src={popupInfo.images[0].url}
 								alt="location"
 							/>
@@ -63,4 +68,3 @@ function DetailedMap({ elpers, height, width, token }) {
 }
 
 export default DetailedMap;
-/* */

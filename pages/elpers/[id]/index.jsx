@@ -68,10 +68,10 @@ function PostDetails({ elpCamp }) {
 						<span className={styles.location}>{elpCamp.location}</span>
 					</div>
 				</div>
-				<Link href="/elpers">
+				<Link href="/elpers" passHref>
 					<button className="btn">Go Back</button>
 				</Link>
-				<Link href={`/elpers/${elpCamp._id}/edit`}>
+				<Link href={`/elpers/${elpCamp._id}/edit`} passHref>
 					<button className="btn-info">Edit</button>
 				</Link>
 				<button className="btn-danger" onClick={handleConfirm}>
