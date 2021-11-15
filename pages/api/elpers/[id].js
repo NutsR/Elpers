@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 		case "DELETE":
 			try {
 				await dbConnect();
-				const elpCamp = await Elpers.findByIdAndDelete(id);
+				await Elpers.findByIdAndDelete(id);
 				return res.status(202).json({ success: true });
 			} catch (error) {
 				return res.status(401).json({ success: false });

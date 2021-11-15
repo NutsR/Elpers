@@ -3,7 +3,7 @@ import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./mapbox.module.css";
 import Image from "next/image";
 import Link from "next/link";
-function Map({ elpers }) {
+function Map({ elpers, token }) {
 	const [size, setSize] = useState(true);
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -36,9 +36,9 @@ function Map({ elpers }) {
 	return (
 		<div className={styles.map}>
 			<MapGL
-				mapboxApiAccessToken="pk.eyJ1IjoiYmxha2VucjAxIiwiYSI6ImNrdDFyZ3ZrZTBkOHMydm56Yjk3MGkwbnMifQ.G5bp_EBof1-WDjZ-WtRFcQ"
+				mapboxApiAccessToken={token}
 				{...viewport}
-				width="97.4vw"
+				width="98.8vw"
 				height={size ? "65vh" : "33.5vh"}
 				onViewportChange={setViewport}
 				mapStyle="mapbox://styles/mapbox/dark-v10"

@@ -4,12 +4,23 @@
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	
+}
+.fixed {
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+}
+.unfixed {
+	position: unset;
+	width: 100%;
+	z-index: unset;
 }
 
 .navItem {
 	height: 61px;
 	font-size: 18px;
-	padding: 4px 0px;
+	padding: 4px 1px;
 	color: #accdf2;
 	float: left;
 	font-weight: 600;
@@ -39,6 +50,7 @@
 @media screen and (max-width: 800px){
 	.navItem{
 		font-size: 17px;
+		padding: 3px 1px;
 	}
 	.navItem:first-child{
 		font-size: 20px;

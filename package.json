@@ -7,7 +7,9 @@
     "start": "next start",
     "lint": "next lint"
   },
-"cacheDirectories": [".next/cache"],
+  "cacheDirectories": [
+    ".next/cache"
+  ],
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.13.2",
     "cloudinary": "^1.27.1",

@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./detail.module.css";
 import Image from "next/image";
-function DetailedMap({ elpers, height, width }) {
+function DetailedMap({ elpers, height, width, token }) {
 	const [popupInfo, setPopupInfo] = useState(null);
 	const [viewport, setViewport] = useState({
 		latitude: elpers.geometry.coordinates[1],
@@ -28,7 +28,7 @@ function DetailedMap({ elpers, height, width }) {
 	return (
 		<div className={styles.map}>
 			<MapGL
-				mapboxApiAccessToken="pk.eyJ1IjoiYmxha2VucjAxIiwiYSI6ImNrdDFyZ3ZrZTBkOHMydm56Yjk3MGkwbnMifQ.G5bp_EBof1-WDjZ-WtRFcQ"
+				mapboxApiAccessToken={token}
 				{...viewport}
 				width={width}
 				height={height}

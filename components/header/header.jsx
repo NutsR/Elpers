@@ -1,8 +1,14 @@
 import Link from "next/dist/client/link";
+import { useRouter } from "next/router";
 import styles from "./header.module.css";
 function Header() {
+	const { asPath } = useRouter();
 	return (
-		<ul className={styles.header}>
+		<ul
+			className={`${styles.header} ${
+				asPath === "/elpers" ? styles.fixed : styles.unfixed
+			}`}
+		>
 			<li className={styles.navItem}>
 				<Link style={{ margin: "25px 25px" }} href="/">
 					<a className={styles.link}>ElpCamp</a>

@@ -83,6 +83,7 @@ function PostDetails({ elpCamp }) {
 					elpers={elpCamp}
 					width={size ? "36vw" : "45vw"}
 					height={size ? "40.6vh" : "23.2vh"}
+					token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
 				/>
 				<div className={styles.reviews}>
 					<h5 className={styles.title}>Reviews</h5>

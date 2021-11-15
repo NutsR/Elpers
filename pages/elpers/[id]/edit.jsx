@@ -12,7 +12,6 @@ const reducer = (state, action) => {
 			return { state };
 	}
 };
-
 function EditCamp({ elpCamp }) {
 	const [state, dispatch] = useReducer(reducer, elpCamp);
 
@@ -27,20 +26,31 @@ function EditCamp({ elpCamp }) {
 	// Handle Submit
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		const exist = Object.keys(state).every((key) => {
+			if (
+				(key === "price" && state[key] > 20) ||
+				state[key] instanceof Array ||
+				state[key] instanceof Object ||
+				state[key].length > 3
+			) {
+				return true;
+			}
+			return true;
+		});
+		console.log(exist);
+		if (!exist) {
+			return Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Some Fields are still empty",
+			});
+		}
 		try {
-			const editData = {
-				...elpCamp,
-				title: state.title,
-				location: state.location,
-				description: state.description,
-				price: state.price,
-			};
 			const res = await fetch(
 				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers/${elpCamp._id}`,
 				{
 					method: "PUT",
-					body: JSON.stringify(editData),
+					body: JSON.stringify(state),
 				}
 			);
 			const data = await res.json();

@@ -1,9 +1,7 @@
-.map {
-	text-align: center;
-	
-	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-}
 
+.marker{
+	position: absolute !important;
+}
 
 @media screen and (max-width: 800px) {
 	.map {
