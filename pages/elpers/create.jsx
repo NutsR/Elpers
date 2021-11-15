@@ -88,19 +88,10 @@ function ElperForm() {
 	// Render form
 	return (
 		<>
-			<h2
-				style={{
-					textAlign: "center",
-					fontWeight: "600",
-					wordSpacing: "6px",
-					marginTop: "0px",
-				}}
-			>
-				Create New ElpCamp
-			</h2>
 			<FormInput
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
+				title="Create New ElpCamp"
 				value={state}
 			/>
 		</>

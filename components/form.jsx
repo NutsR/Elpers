@@ -1,11 +1,21 @@
 import styles from "../styles/form.module.css";
-function FormInput({ handleChange, handleSubmit, value }) {
+function FormInput({ handleChange, handleSubmit, value, title}) {
 	if (!value) {
 		return <div>No ElpCamp Found</div>;
 	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.card}>
+				<h2
+				style={{
+					textAlign: "center",
+					fontWeight: "600",
+					wordSpacing: "6px",
+					marginTop: "0px",
+				}}
+			>
+				{title || 'Form'}
+			</h2>
 				<div className={styles.inputArea}>
 					<label htmlFor="title" className="formLabel">
 						<input
