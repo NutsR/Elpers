@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, memo } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./detail.module.css";
 import Image from "next/image";
@@ -67,4 +67,4 @@ function DetailedMap({ elpers, height, width, token }) {
 	);
 }
 
-export default DetailedMap;
+export default memo(DetailedMap);

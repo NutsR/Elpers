@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, memo } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./mapbox.module.css";
 import Image from "next/image";
@@ -75,5 +75,4 @@ function Map({ elpers, token }) {
 	);
 }
 
-export default Map;
-/* */
+export default memo(Map);
