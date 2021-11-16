@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import dynamic from "next/dynamic";
 import Router from "next/router";
-import { getElperById } from "../../api/elpers/[id]";
+import { findByIdForEdit } from "../../api/elpers/[id]";
 import Swal from "sweetalert2";
 const FormInput = dynamic(() => import("@/components/form"));
 // Reducer
@@ -86,7 +86,7 @@ export const getServerSideProps = async ({ params: { id }, req, res }) => {
 		"Cache-Control",
 		"public, s-maxage=10, stale-while-revalidate=59"
 	);
-	const elpCamp = await getElperById(id);
+	const elpCamp = await findByIdForEdit(id);
 	return {
 		props: {
 			elpCamp,

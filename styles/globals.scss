@@ -43,8 +43,6 @@ button {
 	border-radius: 8px;
 }
 
-
-
 .formLabel {
 	margin: 27px 0;
 	position: relative;
@@ -159,24 +157,36 @@ button {
 		transform: rotate(360deg);
 	}
 }
+
+.overlay {
+	height: 60vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .loader {
-	border: 16px solid darkgrey; /* Light grey */
-	border-top: 16px solid #3498db; /* Blue */
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	border: 3px solid rgba(195, 195, 195, 1);
 	border-radius: 50%;
-	width: 80px;
-	height: 80px;
+	border-top: #636767;
+	border-radius: 50%;
 	animation: spin 2s linear infinite;
 	z-index: 2040;
-  }
-  
-  @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-  }
+}
 
-  .middle-load{
-	width: 80px;
-	height: 80px;
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.middle-load {
 	position: absolute !important;
 	left: 50% !important;
-  }
+}

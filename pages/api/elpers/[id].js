@@ -10,6 +10,11 @@ export const getElperById = async (id) => {
 	const elpCamp = JSON.parse(JSON.stringify(result));
 	return elpCamp;
 };
+export const findByIdForEdit = async (id) => {
+	await dbConnect();
+	const result = await Elpers.findById(id);
+	return JSON.parse(JSON.stringify(result));
+};
 
 export default async function handler(req, res) {
 	const { id } = req.query;
