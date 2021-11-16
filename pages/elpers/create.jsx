@@ -45,10 +45,13 @@ function ElperForm() {
 			if (
 				(key === "price" && state[key] > 20) ||
 				state[key] instanceof Array ||
+				state[key] instanceof Object ||
 				state[key].length > 3
 			) {
 				return true;
 			}
+			console.log(state[key], key);
+			return false;
 		});
 
 		// Check if values exist

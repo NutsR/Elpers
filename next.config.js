@@ -26,8 +26,9 @@ if (process.env.NODE_ENV === "development") {
 		pwa: {
 			disable: process.env.NODE_ENV === "development",
 			dest: "public",
-                        register: true,
-                        skipWaiting: true
+			register: true,
+			skipWaiting: true,
+			publicExcludes: ["!robots.txt"],
 		},
 	});
 }
