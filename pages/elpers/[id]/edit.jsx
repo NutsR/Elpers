@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import dynamic from "next/dynamic";
 import Router from "next/router";
 import { findByIdForEdit } from "../../api/elpers/[id]";
-import Swal from "sweetalert2";
+import { swalSuccess, swalError } from "../../../methods/Swal.fire";
 const FormInput = dynamic(() => import("@/components/form"));
 // Reducer
 const reducer = (state, action) => {
@@ -32,19 +32,17 @@ function EditCamp({ elpCamp }) {
 				(key === "price" && state[key] > 20) ||
 				state[key] instanceof Array ||
 				state[key] instanceof Object ||
+				key === "__v" ||
 				state[key].length > 3
 			) {
 				return true;
 			}
-			return true;
+			console.log(key, state[key]);
+			return false;
 		});
 		console.log(exist);
 		if (!exist) {
-			return Swal.fire({
-				icon: "error",
-				title: "Oops...",
-				text: "Some Fields are still empty",
-			});
+			return swalError({ message: "Empty fields please check and try again" });
 		}
 		try {
 			const res = await fetch(
@@ -56,16 +54,11 @@ function EditCamp({ elpCamp }) {
 			);
 			const data = await res.json();
 			if (data.success) {
-				Swal.fire({
-					icon: "success",
-					title: "Success",
-					showConfirmButton: false,
-					timer: 1500,
-				});
+				swalSuccess();
 				Router.push(`/elpers/${elpCamp._id}`);
 			}
 		} catch (error) {
-			Swal.fire({ icon: "error", title: "error occured", text: error.message });
+			swalError(error);
 		}
 	};
 	// Render form
