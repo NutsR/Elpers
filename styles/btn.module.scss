@@ -1,0 +1,52 @@
+.btn {
+	border: none;
+	background-color: #696f78;
+	color: aliceblue;
+	padding: 15px 32px;
+	margin: 10px;
+	font-size: 15px;
+	font-weight: 600;
+}
+.btnInfo {
+	border: none;
+	background-color: #17a2b8;
+	color: aliceblue;
+	padding: 15px 32px;
+	margin: 10px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+}
+.btnDanger {
+	border: none;
+	background-color: #dc3545;
+	color: aliceblue;
+	padding: 15px 32px;
+	margin: 10px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+}
+.btn:hover {
+	box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+.btnPrimary {
+	background-color: #0459e0;
+    display: flex;
+
+	color: white;
+	border: 2px solid white;
+	margin: 10px;
+	padding: 15px 32px;
+	cursor: pointer;
+	font-weight: bold;
+}
+.btnSuccess {
+	padding: 13px 25px;
+	margin: 10px 10px;
+	border: none;
+	cursor: pointer;
+	background-image: linear-gradient(to right, #28a745, #23ad43);
+}

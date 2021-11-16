@@ -1,5 +1,6 @@
-import styles from "../styles/form.module.css";
-function FormInput({ handleChange, handleSubmit, value, title}) {
+import styles from "@/styles/form.module.scss";
+import { btnSuccess } from "@/styles/btn.module.scss";
+function FormInput({ handleChange, handleSubmit, value, title }) {
 	if (!value) {
 		return <div>No ElpCamp Found</div>;
 	}
@@ -7,15 +8,15 @@ function FormInput({ handleChange, handleSubmit, value, title}) {
 		<div className={styles.container}>
 			<div className={styles.card}>
 				<h2
-				style={{
-					textAlign: "center",
-					fontWeight: "600",
-					wordSpacing: "6px",
-					marginTop: "0px",
-				}}
-			>
-				{title || 'Form'}
-			</h2>
+					style={{
+						textAlign: "center",
+						fontWeight: "600",
+						wordSpacing: "6px",
+						marginTop: "0px",
+					}}
+				>
+					{title || "Form"}
+				</h2>
 				<div className={styles.inputArea}>
 					<label htmlFor="title" className="formLabel">
 						<input
@@ -109,7 +110,7 @@ function FormInput({ handleChange, handleSubmit, value, title}) {
 					</div>
 				)}
 				<div className={styles.inputArea}>
-					<button onClick={handleSubmit} className="btn-success">
+					<button onClick={handleSubmit} className={btnSuccess}>
 						Submit
 					</button>
 				</div>

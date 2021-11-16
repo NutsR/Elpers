@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { getElpers } from "../api/elpers";
-import styles from "@/styles/elper.module.css";
-import dynamic from 'next/dynamic';
+import styles from "@/styles/elper.module.scss";
+import { btnPrimary } from "@/styles/btn.module.scss";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-const Map = dynamic(() => import("@/components/mapbox/mapbox"));
+const Map = dynamic(() => import("@/components/mapbox/mapbox"), {
+	loading: () => <div className="loader"></div>,
+	ssr: false,
+});
 function Post({ elpCamps, error }) {
 	if (error) {
 		return <div>{error.message}</div>;
@@ -29,7 +33,7 @@ function Post({ elpCamps, error }) {
 								<p className={styles.description}>{post.description}</p>
 								<div className={styles.btnCtrl}>
 									<Link href={`/elpers/${post._id}`} passHref>
-										<button className="btn-primary">View More</button>
+										<button className={btnPrimary}>View More</button>
 									</Link>
 								</div>
 							</div>

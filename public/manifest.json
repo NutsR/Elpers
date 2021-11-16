@@ -1,14 +1,17 @@
 {
-    "short_name": "ElpCamp",
-    "name": "ElpCamp The Yelp Ripoff",
-    "description": "...",
-    "icons": [],
-    "start_url": "/",
-    "display": "standalone",
-    "theme_color": "#000000",
-    "background_color": "#ffffff",
-    "src": "./maskable_icon.png",
-    "sizes": "196x196",
-    "type": "image/png",
-    "purpose": "any maskable"
+	"short_name": "ElpCamp",
+	"name": "ElpCamp The Yelp Ripoff",
+	"description": "...",
+	"icons": [
+		{
+			"src": "./maskable_icon.png",
+			"sizes": "196x196",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
 }

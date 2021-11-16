@@ -1,12 +1,16 @@
 import { getElperById } from "../../api/elpers/[id]";
 import { useEffect, useState } from "react";
-import styles from "@/styles/id.module.css";
+import styles from "@/styles/id.module.scss";
+import { btn, btnInfo, btnDanger } from "@/styles/btn.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Router from "next/router";
 import Swal from "sweetalert2";
-const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"));
+const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"), {
+	loading: () => <div className="loader middle-load"></div>,
+	ssr: false,
+});
 function PostDetails({ elpCamp }) {
 	const [size, setSize] = useState(true);
 	useEffect(() => {
@@ -70,12 +74,12 @@ function PostDetails({ elpCamp }) {
 					</div>
 				</div>
 				<Link href="/elpers" passHref>
-					<button className="btn">Go Back</button>
+					<button className={btn}>Go Back</button>
 				</Link>
 				<Link href={`/elpers/${elpCamp._id}/edit`} passHref>
-					<button className="btn-info">Edit</button>
+					<button className={btnInfo}>Edit</button>
 				</Link>
-				<button className="btn-danger" onClick={handleConfirm}>
+				<button className={btnDanger} onClick={handleConfirm}>
 					Delete
 				</button>
 			</div>
@@ -107,4 +111,3 @@ export async function getServerSideProps({ params: { id } }) {
 }
 
 export default PostDetails;
-

@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, memo } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
-import styles from "./mapbox.module.css";
+import styles from "./mapbox.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 function Map({ elpers, token }) {

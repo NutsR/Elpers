@@ -1,0 +1,182 @@
+html {
+	height: 100%;
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	position: relative;
+	margin: 0;
+	padding-bottom: 6rem;
+	min-height: 100%;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+button {
+	border-radius: 8px;
+}
+
+
+
+.formLabel {
+	margin: 27px 0;
+	position: relative;
+	display: inline-block;
+}
+.placeholderText {
+	padding: 10px;
+	pointer-events: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: 0.2s;
+	transition-timing-function: ease;
+	transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+	opacity: 0.5;
+	width: 100%;
+}
+.inputControl:focus + .placeholderText,
+.inputControl:not(:placeholder-shown) + .placeholderText {
+	opacity: 1;
+	font-size: 13px;
+	transform: translateY(-100%) translateX(0px);
+	border-radius: 10px;
+}
+.inputControl:valid {
+	outline: 2px solid #28a745;
+}
+
+/* Make clicks pass-through */
+#nprogress {
+	pointer-events: none;
+}
+
+#nprogress .bar {
+	background: #29d;
+
+	position: fixed;
+	z-index: 1031;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+	display: block;
+	position: absolute;
+	right: 0px;
+	width: 100px;
+	height: 100%;
+	box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+	opacity: 1;
+
+	-webkit-transform: rotate(3deg) translate(0px, -4px);
+	-ms-transform: rotate(3deg) translate(0px, -4px);
+	transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+#nprogress .spinner {
+	display: block;
+	position: fixed;
+	z-index: 1031;
+	top: 75px;
+	right: 15px;
+}
+
+#nprogress .spinner-icon {
+	width: 45px;
+	height: 45px;
+	box-sizing: border-box;
+
+	border: solid 2px transparent;
+	border-top-color: #333333;
+	border-left-color: gray;
+	border-radius: 50%;
+
+	-webkit-animation: nprogress-spinner 400ms linear infinite;
+	animation: nprogress-spinner 400ms linear infinite;
+}
+
+.nprogress-custom-parent {
+	overflow: hidden;
+	position: relative;
+}
+
+#nprogress .bar {
+	background: orange !important;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+	position: absolute;
+	top: 67px;
+}
+
+@-webkit-keyframes nprogress-spinner {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+@keyframes nprogress-spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+.loader {
+	border: 16px solid darkgrey; /* Light grey */
+	border-top: 16px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+	z-index: 2040;
+  }
+  
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }
+
+  .middle-load{
+	position: absolute !important;
+	left: 50% !important;
+	top: 50% !important;
+	margin: -75px 0 0 -75px;
+  }
