@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import dynamic from "next/dynamic";
 import { initialState } from "../../initialState/initialState";
 import Router from "next/router";
-import Swal from "sweetalert2";
+import { swalError, swalSuccess } from "../../methods/Swal.fire";
 const FormInput = dynamic(() => import("@/components/form"));
 
 // Reducer
@@ -56,11 +56,7 @@ function ElperForm() {
 
 		// Check if values exist
 		if (!exist) {
-			return Swal.fire({
-				icon: "error",
-				title: "Oops...",
-				text: "Some Fields are still empty",
-			});
+			return swalError({ message: "empty fields please check and try again" });
 		}
 		let formdata = new FormData();
 		for (let i = 0; i < state.images.length; i++) {
@@ -78,21 +74,11 @@ function ElperForm() {
 			);
 			const data = await res.json();
 			if ((data.success = true)) {
-				Swal.fire({
-					position: "top-end",
-					icon: "success",
-					title: "Your work has been saved",
-					showConfirmButton: false,
-					timer: 1500,
-				});
+				swalSuccess();
 				Router.push("/elpers");
 			}
 		} catch (err) {
-			Swal.fire({
-				icon: "error",
-				title: "error",
-				text: `${err.message}`,
-			});
+			swalError(err);
 		}
 	};
 	// Render form

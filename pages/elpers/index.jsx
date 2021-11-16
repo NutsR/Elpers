@@ -4,28 +4,24 @@ import styles from "@/styles/elper.module.scss";
 import { btnPrimary, btn } from "@/styles/btn.module.scss";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import router from "next/router";
+import useSWR, { SWRConfig } from "swr";
 const Map = dynamic(() => import("@/components/mapbox/mapbox"), {
 	loading: () => <div className="loader middle-load"></div>,
 	ssr: false,
 });
-function Post({ elpCamps, error }) {
-	const [loading, setLoading] = useState(false);
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+function Post({ fallback, error }) {
+	const { data, mutate } = useSWR("/api/elpers", fetcher);
 	const refreshData = (e) => {
 		e.preventDefault();
-		router.replace(router.asPath);
-		setLoading(true);
+		mutate();
 	};
-	useEffect(() => {
-		setLoading(false);
-	}, [elpCamps]);
 	if (error) {
 		return <div>{error.message}</div>;
 	}
 	return (
-		<div>
-			<Map elpers={elpCamps} token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} />
+		<SWRConfig value={fallback}>
+			<Map elpers={data} token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} />
 			<div className={styles.main}>
 				<button
 					style={{ width: "10%", alignSelf: "end" }}
@@ -34,8 +30,8 @@ function Post({ elpCamps, error }) {
 				>
 					Refresh Data
 				</button>
-				{!loading ? (
-					elpCamps.map((post) => (
+				{data ? (
+					data.map((post) => (
 						<div className={styles.item} key={post._id}>
 							<div className={styles.imageCtrl}>
 								<Image
@@ -65,7 +61,7 @@ function Post({ elpCamps, error }) {
 					</div>
 				)}
 			</div>
-		</div>
+		</SWRConfig>
 	);
 }
 
@@ -75,8 +71,14 @@ export async function getServerSideProps({ req, res }) {
 		"public, s-maxage=10, stale-while-revalidate=59"
 	);
 	try {
-		const elpCamps = await getElpers();
-		return { props: { elpCamps } };
+		const data = await getElpers();
+		return {
+			props: {
+				fallback: {
+					"/api/elpers": data,
+				},
+			},
+		};
 	} catch (err) {
 		return { props: { error: err } };
 	}

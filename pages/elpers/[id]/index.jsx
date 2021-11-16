@@ -5,8 +5,7 @@ import { btn, btnInfo, btnDanger } from "@/styles/btn.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import Router from "next/router";
-import Swal from "sweetalert2";
+import deleteMethod from "../../../methods/delete";
 const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"), {
 	loading: () => <div className="loader"></div>,
 	ssr: false,
@@ -18,42 +17,7 @@ function PostDetails({ elpCamp }) {
 			window.innerWidth > 800 ? setSize(true) : setSize(false);
 		}
 	}, []);
-	const handleDelete = async () => {
-		try {
-			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers/${elpCamp._id}`,
-				{
-					method: "DELETE",
-				}
-			);
-			const data = await res.json();
-			if (data.success) {
-				Swal.fire({
-					icon: "success",
-					title: "ElpCamp Deleted",
-					text: "Elpcamp has been deleted",
-				});
-				Router.push(`/elpers`);
-			}
-		} catch (error) {
-			Swal.fire({ icon: "error", title: "error", text: error.message });
-		}
-	};
-	const handleConfirm = () => {
-		Swal.fire({
-			title: "Are you sure?",
-			text: "You won't be able to revert this!",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Yes, delete it!",
-		}).then((result) => {
-			if (result.isConfirmed) {
-				handleDelete();
-			}
-		});
-	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.card}>
@@ -79,7 +43,12 @@ function PostDetails({ elpCamp }) {
 				<Link href={`/elpers/${elpCamp._id}/edit`} passHref>
 					<button className={btnInfo}>Edit</button>
 				</Link>
-				<button className={btnDanger} onClick={handleConfirm}>
+				<button
+					className={btnDanger}
+					onClick={() => {
+						deleteMethod(elpCamp._id);
+					}}
+				>
 					Delete
 				</button>
 			</div>
