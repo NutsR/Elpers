@@ -6,6 +6,7 @@ export default function Home({ success, error }) {
 	return (
 		<div className={styles.container}>
 			<Head>
+                                <meta name="theme-color" content="#fff"/>
 				<title>ElpCamp</title>
 				<meta charSet="utf-8" />
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />

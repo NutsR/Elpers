@@ -1,11 +1,12 @@
 import { getElperById } from "../../api/elpers/[id]";
 import { useEffect, useState } from "react";
-import styles from "../../../styles/id.module.css";
+import styles from "@/styles/id.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import Router from "next/router";
-import DetailedMap from "../../../components/mapbox/details.map";
 import Swal from "sweetalert2";
+const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"));
 function PostDetails({ elpCamp }) {
 	const [size, setSize] = useState(true);
 	useEffect(() => {
@@ -106,4 +107,4 @@ export async function getServerSideProps({ params: { id } }) {
 }
 
 export default PostDetails;
-/* */
+

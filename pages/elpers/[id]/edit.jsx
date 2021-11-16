@@ -1,8 +1,9 @@
 import { useReducer } from "react";
-import FormInput from "../../../components/form";
+import dynamic from "next/dynamic";
 import Router from "next/router";
 import { getElperById } from "../../api/elpers/[id]";
 import Swal from "sweetalert2";
+const FormInput = dynamic(() => import("@/components/form"));
 // Reducer
 const reducer = (state, action) => {
 	switch (action.type) {

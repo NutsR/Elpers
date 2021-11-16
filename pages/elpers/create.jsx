@@ -1,8 +1,10 @@
 import { useReducer } from "react";
-import FormInput from "../../components/form";
+import dynamic from "next/dynamic";
 import { initialState } from "../../initialState/initialState";
 import Router from "next/router";
 import Swal from "sweetalert2";
+const FormInput = dynamic(() => import("@/components/form"));
+
 // Reducer
 const reducer = (state, action) => {
 	switch (action.type) {
