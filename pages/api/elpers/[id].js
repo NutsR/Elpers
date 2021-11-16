@@ -1,6 +1,6 @@
 import Elpers from "../../../models/elpCamp";
-import dbConnect from "../../../lib/connection.js";
-import geocodeLocation from "../../../lib/mapbox";
+import dbConnect from "@/lib/connection.js";
+import geocodeLocation from "@/lib/mapbox";
 
 export const getElperById = async (id) => {
 	await dbConnect();

@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import Router from "next/router";
 import Swal from "sweetalert2";
 const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"), {
-	loading: () => <div className="loader middle-load"></div>,
+	loading: () => <div className="loader"></div>,
 	ssr: false,
 });
 function PostDetails({ elpCamp }) {
@@ -101,13 +101,25 @@ function PostDetails({ elpCamp }) {
 	);
 }
 
-export async function getServerSideProps({ params: { id } }) {
-	const elpCamp = await getElperById(id);
-	return {
-		props: {
-			elpCamp,
-		},
-	};
+export async function getServerSideProps({ params: { id }, req, res }) {
+	res.setHeader(
+		"Cache-Control",
+		"public, s-maxage=10, stale-while-revalidate=59"
+	);
+	try {
+		const elpCamp = await getElperById(id);
+		return {
+			props: {
+				elpCamp,
+			},
+		};
+	} catch (err) {
+		return {
+			props: {
+				err,
+			},
+		};
+	}
 }
 
 export default PostDetails;

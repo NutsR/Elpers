@@ -1,5 +1,6 @@
 import { useState, useMemo, memo } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 import styles from "./detail.module.scss";
 import Image from "next/image";
 function DetailedMap({ elpers, height, width, token }) {

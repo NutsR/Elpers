@@ -5,7 +5,7 @@ import { btnPrimary } from "@/styles/btn.module.scss";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 const Map = dynamic(() => import("@/components/mapbox/mapbox"), {
-	loading: () => <div className="loader"></div>,
+	loading: () => <div className="loader middle-load"></div>,
 	ssr: false,
 });
 function Post({ elpCamps, error }) {
@@ -45,7 +45,11 @@ function Post({ elpCamps, error }) {
 	);
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, res }) {
+	res.setHeader(
+		"Cache-Control",
+		"public, s-maxage=10, stale-while-revalidate=59"
+	);
 	try {
 		const elpCamps = await getElpers();
 		return { props: { elpCamps } };

@@ -81,7 +81,11 @@ function EditCamp({ elpCamp }) {
 	);
 }
 
-export const getServerSideProps = async ({ params: { id } }) => {
+export const getServerSideProps = async ({ params: { id }, req, res }) => {
+	res.setHeader(
+		"Cache-Control",
+		"public, s-maxage=10, stale-while-revalidate=59"
+	);
 	const elpCamp = await getElperById(id);
 	return {
 		props: {

@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, memo } from "react";
+import "mapbox-gl/dist/mapbox-gl.css";
 import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./mapbox.module.scss";
 import Image from "next/image";
