@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getElpers } from "../api/elpers";
 import styles from "../../styles/elper.module.css";
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 import Image from "next/image";
 const Map = dynamic(() => import("../../components/mapbox/mapbox"));
 function Post({ elpCamps, error }) {
