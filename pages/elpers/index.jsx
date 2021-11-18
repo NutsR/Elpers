@@ -5,13 +5,23 @@ import { btnPrimary, btn } from "@/styles/btn.module.scss";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import useSWR, { SWRConfig } from "swr";
+import { useEffect, useState } from "react";
 const Map = dynamic(() => import("@/components/mapbox/mapbox"), {
 	loading: () => <div className="loader middle-load"></div>,
 	ssr: false,
 });
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 function Post({ fallback, error }) {
-	const { data, mutate } = useSWR("/api/elpers", fetcher);
+	const [hide, setHidden] = useState(true);
+	const [mount, setMount] = useState(false);
+	useEffect(() => {
+		setMount(true);
+		const timer = setInterval(() => {
+			setHidden(false);
+		}, 10000);
+		return () => clearInterval(timer);
+	}, []);
+	const { data, mutate } = useSWR(mount ? "/api/elpers" : null, fetcher);
 	const refreshData = (e) => {
 		e.preventDefault();
 		mutate();
@@ -30,7 +40,7 @@ function Post({ fallback, error }) {
 				>
 					Refresh Data
 				</button>
-				{data ? (
+				{data && data.length > 0 ? (
 					data.map((post) => (
 						<div className={styles.item} key={post._id}>
 							<div className={styles.imageCtrl}>
@@ -56,9 +66,15 @@ function Post({ fallback, error }) {
 						</div>
 					))
 				) : (
-					<div className="overlay">
-						<div className="loader middle-load" />
-					</div>
+					<>
+						{!hide ? (
+							<div>Not Found</div>
+						) : (
+							<div className="overlay">
+								<div className="loader middle-load" />
+							</div>
+						)}
+					</>
 				)}
 			</div>
 		</SWRConfig>

@@ -5,6 +5,7 @@ import styles from "./mapbox.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 function Map({ elpers, token }) {
+	if (elpers === undefined || elpers[0] === undefined) return null;
 	const [size, setSize] = useState(true);
 	useEffect(() => {
 		if (typeof window !== "undefined") {
