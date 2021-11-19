@@ -21,7 +21,7 @@ const auth = nextConnect()
 	.use(passport.initialize())
 	.use(passport.session());
 
-passport.use(user.createStrategy());
+passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 export default auth;
