@@ -9,7 +9,8 @@ handler
 	.get(async (req, res) => {
 		await dbConnect();
 		if (req.session.loggedIn) {
-			return res.status(201).json({ user: req.session.loggedIn });
+			const { hash, salt, ...userObj } = req.session.loggedIn;
+			return res.status(201).json({ user: { userObj } });
 		}
 		return res.json({ error: "no user found" });
 	})
@@ -19,6 +20,11 @@ handler
 			return res.status(400).send("Missing fields");
 		}
 		await dbConnect();
+		const existingUsername = await User.find({ username });
+		const existingEmail = await User.find({ email });
+		if (existingUsername || existingEmail)
+			return res.status(409).send("this username is already in use");
+
 		const user = new User({ email, username });
 		const registered = await User.register(user, password);
 		req.login(registered, (err) => {

@@ -59,7 +59,7 @@ function Register() {
 					</label>
 					<div className="submit">
 						<button type="submit">Sign up</button>
-						<Link href="/login">
+						<Link href="/user/login">
 							<a>I already have an account</a>
 						</Link>
 					</div>
