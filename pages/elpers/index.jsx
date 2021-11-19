@@ -31,7 +31,7 @@ function Post({ fallback, error }) {
 	}
 	return (
 		<SWRConfig value={fallback}>
-			<Map elpers={data} token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} />
+			{(data === undefined || data[0] === undefined) ? null : <Map elpers={data} token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} />}
 			<div className={styles.main}>
 				<button
 					style={{ width: "10%", alignSelf: "end" }}
