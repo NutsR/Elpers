@@ -9,7 +9,7 @@ function Header() {
 	const { asPath } = useRouter();
 	const handleLogout = async () => {
 		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_DOMAIN}/api/user/logout`,
+			`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/user/logout`,
 			{
 				method: "POST",
 			}
