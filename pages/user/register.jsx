@@ -5,7 +5,6 @@ import useUser from "@/lib/auth/hooks";
 
 function Register() {
 	const [user, { mutate }] = useUser();
-	console.log(user);
 	const [errorMsg, setErrorMsg] = useState("");
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -43,19 +42,29 @@ function Register() {
 				<form onSubmit={onSubmit}>
 					<label>
 						<span>Username</span>
-						<input type="text" name="username" required />
+						<input autoComplete="off" type="text" name="username" required />
 					</label>
 					<label>
 						<span>Password</span>
-						<input type="password" name="password" required />
+						<input
+							autoComplete="off"
+							type="password"
+							name="password"
+							required
+						/>
 					</label>
 					<label>
 						<span>Repeat password</span>
-						<input type="password" name="rpassword" required />
+						<input
+							autoComplete="off"
+							type="password"
+							name="rpassword"
+							required
+						/>
 					</label>
 					<label>
 						<span>Email</span>
-						<input type="email" name="email" required />
+						<input autoComplete="off" type="email" name="email" required />
 					</label>
 					<div className="submit">
 						<button type="submit">Sign up</button>

@@ -5,23 +5,13 @@ import styles from "./header.module.scss";
 import useUser from "@/lib/auth/hooks";
 import dynamic from "next/dynamic";
 const LoginForm = dynamic(() => import("@/components/login/login.jsx"));
+const ProfileOpts = dynamic(() => import("@/components/profile/profileOpts"));
 function Header() {
 	const [user, { mutate }] = useUser();
 	const [profile, showProfile] = useState(false);
 	const [login, showLogin] = useState(false);
 	const { asPath } = useRouter();
-	const handleLogout = async () => {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/user/logout`,
-			{
-				method: "POST",
-			}
-		);
-		if (res.status === 204) {
-			mutate(null);
-			showProfile(false);
-		}
-	};
+
 	return (
 		<div>
 			<ul
@@ -62,14 +52,9 @@ function Header() {
 					)}
 				</li>
 			</ul>
-			<div>
-				{profile && (
-					<div className={styles.dropDown}>
-						<span onClick={handleLogout}>Logout</span>
-					</div>
-				)}
-				{login && <LoginForm showLogin={showLogin} />}
-			</div>
+
+			{profile && <ProfileOpts showProfile={showProfile} mutate={mutate} />}
+			{login && <LoginForm showLogin={showLogin} />}
 		</div>
 	);
 }

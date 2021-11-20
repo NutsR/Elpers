@@ -3,6 +3,7 @@ import Link from "next/dist/client/link";
 import { useEffect, useState } from "react";
 import styles from "./login.module.scss";
 import { btnSuccess } from "@/styles/btn.module.scss";
+import Router from "next/router";
 function LoginForm({ showLogin }) {
 	const [user, { mutate }] = useUser();
 	const [errorMsg, setErrorMsg] = useState();
@@ -36,6 +37,7 @@ function LoginForm({ showLogin }) {
 			showLogin(false);
 		}
 	}, [user]);
+	Router.events.on("routeChangeComplete", () => showLogin(false));
 	return (
 		<div className={styles.container}>
 			<form onSubmit={handleSubmit}>
@@ -46,6 +48,7 @@ function LoginForm({ showLogin }) {
 						className={`${styles.labelStyles} formLabel`}
 					>
 						<input
+							autoComplete="off"
 							type="text"
 							name="username"
 							required
@@ -63,6 +66,7 @@ function LoginForm({ showLogin }) {
 						className={`${styles.labelStyles} formLabel`}
 					>
 						<input
+							autoComplete="off"
 							type="password"
 							name="password"
 							placeholder=" "
