@@ -1,11 +1,14 @@
 import Link from "next/dist/client/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import styles from "./header.module.css";
+import styles from "./header.module.scss";
 import useUser from "@/lib/auth/hooks";
+import dynamic from "next/dynamic";
+const LoginForm = dynamic(() => import("@/components/login/login.jsx"));
 function Header() {
 	const [user, { mutate }] = useUser();
-	const [dropDown, setDropDown] = useState(false);
+	const [profile, showProfile] = useState(false);
+	const [login, showLogin] = useState(false);
 	const { asPath } = useRouter();
 	const handleLogout = async () => {
 		const res = await fetch(
@@ -16,62 +19,58 @@ function Header() {
 		);
 		if (res.status === 204) {
 			mutate(null);
+			showProfile(false);
 		}
 	};
 	return (
-		<ul
-			id="header"
-			className={`${styles.header} ${
-				asPath === "/elpers" ? styles.fixed : styles.unfixed
-			}`}
-		>
-			<li className={styles.navItem}>
-				<Link style={{ margin: "25px 25px" }} href="/elpers" passHref>
-					<a className={styles.link}>ElpCamp</a>
-				</Link>
-			</li>
-			<li className={styles.navItem}>
-				<Link style={{ margin: "25px 25px" }} href="/" passHref>
-					<a className={styles.link}>Home</a>
-				</Link>
-			</li>
-			<li className={styles.navItem}>
-				<Link href="/elpers/create" passHref>
-					<a className={styles.link}>Create</a>
-				</Link>
-			</li>
-			<li className={`${styles.navItem} ${styles.login}`}>
-				{!user ? (
-					<Link href="/user/register" passHref>
-						<a className={styles.link}>Login</a>
+		<div>
+			<ul
+				id="header"
+				className={`${styles.header} ${
+					asPath === "/elpers" ? styles.fixed : styles.unfixed
+				}`}
+			>
+				<li className={styles.navItem}>
+					<Link style={{ margin: "25px 25px" }} href="/elpers" passHref>
+						<a className={styles.link}>ElpCamp</a>
 					</Link>
-				) : (
-					<>
-						<span
-							className={styles.link}
-							onClick={() => setDropDown(!dropDown)}
-						>
-							{user.userObj?.username}
+				</li>
+				<li className={styles.navItem}>
+					<Link style={{ margin: "25px 25px" }} href="/" passHref>
+						<a className={styles.link}>Home</a>
+					</Link>
+				</li>
+				<li className={styles.navItem}>
+					<Link href="/elpers/create" passHref>
+						<a className={styles.link}>Create</a>
+					</Link>
+				</li>
+				<li className={`${styles.navItem} ${styles.login}`}>
+					{!user ? (
+						<span className={styles.link} onClick={() => showLogin(!login)}>
+							Login
 						</span>
-						{!dropDown ? null : (
+					) : (
+						<>
 							<span
-								onClick={handleLogout}
-								style={{
-									width: "100px",
-									height: "50px",
-									display: "block",
-									zIndex: "10",
-									position: "absolute",
-									top: "100px",
-								}}
+								className={styles.link}
+								onClick={() => showProfile(!profile)}
 							>
-								Logout
+								{user.userObj?.username}
 							</span>
-						)}
-					</>
+						</>
+					)}
+				</li>
+			</ul>
+			<div>
+				{profile && (
+					<div className={styles.dropDown}>
+						<span onClick={handleLogout}>Logout</span>
+					</div>
 				)}
-			</li>
-		</ul>
+				{login && <LoginForm showLogin={showLogin} />}
+			</div>
+		</div>
 	);
 }
 
