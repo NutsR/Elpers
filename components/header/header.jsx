@@ -51,18 +51,18 @@ function Header() {
 							className={styles.link}
 							onClick={() => setDropDown(!dropDown)}
 						>
-							{user.userObj.username}
+							{user.userObj?.username}
 						</span>
 						{!dropDown ? null : (
 							<span
 								onClick={handleLogout}
 								style={{
-									width: "100%",
-									height: "50%",
+									width: "100px",
+									height: "50px",
 									display: "block",
 									zIndex: "10",
 									position: "absolute",
-									top: "50px",
+									top: "100px",
 								}}
 							>
 								Logout

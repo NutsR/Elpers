@@ -23,8 +23,7 @@ function Login() {
 				}
 			);
 			if (res.status === 200) {
-				const userObj = await res.json();
-				mutate(userObj);
+				mutate(await res.json());
 			} else {
 				setErrorMsg("invalid fields");
 			}

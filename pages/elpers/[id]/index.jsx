@@ -7,12 +7,14 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import deleteMethod from "../../../methods/delete";
+import useUser from "../../../lib/auth/hooks";
 const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"), {
 	loading: () => <div className="loader"></div>,
 	ssr: false,
 });
 const fetcher = (url) => fetch(url).then((r) => r.json());
 function PostDetails({ fallback, id }) {
+	const [user] = useUser();
 	const { data, error } = useSWR(`/api/elpers/${id}`, fetcher);
 	const [size, setSize] = useState(true);
 	useEffect(() => {
@@ -51,17 +53,21 @@ function PostDetails({ fallback, id }) {
 						<Link href="/elpers" passHref>
 							<button className={btn}>Go Back</button>
 						</Link>
-						<Link href={`/elpers/${data._id}/edit`} passHref>
-							<button className={btnInfo}>Edit</button>
-						</Link>
-						<button
-							className={btnDanger}
-							onClick={() => {
-								deleteMethod(data._id);
-							}}
-						>
-							Delete
-						</button>
+						{user?.userObj._id === data.user._id && (
+							<div>
+								<Link href={`/elpers/${data._id}/edit`} passHref>
+									<button className={btnInfo}>Edit</button>
+								</Link>
+								<button
+									className={btnDanger}
+									onClick={() => {
+										deleteMethod(data._id);
+									}}
+								>
+									Delete
+								</button>
+							</div>
+						)}
 					</div>
 					<div className={styles.map}>
 						<DetailedMap

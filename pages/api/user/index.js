@@ -22,7 +22,7 @@ handler
 		await dbConnect();
 		const existingUsername = await User.find({ username });
 		const existingEmail = await User.find({ email });
-		if (existingUsername || existingEmail)
+		if (existingUsername.username || existingEmail.email)
 			return res.status(409).send("this username is already in use");
 
 		const user = new User({ email, username });
