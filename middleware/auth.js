@@ -8,7 +8,9 @@ const auth = nextConnect()
 	.use(
 		session({
 			name: "sess",
-			secret: process.env.TOKEN_SECRET || "unsafesecretmustchangetogoodone",
+			secret:
+				process.env.TOKEN_SECRET ||
+				"Error: Password string too short (min 32 characters required)",
 			cookie: {
 				maxAge: 60 * 60 * 8, // 8 hours,
 				httpOnly: true,
