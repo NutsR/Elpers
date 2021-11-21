@@ -44,7 +44,6 @@ function Register() {
 					<label className={`${styles.labelStyles} formLabel`}>
 						<input
 							className={`${styles.inputStyles} inputControl`}
-							placeholder=" "
 							autoComplete="off"
 							type="text"
 							name="username"
