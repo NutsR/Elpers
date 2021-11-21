@@ -39,7 +39,7 @@ function Register() {
 		<div className={styles.container}>
 			<h1 className={styles.title}>Register a New Elper</h1>
 			{errorMsg && <p className={styles.error}>{errorMsg}</p>}
-			<div onSubmit={onSubmit} className={styles.formContainer}>
+			<form onSubmit={onSubmit} className={styles.formContainer}>
 				<div className="">
 					<label className={`${styles.labelStyles} formLabel`}>
 						<input
@@ -60,6 +60,7 @@ function Register() {
 							autoComplete="off"
 							type="password"
 							name="password"
+							minLength={8}
 							required
 							placeholder=" "
 						/>
@@ -71,6 +72,7 @@ function Register() {
 						<input
 							className={`${styles.inputStyles} inputControl`}
 							autoComplete="off"
+							minLength={8}
 							type="password"
 							name="rpassword"
 							required
@@ -97,7 +99,7 @@ function Register() {
 						Sign up
 					</button>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 }

@@ -16,7 +16,7 @@ function EditCamp({ elpCamp }) {
 	const [user] = useUser();
 	const [state, dispatch] = useReducer(reducer, elpCamp);
 	const handleChange = returnHandleChange(dispatch);
-	const handleSubmit = returnHandleSubmit(state);
+	const handleSubmit = returnHandleSubmit(state, elpCamp._id);
 	useEffect(() => {
 		if (user) {
 			if (user.userObj?._id !== state.user) {

@@ -18,7 +18,7 @@ export const returnHandleChange = (dispatch) => {
 		});
 };
 // Handle Submit
-export const returnHandleSubmit = (state) => {
+export const returnHandleSubmit = (state, id) => {
 	return async (e) => {
 		e.preventDefault();
 		const exist = Object.keys(state).every((key) => {
@@ -39,7 +39,7 @@ export const returnHandleSubmit = (state) => {
 		}
 		try {
 			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers/${elpCamp._id}`,
+				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers/${id}`,
 				{
 					method: "PUT",
 					body: JSON.stringify(state),
@@ -48,7 +48,7 @@ export const returnHandleSubmit = (state) => {
 			const data = await res.json();
 			if (data.success) {
 				swalSuccess();
-				Router.push(`/elpers/${elpCamp._id}`);
+				Router.push(`/elpers/${id}`);
 			}
 		} catch (error) {
 			swalError(error);

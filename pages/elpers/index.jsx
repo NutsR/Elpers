@@ -22,24 +22,16 @@ function Post({ fallback, error }) {
 		return () => clearInterval(timer);
 	}, []);
 	const { data, mutate } = useSWR(mount ? "/api/elpers" : null, fetcher);
-	const refreshData = (e) => {
-		e.preventDefault();
-		mutate();
-	};
 	if (error) {
 		return <div>{error.message}</div>;
 	}
 	return (
 		<SWRConfig value={fallback}>
-			{(data === undefined || data[0] === undefined) ? null : <Map elpers={data} token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} />}
+			{data === undefined || data[0] === undefined ? null : (
+				<Map elpers={data} token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} />
+			)}
 			<div className={styles.main}>
-				<button
-					style={{ width: "10%", alignSelf: "end" }}
-					className={btn}
-					onClick={refreshData}
-				>
-					Refresh Data
-				</button>
+				<h2 className={styles.mainTitle}>ElpCamps</h2>
 				{data && data.length > 0 ? (
 					data.map((post) => (
 						<div className={styles.item} key={post._id}>
@@ -55,7 +47,14 @@ function Post({ fallback, error }) {
 								<div className={styles.innerContent}>
 									<h5 className={styles.title}>{post.title}</h5>
 
-									<p className={styles.description}>{post.description}</p>
+									<span className={styles.description}>
+										<span>
+											{post.description.substring(0, 170)}{" "}
+											<Link href={`/elpers/${post._id}`} passHref>
+												<a className={styles.decroLink}>Continue Reading...</a>
+											</Link>
+										</span>
+									</span>
 									<div className={styles.btnCtrl}>
 										<Link href={`/elpers/${post._id}`} passHref>
 											<button className={btnPrimary}>View More</button>
@@ -100,3 +99,14 @@ export async function getServerSideProps({ req, res }) {
 	}
 }
 export default Post;
+/* const refreshData = (e) => {
+		e.preventDefault();
+		mutate();
+		<button
+					style={{ width: "10%", alignSelf: "end" }}
+					className={btn}
+					onClick={refreshData}
+				>
+					Refresh Data
+				</button>
+	}; */
