@@ -43,14 +43,13 @@ export const returnHandleChange = (dispatch) => {
 	};
 };
 
-export const returnHandleSubmit = (dispatch, user, state) => {
+export const returnHandleSubmit = (state) => {
 	return async (e) => {
 		e.preventDefault();
-		if (!user)
+		if (!state.user)
 			return swalError({
 				message: "Not Logged in please login or register and try again",
 			});
-		dispatch({ type: "change", name: "user", payload: user.userObj?._id });
 		const exist = Object.keys(state).every((key) => {
 			if (
 				(key === "price" && state[key] > 20) ||
@@ -68,7 +67,6 @@ export const returnHandleSubmit = (dispatch, user, state) => {
 		if (!exist) {
 			return swalError({ message: "empty fields please check and try again" });
 		}
-
 		let formdata = new FormData();
 		for (let i = 0; i < state.images.length; i++) {
 			formdata.append(`photos`, state.images[i]);

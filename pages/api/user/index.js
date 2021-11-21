@@ -1,7 +1,7 @@
 import nextConnect from "next-connect";
 import auth from "@/middleware/auth";
 import User from "../../../models/user";
-import dbConnect from "../../../lib/connection";
+import dbConnect from "@/lib/connection";
 const handler = nextConnect();
 
 handler
@@ -9,12 +9,13 @@ handler
 	.get(async (req, res) => {
 		await dbConnect();
 		if (req.session.loggedIn) {
-			const { hash, salt, ...userObj } = req.session.loggedIn;
+			const userObj = await User.findById(req.session.loggedIn);
 			return res.status(201).json({ user: { userObj } });
 		}
 		return res.json({ error: "no user found" });
 	})
 	.post(async (req, res) => {
+		await dbConnect();
 		const { username, password, email } = req.body;
 		if (!username || !password || !email) {
 			return res.status(400).send("Missing fields");
@@ -29,8 +30,8 @@ handler
 		const registered = await User.register(user, password);
 		req.login(registered, (err) => {
 			if (err) return err;
-
-			req.session.loggedIn = req.user;
+			console.log(req.user._id);
+			req.session.loggedIn = req.user._id;
 			res.status(201).json({ success: true });
 		});
 	});

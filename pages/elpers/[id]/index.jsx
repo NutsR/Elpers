@@ -53,7 +53,7 @@ function PostDetails({ fallback, id }) {
 						<Link href="/elpers" passHref>
 							<button className={btn}>Go Back</button>
 						</Link>
-						{user?.userObj._id === data.user._id && (
+						{user && user.userObj?._id === data.user._id && (
 							<div>
 								<Link href={`/elpers/${data._id}/edit`} passHref>
 									<button className={btnInfo}>Edit</button>

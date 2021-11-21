@@ -14,14 +14,16 @@ function ElperForm() {
 	const [user] = useUser();
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const handleChange = returnHandleChange(dispatch);
-	const handleSubmit = returnHandleSubmit(dispatch, user, state);
+	const handleSubmit = returnHandleSubmit(state);
 
 	useEffect(() => {
-		if (!user)
+		if (!user) {
+			state.user = null;
 			swalError({
 				message: "Creating ElpCamp disabled reason: NOT LOGGED IN",
 			});
-	}, []);
+		} else state.user = user.userObj?._id;
+	}, [user]);
 	// Render form
 	return (
 		<>
