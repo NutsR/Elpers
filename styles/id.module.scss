@@ -1,21 +1,27 @@
-.container {
+.container{
 	display: flex;
-	justify-content: center;
-	margin-top: 10px;
-        margin-left: 20px;
+	flex-direction: column-reverse;
 }
 
 .card {
-	margin: 0 30px;
+	margin: 0px 5px 20px 0px;
+	order: 1;
+}
+.map{
+	order: 2;
+}
+.muted{
+	color: #696f78;
 }
 .imageCtrl {
-	width: 65vh;
-	
+	width: 90vw;
+	margin: auto;
+	margin-top: 10px;
 }
 .imageCtrl > span {
-        position: unset !important;
-        height: 100%;
-		border-radius: 10px;
+	position: unset !important;
+	height: 100%;
+	border-radius: 10px;
 }
 .image {
 	object-fit: contain;
@@ -24,31 +30,47 @@
 	height: 100% !important;
 }
 
-.content {
-	margin-left: 10px;
-}
-.title {
-	font-size: 20px;
-	font-weight: 600;
-	margin-bottom: unset;
-}
-.textContent {
-	font-size: 18px;
-}
-.price {
-	display: block;
-	margin: 20px 10px 5px 10px;
-}
-.location {
-	color: #696f78;
-}
+@media screen and (min-width: 800px) {
+	.container {
+		display: grid;
+		margin-top: 10px;
+		margin-left: 20px;
+		grid-template-areas: "main map" "footer footer";
+	}
 
-@media screen and (max-width: 800px) {
 	.card {
-		margin: 0px 5px 20px 0px;
-		box-shadow: unset;
+		margin: 0 30px;
+		grid-area: main;
+		justify-self: end;
+	}
+	.map {
+		margin-top: 12px;
+		grid-area: map;
+	}
+	.reviews {
+		grid-area: footer;
+		justify-self: center;
 	}
 	.imageCtrl {
-		width: 50vw;
+		width: 65vh;
+	}
+
+	.content {
+		margin-left: 10px;
+	}
+	.title {
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: unset;
+	}
+	.textContent {
+		font-size: 18px;
+	}
+	.price {
+		display: block;
+		margin: 20px 10px 5px 10px;
+	}
+	.location {
+		color: #696f78;
 	}
 }

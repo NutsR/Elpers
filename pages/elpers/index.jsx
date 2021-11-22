@@ -46,10 +46,15 @@ function Post({ fallback, error }) {
 							<div className={styles.content}>
 								<div className={styles.innerContent}>
 									<h5 className={styles.title}>{post.title}</h5>
-
+									<hr className={styles.hr} />
 									<span className={styles.description}>
 										<span>
-											{post.description.substring(0, 170)}{" "}
+											<span className={styles.smText}>
+												{post.description.substr(0, 150)}...{" "}
+											</span>
+											<span className={styles.mdText}>
+												{post.description.substr(0, 170)}...{" "}
+											</span>
 											<Link href={`/elpers/${post._id}`} passHref>
 												<a className={styles.decroLink}>Continue Reading...</a>
 											</Link>

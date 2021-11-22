@@ -45,9 +45,12 @@ function PostDetails({ fallback, id }) {
 								<h5 className={styles.title}>
 									{data.title} By {data.user.username}{" "}
 								</h5>
-								<span className={styles.textContent}>{data.description}</span>
-								<span className={styles.price}>{data.price}</span>
-								<span className={styles.location}>{data.location}</span>
+								<div className={styles.textContent}>{data.description}</div>
+								<div className={styles.price}>
+									Price Defined By User :{" "}
+									<span className={styles.muted}>{data.price}</span>
+								</div>
+								<div className={styles.location}>{data.location}</div>
 							</div>
 						</div>
 						<Link href="/elpers" passHref>
@@ -72,16 +75,16 @@ function PostDetails({ fallback, id }) {
 					<div className={styles.map}>
 						<DetailedMap
 							elpers={data}
-							width={size ? "36vw" : "45vw"}
-							height={size ? "40.6vh" : "23.2vh"}
+							width={size ? "36vw" : "100vw"}
+							height={size ? "40.6vh" : "30vh"}
 							token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
 						/>
-						<div className={styles.reviews}>
-							<h5 className={styles.title}>Reviews</h5>
-							{data.review.map((el) => (
-								<span key={el._id}>{el.review}</span>
-							))}
-						</div>
+					</div>
+					<div className={styles.reviews}>
+						<h5 className={styles.title}>Reviews</h5>
+						{data.review.map((el) => (
+							<span key={el._id}>{el.review}</span>
+						))}
 					</div>
 				</div>
 			)}

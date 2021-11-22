@@ -51,7 +51,16 @@
 .btnCtrl {
 	bottom: 0;
 }
-
+	.mdText{
+		display: none;
+	}
+	.smText{
+		display: inline;
+	}
+.hr{
+	border:2px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
 @media screen and (min-width: 800px) {
 	.main {
 		display: flex;
@@ -103,5 +112,33 @@
 	.btnCtrl {
 		position: relative;
 		bottom: -50px;
+	}
+	.smText{
+		display: none;
+	}
+}
+@media screen and (min-width: 700px) {
+	.lgText,
+	.mdText{
+		display: inline;
+	}
+	.smText{
+		display: none;
+	}
+}
+/* tried to make it work with kindle fire HDX Linux */
+@media screen and (max-height: 1300px) and (max-width: 800px){
+	.image{
+		height: 20vh !important;
+	}
+	.mdText{
+		display: none;
+	}
+	.smText{
+		display: inline;
+	}
+	.btnCtrl{
+		position: relative;
+		bottom: -20px;
 	}
 }
