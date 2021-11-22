@@ -20,6 +20,7 @@ function FormInput({ handleChange, handleSubmit, value, title }) {
 				<div className={styles.inputArea}>
 					<label htmlFor="title" className="formLabel">
 						<input
+							autoComplete="off"
 							type="text"
 							minLength="5"
 							className="inputControl"
@@ -38,6 +39,7 @@ function FormInput({ handleChange, handleSubmit, value, title }) {
 				<div className={styles.inputArea}>
 					<label htmlFor="location" className="formLabel">
 						<input
+							autoComplete="off"
 							type="text"
 							minLength="3"
 							name="location"
@@ -75,6 +77,7 @@ function FormInput({ handleChange, handleSubmit, value, title }) {
 				<div className={styles.inputArea}>
 					<label htmlFor="price" className="formLabel">
 						<input
+							autoComplete="off"
 							className="inputControl"
 							type="number"
 							name="price"
@@ -95,6 +98,7 @@ function FormInput({ handleChange, handleSubmit, value, title }) {
 							Upload Image Prefer Landscape images
 						</label>
 						<input
+							autoComplete="off"
 							type="file"
 							className="inputControl"
 							size="60"

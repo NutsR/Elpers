@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === "development") {
 	module.exports = withBundleAnalyzer(
 		withPWA({
 			reactStrictMode: true,
-
+			productionBrowserSourceMaps: true,
 			images: {
 				domains: ["cloudinary.com", "res.cloudinary.com"],
 			},
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "development") {
 } else {
 	module.exports = withPWA({
 		reactStrictMode: true,
-
+		productionBrowserSourceMaps: true,
 		images: {
 			domains: ["cloudinary.com", "res.cloudinary.com"],
 		},

@@ -104,28 +104,6 @@ button {
 }
 
 /* Remove these to get rid of the spinner */
-#nprogress .spinner {
-	display: block;
-	position: fixed;
-	z-index: 1031;
-	top: 75px;
-	right: 15px;
-}
-
-#nprogress .spinner-icon {
-	width: 45px;
-	height: 45px;
-	box-sizing: border-box;
-
-	border: solid 2px transparent;
-	border-top-color: #333333;
-	border-left-color: gray;
-	border-radius: 50%;
-
-	-webkit-animation: nprogress-spinner 400ms linear infinite;
-	animation: nprogress-spinner 400ms linear infinite;
-}
-
 .nprogress-custom-parent {
 	overflow: hidden;
 	position: relative;
