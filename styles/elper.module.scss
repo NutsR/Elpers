@@ -21,8 +21,10 @@
 	border-radius: 7px;
 }
 .item {
-	box-shadow: unset;
+	background-color: #e1e2e3;
 	display: grid;
+	padding: 15px;
+	border-radius: 10px;
 	grid-template-columns: 1fr 2fr;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -40,7 +42,7 @@
 .description{
 	display: block;
 	color: rgba(110, 112, 114, 1);
-	height: 18vh;
+	height: 21vh;
 }
 
 .decroLink{
