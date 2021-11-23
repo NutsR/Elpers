@@ -33,6 +33,7 @@ function EditCamp({ elpCamp }) {
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 				value={state}
+				id={elpCamp._id}
 				title={`Editing ${elpCamp.title}`}
 			/>
 		</>

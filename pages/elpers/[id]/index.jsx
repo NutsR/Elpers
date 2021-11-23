@@ -2,12 +2,11 @@ import { getElperById } from "../../api/elpers/[id]";
 import useSWR, { SWRConfig } from "swr";
 import { useEffect, useState } from "react";
 import styles from "@/styles/id.module.scss";
-import { btn, btnInfo, btnDanger } from "@/styles/btn.module.scss";
+import { btn, btnInfo } from "@/styles/btn.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import deleteMethod from "../../../methods/delete";
-import useUser from "../../../lib/auth/hooks";
+import useUser from "@/lib/auth/hooks";
 const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"), {
 	loading: () => <div className="loader"></div>,
 	ssr: false,
@@ -42,35 +41,37 @@ function PostDetails({ fallback, id }) {
 								alt="post describing"
 							/>
 							<div className={styles.content}>
+								<hr className={styles.hr} />
 								<h5 className={styles.title}>
 									{data.title} By {data.user.username}{" "}
+									{user && user.userObj?._id === data.user._id && (
+										<span className={styles.btnEdit}>
+											<Link href={`/elpers/${data._id}/edit`} passHref>
+												<button className={btnInfo}>Edit</button>
+											</Link>
+										</span>
+									)}
 								</h5>
-								<div className={styles.textContent}>{data.description}</div>
-								<div className={styles.price}>
-									Price Defined By User :{" "}
-									<span className={styles.muted}>{data.price}</span>
+
+								<div className={styles.textContent}>
+									{data.description}
+									<hr className={styles.hr} />
 								</div>
-								<div className={styles.location}>{data.location}</div>
+
+								<div className={styles.price}>
+									AVG Price:{" "}
+									<span className={styles.muted}>
+										{data.price}
+										<b>₹</b>
+									</span>
+								</div>
+								<div className={styles.location}>
+									ElpCamp Location:{" "}
+									<span className={styles.muted}>{data.location}</span>
+								</div>
+								<hr className={styles.hr} />
 							</div>
 						</div>
-						<Link href="/elpers" passHref>
-							<button className={btn}>Go Back</button>
-						</Link>
-						{user && user.userObj?._id === data.user._id && (
-							<div>
-								<Link href={`/elpers/${data._id}/edit`} passHref>
-									<button className={btnInfo}>Edit</button>
-								</Link>
-								<button
-									className={btnDanger}
-									onClick={() => {
-										deleteMethod(data._id);
-									}}
-								>
-									Delete
-								</button>
-							</div>
-						)}
 					</div>
 					<div className={styles.map}>
 						<DetailedMap

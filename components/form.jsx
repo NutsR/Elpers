@@ -1,6 +1,9 @@
 import styles from "@/styles/form.module.scss";
-import { btnSuccess } from "@/styles/btn.module.scss";
-function FormInput({ handleChange, handleSubmit, value, title }) {
+import { btnSuccess, btnDanger } from "@/styles/btn.module.scss";
+import deleteMethod from "@/methods/delete";
+import { useRouter } from "next/router";
+function FormInput({ handleChange, handleSubmit, value, title, id }) {
+	const router = useRouter();
 	if (!value) {
 		return <div>No ElpCamp Found</div>;
 	}
@@ -92,7 +95,7 @@ function FormInput({ handleChange, handleSubmit, value, title }) {
 						<h6>Looks good!</h6>
 					</div>
 				</div>
-				{value.images instanceof Array && value.images[0].url ? null : (
+				{router.pathname === "/elpers/[id]/edit" ? null : (
 					<div className={styles.inputArea}>
 						<label htmlFor="images" className={styles.customLabel}>
 							Upload Image Prefer Landscape images
@@ -117,6 +120,16 @@ function FormInput({ handleChange, handleSubmit, value, title }) {
 					<button onClick={handleSubmit} className={btnSuccess}>
 						Submit
 					</button>
+					{router.pathname === "/elpers/[id]/edit" && (
+						<button
+							className={btnDanger}
+							onClick={() => {
+								deleteMethod(id);
+							}}
+						>
+							Delete
+						</button>
+					)}
 				</div>
 			</div>
 		</div>
