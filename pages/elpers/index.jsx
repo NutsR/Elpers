@@ -40,7 +40,7 @@ function Post({ fallback, error }) {
 			<div className={styles.main}>
 				<h2 className={styles.mainTitle}>ElpCamps</h2>
 				{data && data.length > 0 ? (
-					data.map((post) => <Camps styles={styles} post={post} />)
+					data.map((post) => <Camps key={post._id} styles={styles} post={post} />)
 				) : (
 					<>{!hide && <div>Not Found</div>}</>
 				)}

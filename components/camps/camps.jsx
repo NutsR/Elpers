@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Camps({ styles, post }) {
 	return (
-		<div className={styles.item} key={post._id}>
+		<div className={styles.item}>
 			<div className={styles.imageCtrl}>
 				<Image
 					layout="fill"
