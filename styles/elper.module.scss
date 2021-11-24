@@ -33,33 +33,38 @@
 	box-shadow: unset;
 }
 .title {
-	margin-top: unset;
+	margin: unset;
+	margin-bottom: 5px;
 }
 .content {
 	height: 15%;
 	box-sizing: border-box;
 }
-.description{
+.description {
 	display: block;
 	color: rgba(110, 112, 114, 1);
 	height: 21vh;
 }
 
-.decroLink{
+.decroLink {
 	color: #0fadcc;
 }
 .btnCtrl {
 	bottom: 0;
 }
-	.mdText{
-		display: none;
-	}
-	.smText{
-		display: inline;
-	}
-.hr{
-	border:2.5px solid rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
+.mdText {
+	display: none;
+}
+.smText {
+	display: inline;
+}
+
+.muted {
+	font-weight: 600;
+	color: #696f78;
+	display: block;
+	width: 100%;
+	border-bottom: 2.95px solid rgba(0, 0, 0, 0.2);
 }
 @media screen and (min-width: 800px) {
 	.main {
@@ -105,7 +110,7 @@
 		font-weight: bold;
 		font-size: 15px;
 	}
-	
+
 	.description {
 		height: 11vh;
 	}
@@ -113,31 +118,31 @@
 		position: relative;
 		bottom: -50px;
 	}
-	.smText{
+	.smText {
 		display: none;
 	}
 }
 @media screen and (min-width: 700px) {
 	.lgText,
-	.mdText{
+	.mdText {
 		display: inline;
 	}
-	.smText{
+	.smText {
 		display: none;
 	}
 }
 /* tried to make it work with kindle fire HDX Linux */
-@media screen and (max-height: 1300px) and (max-width: 800px){
-	.image{
+@media screen and (max-height: 1300px) and (max-width: 800px) {
+	.image {
 		height: 20vh !important;
 	}
-	.mdText{
+	.mdText {
 		display: none;
 	}
-	.smText{
+	.smText {
 		display: inline;
 	}
-	.btnCtrl{
+	.btnCtrl {
 		position: relative;
 		bottom: -20px;
 	}

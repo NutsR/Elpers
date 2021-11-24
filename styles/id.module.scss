@@ -1,4 +1,4 @@
-.container{
+.container {
 	display: flex;
 	flex-direction: column-reverse;
 }
@@ -7,56 +7,60 @@
 	margin: 0px 5px 20px 0px;
 	order: 1;
 }
-.content{
+.content {
 	background-color: #e1e2e3;
+	border-radius: 5px;
 	color: rgba(110, 112, 114, 1);
 	text-align: center;
+	width: 98vw;
 }
-.map{
+.title {
+	color: rgba(78, 78, 78, 1);
+	font-size: 18px;
+	font-weight: 600;
+	margin: 0 5px 5px;
+	border-bottom: 2.95px solid rgba(0, 0, 0, 0.2);
+
+}
+.map {
 	order: 2;
 }
-.muted{
+.muted {
 	font-weight: 600;
 	color: #696f78;
 }
 .imageCtrl {
-	width: 90vw;
-	margin: auto;
-	margin-top: 10px;
+	
+	width: 95vw !important;
+	margin: 20px 10px;
+	margin-bottom: 0px;
+	> span {
+		position: unset !important;
+		border-radius: 10px;
+	}
 }
-.imageCtrl > span {
-	position: unset !important;
-	height: 100%;
-	border-radius: 10px;
-}
+
 .image {
 	object-fit: contain;
 	width: auto !important;
 	position: relative !important;
 	height: 100% !important;
 }
-.btnEdit{
+.btnEdit {
 	position: relative;
-	left: 75px;
-	> button{
-	
+	> button {
 		padding: 10px 24px;
 	}
-} 
-.price,
-.location{
+}
+.bottom {
 	color: #333;
 	font-weight: 600;
 }
-.textContent{
+.textContent {
 	padding: 0 5px;
 	font-size: 16px;
-	
+	text-align: start;
 	margin-bottom: 5px;
-}
-.hr{
-	border:2.5px solid rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
 }
 @media screen and (min-width: 800px) {
 	.container {
@@ -72,7 +76,7 @@
 		justify-self: end;
 	}
 	.map {
-		margin-top: 12px;
+		margin-top: 22px;
 		grid-area: map;
 	}
 	.reviews {
@@ -80,14 +84,15 @@
 		justify-self: center;
 	}
 	.imageCtrl {
-		width: 65vh;
+		width: 65vh !important;
 	}
 
 	.content {
+		width: 65vh !important;
 		margin-left: 10px;
 	}
 	.title {
-		color: rgba(78,78,78, 1);
+		color: rgba(78, 78, 78, 1);
 		font-size: 20px;
 		font-weight: 600;
 		margin: 0 5px 5px;
@@ -95,8 +100,7 @@
 	.textContent {
 		font-size: 18px;
 	}
-	.price,.location {
-		margin: 0px 10px 5px 10px;
+	.bottom{
+		padding: 10px;
 	}
-	
 }

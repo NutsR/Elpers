@@ -1,15 +1,22 @@
-import Link from "next/link";
 import { getElpers } from "../api/elpers";
 import styles from "@/styles/elper.module.scss";
-import { btnPrimary, btn } from "@/styles/btn.module.scss";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import useSWR, { SWRConfig } from "swr";
 import { useEffect, useState } from "react";
+
+const Camps = dynamic(() => import("@/components/camps/camps"), {
+	loading: () => (
+		<div className="overlay">
+			<div className="loader middle-load" />
+		</div>
+	),
+});
+
 const Map = dynamic(() => import("@/components/mapbox/mapbox"), {
 	loading: () => <div className="loader middle-load"></div>,
 	ssr: false,
 });
+
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 function Post({ fallback, error }) {
 	const [hide, setHidden] = useState(true);
@@ -33,52 +40,9 @@ function Post({ fallback, error }) {
 			<div className={styles.main}>
 				<h2 className={styles.mainTitle}>ElpCamps</h2>
 				{data && data.length > 0 ? (
-					data.map((post) => (
-						<div className={styles.item} key={post._id}>
-							<div className={styles.imageCtrl}>
-								<Image
-									layout="fill"
-									className={styles.image}
-									src={post.images[0].url}
-									alt="post describing"
-								/>
-							</div>
-							<div className={styles.content}>
-								<div className={styles.innerContent}>
-									<h5 className={styles.title}>{post.title}</h5>
-									<hr className={styles.hr} />
-									<span className={styles.description}>
-										<span>
-											<span className={styles.smText}>
-												{post.description.substr(0, 150)}...{" "}
-											</span>
-											<span className={styles.mdText}>
-												{post.description.substr(0, 170)}...{" "}
-											</span>
-											<Link href={`/elpers/${post._id}`} passHref>
-												<a className={styles.decroLink}>Continue Reading...</a>
-											</Link>
-										</span>
-									</span>
-									<div className={styles.btnCtrl}>
-										<Link href={`/elpers/${post._id}`} passHref>
-											<button className={btnPrimary}>View More</button>
-										</Link>
-									</div>
-								</div>
-							</div>
-						</div>
-					))
+					data.map((post) => <Camps styles={styles} post={post} />)
 				) : (
-					<>
-						{!hide ? (
-							<div>Not Found</div>
-						) : (
-							<div className="overlay">
-								<div className="loader middle-load" />
-							</div>
-						)}
-					</>
+					<>{!hide && <div>Not Found</div>}</>
 				)}
 			</div>
 		</SWRConfig>
@@ -104,14 +68,3 @@ export async function getServerSideProps({ req, res }) {
 	}
 }
 export default Post;
-/* const refreshData = (e) => {
-		e.preventDefault();
-		mutate();
-		<button
-					style={{ width: "10%", alignSelf: "end" }}
-					className={btn}
-					onClick={refreshData}
-				>
-					Refresh Data
-				</button>
-	}; */

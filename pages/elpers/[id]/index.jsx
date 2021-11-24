@@ -40,24 +40,21 @@ function PostDetails({ fallback, id }) {
 								src={data.images[0].url}
 								alt="post describing"
 							/>
-							<div className={styles.content}>
-								<hr className={styles.hr} />
-								<h5 className={styles.title}>
-									{data.title} By {data.user.username}{" "}
-									{user && user.userObj?._id === data.user._id && (
-										<span className={styles.btnEdit}>
-											<Link href={`/elpers/${data._id}/edit`} passHref>
-												<button className={btnInfo}>Edit</button>
-											</Link>
-										</span>
-									)}
-								</h5>
+						</div>
+						<div className={styles.content}>
+							<h5 className={styles.title}>
+								{data.title} By {data.user.username}{" "}
+								{user && user.userObj?._id === data.user._id && (
+									<span className={styles.btnEdit}>
+										<Link href={`/elpers/${data._id}/edit`} passHref>
+											<button className={btnInfo}>Edit</button>
+										</Link>
+									</span>
+								)}
+							</h5>
 
-								<div className={styles.textContent}>
-									{data.description}
-									<hr className={styles.hr} />
-								</div>
-
+							<div className={styles.textContent}>{data.description}</div>
+							<div className={styles.bottom}>
 								<div className={styles.price}>
 									AVG Price:{" "}
 									<span className={styles.muted}>
@@ -69,7 +66,6 @@ function PostDetails({ fallback, id }) {
 									ElpCamp Location:{" "}
 									<span className={styles.muted}>{data.location}</span>
 								</div>
-								<hr className={styles.hr} />
 							</div>
 						</div>
 					</div>
