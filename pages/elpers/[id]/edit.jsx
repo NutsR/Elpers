@@ -38,7 +38,7 @@ function EditCamp() {
 				handleSubmit={handleSubmit}
 				value={state}
 				id={data && data._id}
-				title={`Editing ${data.title}`}
+				title={`Editing ${data && data.title}`}
 			/>
 		</>
 	);
