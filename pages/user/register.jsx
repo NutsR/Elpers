@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Router from "next/router";
 import Link from "next/link";
-import useUser from "@/lib/auth/hooks";
+import useUser from "@/lib/hooks/hooks";
 import styles from "@/styles/register.module.scss";
 import { btnSuccess } from "@/styles/btn.module.scss";
 function Register() {

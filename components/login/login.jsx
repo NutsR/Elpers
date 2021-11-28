@@ -1,4 +1,4 @@
-import useUser from "@/lib/auth/hooks";
+import useUser from "@/lib/hooks/hooks";
 import Link from "next/dist/client/link";
 import { useEffect, useState } from "react";
 import styles from "./login.module.scss";

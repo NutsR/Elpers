@@ -2,9 +2,9 @@ import multiparty from "multiparty";
 import fs from "fs";
 import streamifier from "streamifier";
 
-import cloudinary from "../../../lib/cloudinary";
-import dbConnect from "../../../lib/connection";
-import geocodeLocation from "../../../lib/mapbox";
+import cloudinary from "@/lib/cloudinary";
+import dbConnect from "@/lib/connection";
+import geocodeLocation from "@/lib/mapbox";
 import Elper from "../../../models/elpCamp";
 
 export const config = {
@@ -16,7 +16,11 @@ export const config = {
 export const getElpers = async () => {
 	// find all the data in our database
 	await dbConnect();
-	const result = await Elper.find({});
+
+	const result = await Elper.find({}).populate({
+		path: "review",
+		populate: { path: "user" },
+	});
 	const elpCamps = JSON.parse(JSON.stringify(result));
 	return elpCamps;
 };

@@ -1,27 +1,31 @@
 import { useEffect, useReducer } from "react";
 import dynamic from "next/dynamic";
-import { findByIdForEdit } from "../../api/elpers/[id]";
-import useUser from "@/lib/auth/hooks";
+import useUser from "@/lib/hooks/hooks";
 import {
 	reducer,
 	returnHandleChange,
 	returnHandleSubmit,
 } from "@/methods/editHandler";
-import Router from "next/router";
+import { getElpersById } from "@/lib/hooks/elpers";
+import Router, { useRouter } from "next/router";
 import { swalError } from "@/methods/Swal.fire";
 
 const FormInput = dynamic(() => import("@/components/form"));
 
-function EditCamp({ elpCamp }) {
+function EditCamp() {
 	const [user] = useUser();
-	const [state, dispatch] = useReducer(reducer, elpCamp);
+	const { id } = useRouter().query;
+	const [data, { mutate, loading }] = getElpersById(id);
+	console.log(Router);
+	const [state, dispatch] = useReducer(reducer, data);
 	const handleChange = returnHandleChange(dispatch);
-	const handleSubmit = returnHandleSubmit(state, elpCamp._id);
+	const handleSubmit = returnHandleSubmit(state, data._id);
+
 	useEffect(() => {
 		if (user) {
-			if (user.userObj?._id !== state.user) {
+			if (user.userObj?._id !== data.user._id) {
 				swalError({ message: "Not Authorised" });
-				Router.push(`/elpers/${elpCamp._id}`);
+				Router.push(`/elpers/${data._id}`);
 			}
 		} else {
 			swalError({ message: "Not Authorised" });
@@ -33,24 +37,11 @@ function EditCamp({ elpCamp }) {
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 				value={state}
-				id={elpCamp._id}
-				title={`Editing ${elpCamp.title}`}
+				id={data._id}
+				title={`Editing ${data.title}`}
 			/>
 		</>
 	);
 }
-
-export const getServerSideProps = async ({ params: { id }, req, res }) => {
-	res.setHeader(
-		"Cache-Control",
-		"public, s-maxage=10, stale-while-revalidate=59"
-	);
-	const elpCamp = await findByIdForEdit(id);
-	return {
-		props: {
-			elpCamp,
-		},
-	};
-};
 
 export default EditCamp;

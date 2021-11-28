@@ -2,7 +2,7 @@ import Link from "next/dist/client/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "./header.module.scss";
-import useUser from "@/lib/auth/hooks";
+import useUser from "@/lib/hooks/hooks";
 import dynamic from "next/dynamic";
 const LoginForm = dynamic(() => import("@/components/login/login.jsx"));
 const ProfileOpts = dynamic(() => import("@/components/profile/profileOpts"));

@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import dynamic from "next/dynamic";
 import { swalError } from "../../methods/Swal.fire";
-import useUser from "@/lib/auth/hooks";
+import useUser from "@/lib/hooks/hooks";
 import {
 	reducer,
 	initialState,
