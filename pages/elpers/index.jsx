@@ -1,6 +1,6 @@
 import styles from "@/styles/elper.module.scss";
 import dynamic from "next/dynamic";
-import { getElpers } from "@/lib/hooks/elpers";
+import { useGetElpers } from "@/lib/hooks/elpers";
 import { useEffect, useState } from "react";
 
 const Camps = dynamic(() => import("@/components/camps/camps"), {
@@ -22,7 +22,7 @@ function Post() {
 		return () => clearInterval(timer);
 	}, []);
 
-	const [data, { mutate, loading }] = getElpers();
+	const [data, { mutate, loading }] = useGetElpers();
 
 	return (
 		<>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "@/styles/id.module.scss";
 import dynamic from "next/dynamic";
-import { getElpersById } from "@/lib/hooks/elpers";
+import { useElpersById } from "@/lib/hooks/elpers";
 import { useRouter } from "next/router";
 
 const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"), {
@@ -19,7 +19,7 @@ const CampDetails = dynamic(() => import("@/components/camps/camp-details"), {
 
 function PostDetails() {
 	const { id } = useRouter().query;
-	const [data, { mutate, loading }] = getElpersById(id);
+	const [data, { mutate, loading }] = useElpersById(id);
 	const [size, setSize] = useState(true);
 	useEffect(() => {
 		if (typeof window !== "undefined") {

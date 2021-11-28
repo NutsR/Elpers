@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-import { btnInfo } from "@/styles/btn.module.scss";
 import Link from "next/link";
 import useUser from "@/lib/hooks/hooks";
 

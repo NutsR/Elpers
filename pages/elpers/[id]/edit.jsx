@@ -6,7 +6,7 @@ import {
 	returnHandleChange,
 	returnHandleSubmit,
 } from "@/methods/editHandler";
-import { getElpersById } from "@/lib/hooks/elpers";
+import { useElpersById } from "@/lib/hooks/elpers";
 import Router, { useRouter } from "next/router";
 import { swalError } from "@/methods/Swal.fire";
 
@@ -15,7 +15,7 @@ const FormInput = dynamic(() => import("@/components/form"));
 function EditCamp() {
 	const [user] = useUser();
 	const { id } = useRouter().query;
-	const [data, { mutate, loading }] = getElpersById(id);
+	const [data, { mutate, loading }] = useElpersById(id);
 	console.log(Router);
 	const [state, dispatch] = useReducer(reducer, data);
 	const handleChange = returnHandleChange(dispatch);
