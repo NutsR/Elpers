@@ -13,13 +13,13 @@ import { swalError } from "@/methods/Swal.fire";
 const FormInput = dynamic(() => import("@/components/form"));
 
 function EditCamp() {
-	const [user] = useUser();
 	const { id } = useRouter().query;
 	const [data, { mutate, loading }] = useElpersById(id);
-	console.log(Router);
+	const [user] = useUser();
+
 	const [state, dispatch] = useReducer(reducer, data);
 	const handleChange = returnHandleChange(dispatch);
-	const handleSubmit = returnHandleSubmit(state, data._id);
+	const handleSubmit = returnHandleSubmit(state, data && data._id);
 
 	useEffect(() => {
 		if (user) {
@@ -37,7 +37,7 @@ function EditCamp() {
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 				value={state}
-				id={data._id}
+				id={data && data._id}
 				title={`Editing ${data.title}`}
 			/>
 		</>
