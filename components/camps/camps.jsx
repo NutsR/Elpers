@@ -19,7 +19,7 @@ function Camps({ styles, post, handleHover }) {
 			</div>
 			<div className={styles.content}>
 				<div className={styles.innerContent}>
-					<h5 className={styles.title}>{post.title}</h5>
+					<h2 className={styles.title}>{post.title}</h2>
 					<span className={styles.muted}>Location: {post.location}</span>
 					<span className={styles.description}>
 						<span>

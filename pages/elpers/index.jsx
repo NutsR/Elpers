@@ -32,7 +32,7 @@ function Post() {
 				</div>
 			)}
 			<div className={styles.main}>
-				<h2 className={styles.mainTitle}>ElpCamps</h2>
+				<h1 className={styles.mainTitle}>ElpCamps</h1>
 				{data && data.length > 0 ? (
 					data.map((post) => (
 						<>
