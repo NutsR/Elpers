@@ -2,13 +2,9 @@ import Link from "next/link";
 import { btnPrimary } from "@/styles/btn.module.scss";
 import Image from "next/image";
 
-function Camps({ styles, post, handleHover }) {
+function Camps({ styles, post }) {
 	return (
-		<div
-			className={styles.item}
-			onMouseEnter={() => handleHover(true)}
-			onMouseLeave={() => handleHover(false)}
-		>
+		<div className={styles.item}>
 			<div className={styles.imageCtrl}>
 				<Image
 					layout="fill"

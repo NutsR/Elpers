@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
 import dynamic from "next/dynamic";
-import { swalError } from "../../methods/Swal.fire";
+import { swalError } from "@/methods/Swal.fire";
 import useUser from "@/lib/hooks/hooks";
 import {
 	reducer,
@@ -8,7 +8,7 @@ import {
 	returnHandleChange,
 	returnHandleSubmit,
 } from "@/methods/createHandler";
-const FormInput = dynamic(() => import("@/components/form"));
+const FormInput = dynamic(() => import("@/components/forms/form"));
 
 function ElperForm() {
 	const [user] = useUser();

@@ -16,7 +16,6 @@ export const createUser = async (req, res) => {
 	if (!username || !password || !email) {
 		return res.status(400).send("Missing fields");
 	}
-	await dbConnect();
 	const existingUsername = await User.find({ username });
 	const existingEmail = await User.find({ email });
 	if (existingUsername.username || existingEmail.email)

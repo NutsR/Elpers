@@ -24,6 +24,11 @@ class MyDocument extends Document {
 						sizes="57x57"
 						href="/apple-touch-icon-57x57.png"
 					/>
+					<link
+						rel="stylesheet"
+						type="text/css"
+						href="css/starability-growRotate.min.css"
+					/>
 				</Head>
 				<body>
 					<Main />

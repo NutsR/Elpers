@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import useUser from "@/lib/hooks/hooks";
-
+import ReviewForm from "../forms/review";
 function CampDetails({ styles, data, children }) {
 	const [user] = useUser();
 	const [menu, showMenu] = useState(false);
@@ -70,6 +70,7 @@ function CampDetails({ styles, data, children }) {
 			<div className={styles.map}>{children}</div>
 			<div className={styles.reviews}>
 				<h5 className={styles.title}>Reviews</h5>
+				{user && <ReviewForm id={data._id} />}
 				{data.review.map((el) => (
 					<span key={el._id}>{el.review}</span>
 				))}

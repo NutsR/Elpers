@@ -13,7 +13,6 @@ const Camps = dynamic(() => import("@/components/camps/camps"), {
 
 function Post() {
 	const [hide, setHidden] = useState(true);
-	const [reviews, showReviews] = useState(false);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
@@ -36,14 +35,7 @@ function Post() {
 				{data && data.length > 0 ? (
 					data.map((post) => (
 						<>
-							<Camps
-								key={post._id}
-								styles={styles}
-								post={post}
-								handleHover={showReviews}
-							/>
-							{reviews &&
-								post.review.map((el) => <span key={el._id}>{el.review}</span>)}
+							<Camps key={post._id} styles={styles} post={post} />
 						</>
 					))
 				) : (

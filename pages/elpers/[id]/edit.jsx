@@ -10,7 +10,7 @@ import { useElpersById } from "@/lib/hooks/elpers";
 import Router, { useRouter } from "next/router";
 import { swalError } from "@/methods/Swal.fire";
 
-const FormInput = dynamic(() => import("@/components/form"));
+const FormInput = dynamic(() => import("@/components/forms/form"));
 
 function EditCamp() {
 	const { id } = useRouter().query;
