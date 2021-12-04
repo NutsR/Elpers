@@ -16,7 +16,11 @@ function LoginForm({ showLogin }) {
 		};
 		try {
 			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/user/login`,
+				`${
+					(process.env.NODE_ENV === "development" &&
+						process.env.NEXT_PUBLIC_DOMAIN) ||
+					""
+				}/api/user/login`,
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },

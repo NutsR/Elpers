@@ -1,6 +1,6 @@
 import nextConnect from "next-connect";
 import passport from "passport";
-import LocalStrategy from "passport-local";
+
 import User from "../models/user";
 import session from "@/lib/auth/session";
 
