@@ -34,7 +34,7 @@ function PostDetails() {
 					<div className="loader middle-load" />
 				</div>
 			) : (
-				<CampDetails styles={styles} data={data}>
+				<CampDetails styles={styles} data={data} mutate={mutate}>
 					<DetailedMap
 						elpers={data}
 						width={size ? "36vw" : "100vw"}

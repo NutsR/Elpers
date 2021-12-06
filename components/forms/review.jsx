@@ -16,6 +16,7 @@ function ReviewForm({ id }) {
 			review: e.currentTarget.review.value,
 			id,
 		};
+		e.currentTarget.review.value = "";
 		try {
 			const res = await fetch(
 				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/review`,

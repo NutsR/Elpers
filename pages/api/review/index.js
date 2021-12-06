@@ -1,10 +1,10 @@
 import nextConnect from "next-connect";
 import wrapAsync from "@/utils/wrapAsync";
-import { createReview } from "@/controller/review";
+import { createReview, deleteReview } from "@/controller/review";
 import auth from "@/middleware/auth";
 
 const handler = nextConnect();
 
-handler.use(auth).post(wrapAsync(createReview));
+handler.use(auth).post(wrapAsync(createReview)).delete(wrapAsync(deleteReview));
 
 export default handler;
