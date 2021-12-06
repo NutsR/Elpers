@@ -23,8 +23,9 @@ export const updateElpCamp = async () => {
 	return res.status(201).json({ success: true });
 };
 
-export const deleteElpCamp = async () => {
+export const deleteElpCamp = async (req, res) => {
 	const { id } = req.query;
+	console.log("hit");
 	await dbConnect();
 	await Elpers.findByIdAndDelete(id);
 	return res.status(202).json({ success: true });

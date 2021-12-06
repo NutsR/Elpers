@@ -2,7 +2,15 @@ import styles from "@/styles/form.module.scss";
 import { btnSuccess, btnDanger } from "@/styles/btn.module.scss";
 import deleteMethod from "@/methods/delete";
 import { useRouter } from "next/router";
-function FormInput({ handleChange, handleSubmit, value, title, id }) {
+function FormInput({
+	handleChange,
+	handleSubmit,
+	value,
+	title,
+	id,
+	handleBlur,
+	geolocation,
+}) {
 	const router = useRouter();
 	if (!value) {
 		return <div>No ElpCamp Found</div>;
@@ -46,6 +54,7 @@ function FormInput({ handleChange, handleSubmit, value, title, id }) {
 							type="text"
 							minLength="3"
 							name="location"
+							onBlur={handleBlur}
 							className="inputControl"
 							placeholder=" "
 							value={value.location ? value.location : ""}
@@ -53,6 +62,15 @@ function FormInput({ handleChange, handleSubmit, value, title, id }) {
 							onChange={handleChange}
 						/>
 						<span className="placeholderText">Location</span>
+						{geolocation && (
+							<div id="location">
+								<div>
+									<b>Near :</b>
+									<br />
+									<span>{geolocation.place_name}</span>
+								</div>
+							</div>
+						)}
 					</label>
 					<div className={styles.validFeedback}>
 						<h6>Looks good!</h6>
@@ -89,6 +107,7 @@ function FormInput({ handleChange, handleSubmit, value, title, id }) {
 							required
 							onChange={handleChange}
 						/>
+
 						<span className="placeholderText">Cost ₹/day</span>
 					</label>
 					<div className={styles.validFeedback}>
@@ -101,7 +120,6 @@ function FormInput({ handleChange, handleSubmit, value, title, id }) {
 							Upload Image Prefer Landscape images
 						</label>
 						<input
-							autoComplete="off"
 							type="file"
 							className="inputControl"
 							size="60"

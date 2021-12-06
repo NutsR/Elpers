@@ -72,7 +72,12 @@ function CampDetails({ styles, data, children }) {
 				<h5 className={styles.title}>Reviews</h5>
 				{user && <ReviewForm id={data._id} />}
 				{data.review.map((el) => (
-					<span key={el._id}>{el.review}</span>
+					<div key={el._id}>
+						<hr />
+						<div className="starability-result" data-rating={el.rating}></div>
+						<div>{el.user.username}</div>
+						{el.review}
+					</div>
 				))}
 			</div>
 		</div>

@@ -23,7 +23,7 @@ function EditCamp() {
 
 	useEffect(() => {
 		if (user) {
-			if (user.userObj?._id !== data.user._id) {
+			if (data && user.userObj?._id !== data.user._id) {
 				swalError({ message: "Not Authorised" });
 				Router.push(`/elpers/${data._id}`);
 			}
