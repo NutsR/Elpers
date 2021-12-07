@@ -17,8 +17,9 @@ function LoginForm({ showLogin }) {
 		try {
 			const res = await fetch(
 				`${
-					process.env.NODE_ENV === "development" &&
-					process.env.NEXT_PUBLIC_DOMAIN
+					process.env.NODE_ENV === "development"
+						? process.env.NEXT_PUBLIC_DOMAIN
+						: ""
 				}/api/user/login`,
 				{
 					method: "POST",

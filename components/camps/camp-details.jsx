@@ -77,7 +77,7 @@ function CampDetails({ styles, data, mutate, children }) {
 							AVG Price:{" "}
 							<span className={styles.muted}>
 								{data.price}
-								<b>₹</b>
+								<strong>₹</strong>
 							</span>
 						</div>
 						<div className={styles.location}>
@@ -96,21 +96,23 @@ function CampDetails({ styles, data, mutate, children }) {
 						<div className="starability-result" data-rating={el.rating}></div>
 						<div>{el.user.username}</div>
 						<div style={{ maxWidth: "50ch" }}>{el.review}</div>
-						{user.userObj?._id === el.user._id && (
-							<div className={styles.title}>
-								<Image
-									src="/tdicon.png"
-									layout="responsive"
-									width={5}
-									height={5}
-									className={styles.icon}
-									alt="icon"
-									onClick={() =>
-										showReviewOpts({ show: !reviewOpts.show, id: el._id })
-									}
-								/>
-							</div>
-						)}
+						{user
+							? user.userObj?._id === el.user._id && (
+									<div className={styles.title}>
+										<Image
+											src="/tdicon.png"
+											layout="responsive"
+											width={5}
+											height={5}
+											className={styles.icon}
+											alt="icon"
+											onClick={() =>
+												showReviewOpts({ show: !reviewOpts.show, id: el._id })
+											}
+										/>
+									</div>
+							  )
+							: null}
 						{reviewOpts.show
 							? reviewOpts.id === el._id && (
 									<div className={styles.dropdown}>
