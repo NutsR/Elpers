@@ -20,13 +20,21 @@ const CampDetails = dynamic(() => import("@/components/camps/camp-details"), {
 function PostDetails() {
 	const { id } = useRouter().query;
 	const [data, { mutate, loading }] = useElpersById(id);
+	const [nextImg, setNextImg] = useState(0);
 	const [size, setSize] = useState(true);
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			window.innerWidth > 800 ? setSize(true) : setSize(false);
 		}
 	}, []);
-
+	const handleClick = (e) => {
+		console.log(data.images.length);
+		if (nextImg === data.images.length - 1) {
+			setNextImg(0);
+		} else {
+			setNextImg(nextImg + 1);
+		}
+	};
 	return (
 		<>
 			{loading ? (
@@ -34,7 +42,13 @@ function PostDetails() {
 					<div className="loader middle-load" />
 				</div>
 			) : (
-				<CampDetails styles={styles} data={data} mutate={mutate}>
+				<CampDetails
+					styles={styles}
+					data={data}
+					mutate={mutate}
+					nextImg={nextImg}
+					handleClick={handleClick}
+				>
 					<DetailedMap
 						elpers={data}
 						width={size ? "36vw" : "100vw"}

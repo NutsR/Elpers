@@ -4,7 +4,7 @@ import Link from "next/link";
 import useUser from "@/lib/hooks/hooks";
 import ReviewForm from "../forms/review";
 import { swalConfirmation, swalError, swalSuccess } from "@/methods/Swal.fire";
-function CampDetails({ styles, data, mutate, children }) {
+function CampDetails({ styles, data, mutate, nextImg, handleClick, children }) {
 	const [user] = useUser();
 	const [menu, showMenu] = useState(false);
 	const [reviewOpts, showReviewOpts] = useState({ show: false, id: "" });
@@ -29,11 +29,16 @@ function CampDetails({ styles, data, mutate, children }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.card}>
+				{data.images.length > 1 && (
+					<div className={styles.pointer} onClick={handleClick}>
+						{">"}
+					</div>
+				)}
 				<div className={styles.imageCtrl}>
 					<Image
 						className={styles.image}
 						layout="fill"
-						src={data.images[0].url}
+						src={data.images[nextImg].url}
 						alt="post describing"
 					/>
 				</div>

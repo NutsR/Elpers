@@ -1,0 +1,42 @@
+.imageCtrl {
+	margin: unset !important;
+	width: 25vw !important;
+	display: block;
+}
+.image {
+	object-fit: cover;
+	position: relative !important;
+	height: 22vh !important;
+}
+.imageCtrl > span {
+	position: unset !important;
+	border-radius: 7px;
+}
+
+.validFeedback {
+	display: none;
+}
+.customLabel {
+	margin: 10px auto;
+	border: 1px solid #ccc;
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+.inputArea input {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	width: 100%;
+	padding: 10px;
+	border-radius: 10px;
+}
+.inputArea label {
+	display: block;
+}
+
+.inputArea {
+	margin-bottom: 7px;
+	margin-top: 7px;
+}
