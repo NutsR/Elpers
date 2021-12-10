@@ -18,6 +18,7 @@ const handleDelete = async (id) => {
 		swalError(error);
 	}
 };
-export default (id) => {
+const deleteMethod = (id) => {
 	swalConfirmation(handleDelete, id);
 };
+export default deleteMethod;

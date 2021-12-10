@@ -55,10 +55,11 @@ function CampDetails({ data, mutate, children }) {
 										pathname: `/elpers/${data._id}/edit`,
 										query: data._id,
 									}}
+									passHref
 								>
 									<div className={styles.dropDownItem}>Edit</div>
 								</Link>
-								<Link href={`/elpers/${data._id}/upload`}>
+								<Link href={`/elpers/${data._id}/upload`} passHref>
 									<div className={styles.dropDownItem}>Upload Images</div>
 								</Link>
 							</div>

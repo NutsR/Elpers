@@ -40,7 +40,7 @@ function LoginForm({ showLogin }) {
 		if (user) {
 			showLogin(false);
 		}
-	}, [user]);
+	}, [user, showLogin]);
 	Router.events.on("routeChangeComplete", () => showLogin(false));
 	return (
 		<div className={styles.container}>

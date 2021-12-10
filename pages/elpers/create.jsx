@@ -27,7 +27,8 @@ function ElperForm() {
 				message: "Creating ElpCamp disabled reason: NOT LOGGED IN",
 			});
 		} else state.user = user.userObj?._id;
-	}, [user]);
+	}, [user, state]);
+	console.log(state);
 	// Render form
 	return (
 		<>

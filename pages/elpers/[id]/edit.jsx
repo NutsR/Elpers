@@ -30,7 +30,7 @@ function EditCamp() {
 		} else {
 			swalError({ message: "Not Authorised" });
 		}
-	}, [user]);
+	}, [user, data]);
 	return (
 		<>
 			<FormInput

@@ -4,7 +4,7 @@
 }
 
 .card {
-	margin: 0px 5px 20px 0px;
+	margin: 0 5px 20px 0;
 	order: 1;
 }
 .content {
@@ -39,7 +39,7 @@
 .imageCtrl {
 	width: 95vw !important;
 	margin: 20px 10px;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	> span {
 		position: unset !important;
 		border-radius: 10px;
@@ -82,12 +82,12 @@
 	background-color: #f9f9f9;
 	cursor: pointer;
 	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 	z-index: 10;
 }
 .dropDownItem {
 	text-align: start;
-	margin: 5px 0px;
+	margin: 5px 0;
 	padding: 7.5px 16px;
 
 	&:hover {

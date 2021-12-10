@@ -14,7 +14,7 @@ function Camps({ styles, post }) {
 			});
 			setReviews(Math.round(total / length));
 		}
-	});
+	}, [post]);
 	return (
 		<div className={styles.item}>
 			<div className={styles.imageCtrl}>
