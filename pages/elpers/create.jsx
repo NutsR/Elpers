@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from "react";
 import dynamic from "next/dynamic";
 import { swalError } from "@/methods/Swal.fire";
 import useUser from "@/lib/hooks/hooks";
-import { useGetElpers } from "@/lib/hooks/elpers";
+
 import {
 	reducer,
 	initialState,
@@ -15,10 +15,9 @@ const FormInput = dynamic(() => import("@/components/forms/form"));
 function ElperForm() {
 	const [user] = useUser();
 	const [geolocation, setGeolocation] = useState();
-	const [data, { mutate }] = useGetElpers();
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const handleChange = returnHandleChange(dispatch);
-	const handleSubmit = returnHandleSubmit(state, mutate);
+	const handleSubmit = returnHandleSubmit(state);
 	const handleBlur = returnBlueHandler(state, setGeolocation);
 
 	useEffect(() => {

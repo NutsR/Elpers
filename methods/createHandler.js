@@ -60,7 +60,7 @@ export const returnHandleChange = (dispatch) => {
 	};
 };
 
-export const returnHandleSubmit = (state, mutate) => {
+export const returnHandleSubmit = (state) => {
 	return async (e) => {
 		e.preventDefault();
 		if (!state.user)
@@ -101,7 +101,7 @@ export const returnHandleSubmit = (state, mutate) => {
 			const data = await res.json();
 			if ((data.success = true)) {
 				swalSuccess();
-				mutate("/api/elpers");
+
 				Router.push("/elpers");
 			}
 		} catch (err) {

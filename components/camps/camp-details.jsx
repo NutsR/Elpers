@@ -2,28 +2,21 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import useUser from "@/lib/hooks/hooks";
+import styles from "@/styles/id.module.scss";
 import ReviewForm from "../forms/review";
-import { swalConfirmation, swalError, swalSuccess } from "@/methods/Swal.fire";
-function CampDetails({ styles, data, mutate, nextImg, handleClick, children }) {
+import ReviewDetails from "../review/reviewdetails";
+
+function CampDetails({ data, mutate, children }) {
 	const [user] = useUser();
 	const [menu, showMenu] = useState(false);
-	const [reviewOpts, showReviewOpts] = useState({ show: false, id: "" });
-	const handleDelete = async (id) => {
-		try {
-			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/review`,
-				{
-					method: "delete",
-					body: JSON.stringify({ id }),
-				}
-			);
-			const data = await res.json();
-			if (data) {
-				swalSuccess();
-				mutate();
-			}
-		} catch (err) {
-			swalError(err);
+	const [nextImg, setNextImg] = useState(0);
+
+	const handleClick = () => {
+		console.log(data.images.length);
+		if (nextImg === data.images.length - 1) {
+			setNextImg(0);
+		} else {
+			setNextImg(nextImg + 1);
 		}
 	};
 	return (
@@ -96,43 +89,8 @@ function CampDetails({ styles, data, mutate, nextImg, handleClick, children }) {
 			<div className={styles.reviews}>
 				<h5 className={styles.title}>Reviews</h5>
 				{user && <ReviewForm id={data._id} />}
-				{data.review.map((el) => (
-					<div key={el._id}>
-						<div className="starability-result" data-rating={el.rating}></div>
-						<div>{el.user.username}</div>
-						<div style={{ maxWidth: "50ch" }}>{el.review}</div>
-						{user
-							? user.userObj?._id === el.user._id && (
-									<div className={styles.title}>
-										<Image
-											src="/tdicon.png"
-											layout="responsive"
-											width={5}
-											height={5}
-											className={styles.icon}
-											alt="icon"
-											onClick={() =>
-												showReviewOpts({ show: !reviewOpts.show, id: el._id })
-											}
-										/>
-									</div>
-							  )
-							: null}
-						{reviewOpts.show
-							? reviewOpts.id === el._id && (
-									<div className={styles.dropdown}>
-										<div className={styles.dropDownItem}>Edit</div>
-
-										<div
-											onClick={() => swalConfirmation(handleDelete, el._id)}
-											className={styles.dropDownItem}
-										>
-											Delete
-										</div>
-									</div>
-							  )
-							: null}
-					</div>
+				{data.review.map((el, i) => (
+					<ReviewDetails data={el} key={i} mutate={mutate} />
 				))}
 			</div>
 		</div>

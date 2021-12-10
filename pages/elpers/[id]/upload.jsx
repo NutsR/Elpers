@@ -9,12 +9,12 @@ function Upload() {
 	const [loader, setLoader] = useState(false);
 	const [imgDel, setImgDel] = useState([]);
 	const handleChange = async (e) => {
+		setLoader(true);
 		let formdata = new FormData();
 		for (let i = 0; i < e.target.files.length; i++) {
 			formdata.append(`photos`, e.target.files[i]);
 		}
 		formdata.append("elpers", JSON.stringify({ key: "be value" }));
-		setLoader(true);
 		const res = await fetch(
 			`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/elpers/${data._id}`,
 			{

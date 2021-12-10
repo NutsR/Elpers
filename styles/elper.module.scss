@@ -31,6 +31,7 @@
 	grid-template-columns: 1fr 2fr;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	position: relative;
 }
 .item:hover {
 	box-shadow: unset;
@@ -70,6 +71,9 @@
 	width: 100%;
 	border-bottom: 2.95px solid rgba(0, 0, 0, 0.2);
 }
+.btnCtrl {
+	position: absolute;
+}
 @media screen and (min-width: 800px) {
 	.main {
 		display: flex;
@@ -83,6 +87,7 @@
 		display: table;
 		table-layout: auto;
 		border-radius: 10px;
+		position: relative;
 	}
 	.item:hover {
 		box-shadow: 8px 8px 16px 8px rgba(0, 0, 0, 0.2);
@@ -118,10 +123,7 @@
 	.description {
 		height: 11vh;
 	}
-	.btnCtrl {
-		position: relative;
-		bottom: -50px;
-	}
+
 	.smText {
 		display: none;
 	}

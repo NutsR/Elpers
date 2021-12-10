@@ -34,7 +34,6 @@ function ReviewForm({ id }) {
 			swalError(err);
 		}
 	};
-	console.log(rating);
 	return (
 		<>
 			<form onSubmit={handleSubmit} className={styles.reviewForm}>

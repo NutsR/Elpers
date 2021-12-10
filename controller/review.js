@@ -16,7 +16,6 @@ export const createReview = async (req, res) => {
 export const deleteReview = async (req, res) => {
 	await dbConnect();
 	const { id } = JSON.parse(req.body);
-	console.log(id);
 	await Review.findByIdAndDelete(id);
 	res.status(200).json({ success: true });
 };

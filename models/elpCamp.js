@@ -7,7 +7,10 @@ const imageSchema = new Schema({
 	publicId: String,
 });
 imageSchema.virtual("thumbnail").get(function () {
-	return this.url.replace("/upload", "/upload/w_200");
+	return this.url.replace(
+		"/upload",
+		"/upload/ar_4:3,c_fill/c_scale,w_auto/dpr_auto/q_70"
+	);
 });
 const opts = { toJSON: { virtuals: true } };
 const elperSchema = new Schema(

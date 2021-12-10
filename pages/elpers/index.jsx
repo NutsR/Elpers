@@ -3,13 +3,7 @@ import dynamic from "next/dynamic";
 import { useGetElpers } from "@/lib/hooks/elpers";
 import { useEffect, useState } from "react";
 
-const Camps = dynamic(() => import("@/components/camps/camps"), {
-	loading: () => (
-		<div className="overlay">
-			<div className="loader middle-load" />
-		</div>
-	),
-});
+import Camps from "@/components/camps/camps";
 
 function Post() {
 	const [hide, setHidden] = useState(true);
@@ -33,9 +27,9 @@ function Post() {
 			<div className={styles.main}>
 				<h1 className={styles.mainTitle}>ElpCamps</h1>
 				{data && data.length > 0 ? (
-					data.map((post) => (
+					data.map((post, i) => (
 						<>
-							<Camps key={post._id} styles={styles} post={post} />
+							<Camps key={i} styles={styles} post={post} />
 						</>
 					))
 				) : (
