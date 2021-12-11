@@ -1,4 +1,4 @@
-import useUser from "@/lib/auth/hooks";
+import useUser from "@/lib/hooks/hooks";
 import Link from "next/dist/client/link";
 import { useEffect, useState } from "react";
 import styles from "./login.module.scss";
@@ -16,7 +16,11 @@ function LoginForm({ showLogin }) {
 		};
 		try {
 			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_DOMAIN || ""}/api/user/login`,
+				`${
+					process.env.NODE_ENV === "development"
+						? process.env.NEXT_PUBLIC_DOMAIN
+						: ""
+				}/api/user/login`,
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -36,7 +40,7 @@ function LoginForm({ showLogin }) {
 		if (user) {
 			showLogin(false);
 		}
-	}, [user]);
+	}, [user, showLogin]);
 	Router.events.on("routeChangeComplete", () => showLogin(false));
 	return (
 		<div className={styles.container}>

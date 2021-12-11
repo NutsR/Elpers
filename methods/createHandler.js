@@ -1,6 +1,6 @@
 import Router from "next/router";
 import { swalSuccess, swalError } from "./Swal.fire";
-
+import geocodeLocation, { reverseGeoCode } from "@/lib/mapbox";
 export const initialState = {
 	title: "",
 	location: "",
@@ -24,6 +24,23 @@ export const reducer = (state, action) => {
 		default:
 			return { state };
 	}
+};
+export const returnBlueHandler = (state, setGeolocation) => {
+	return async () => {
+		if (state.location.length > 1) {
+			const geoLocation = await geocodeLocation(state.location);
+			if (geoLocation.body.features.length) {
+				const place = await reverseGeoCode(
+					geoLocation.body.features[0].geometry.coordinates
+				);
+				setGeolocation(
+					place.body.features.length ? place.body.features[0] : "Not Found"
+				);
+			} else {
+				swalError({ message: "Location is invalid" });
+			}
+		}
+	};
 };
 
 export const returnHandleChange = (dispatch) => {
@@ -84,6 +101,7 @@ export const returnHandleSubmit = (state) => {
 			const data = await res.json();
 			if ((data.success = true)) {
 				swalSuccess();
+
 				Router.push("/elpers");
 			}
 		} catch (err) {

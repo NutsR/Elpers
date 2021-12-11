@@ -3,7 +3,10 @@
 	margin-left: 20px;
 	margin-right: 20px;
 }
+
 .mainTitle {
+	margin: unset;
+	margin-top: 70px;
 	text-align: center;
 }
 .imageCtrl {
@@ -28,6 +31,7 @@
 	grid-template-columns: 1fr 2fr;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	position: relative;
 }
 .item:hover {
 	box-shadow: unset;
@@ -42,7 +46,8 @@
 }
 .description {
 	display: block;
-	color: rgba(110, 112, 114, 1);
+	color: #555759;
+	font-size: 16.4px;
 	height: 21vh;
 }
 
@@ -51,6 +56,7 @@
 }
 .btnCtrl {
 	bottom: 0;
+	position: absolute;
 }
 .mdText {
 	display: none;
@@ -61,7 +67,7 @@
 
 .muted {
 	font-weight: 600;
-	color: #696f78;
+	color: #474b52;
 	display: block;
 	width: 100%;
 	border-bottom: 2.95px solid rgba(0, 0, 0, 0.2);
@@ -79,6 +85,7 @@
 		display: table;
 		table-layout: auto;
 		border-radius: 10px;
+		position: relative;
 	}
 	.item:hover {
 		box-shadow: 8px 8px 16px 8px rgba(0, 0, 0, 0.2);
@@ -114,10 +121,7 @@
 	.description {
 		height: 11vh;
 	}
-	.btnCtrl {
-		position: relative;
-		bottom: -50px;
-	}
+
 	.smText {
 		display: none;
 	}

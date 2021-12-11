@@ -7,7 +7,9 @@
 			"@/lib/*": ["lib/*"],
 			"@/models/*": ["models/*"],
 			"@/methods/*": ["methods/*"],
-			"@/middleware/*": ["middleware/*"]
+			"@/middleware/*": ["middleware/*"],
+			"@/utils/*": ["utils/*"],
+			"@/controller/*": ["controller/*"]
 		}
 	}
 }

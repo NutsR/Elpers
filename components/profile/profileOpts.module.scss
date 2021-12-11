@@ -1,0 +1,14 @@
+.dropDown{
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    right: 10px;
+    top: 61px;
+    padding: 15px 32px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    background-color: white;
+    border: 1px solid aliceblue;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}

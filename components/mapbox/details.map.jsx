@@ -33,6 +33,8 @@ function DetailedMap({ elpers, height, width, token }) {
 				{...viewport}
 				width={width}
 				height={height}
+				minZoom={3}
+				maxZoom={19}
 				onViewportChange={setViewport}
 				mapStyle="mapbox://styles/mapbox/dark-v10?optimize=true"
 			>

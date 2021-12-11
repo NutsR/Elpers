@@ -1,20 +1,21 @@
-import { getElperById } from "../../api/elpers/[id]";
-import useSWR, { SWRConfig } from "swr";
 import { useEffect, useState } from "react";
-import styles from "@/styles/id.module.scss";
-import { btn, btnInfo } from "@/styles/btn.module.scss";
-import Link from "next/link";
-import Image from "next/image";
+import { useElpersById } from "@/lib/hooks/elpers";
+import { useRouter } from "next/router";
+import CampDetails from "@/components/camps/camp-details";
 import dynamic from "next/dynamic";
-import useUser from "@/lib/auth/hooks";
 const DetailedMap = dynamic(() => import("@/components/mapbox/details.map"), {
-	loading: () => <div className="loader"></div>,
 	ssr: false,
+	loading: () => (
+		<div className="overlay">
+			<div className="loader middle-load" />
+		</div>
+	),
 });
-const fetcher = (url) => fetch(url).then((r) => r.json());
-function PostDetails({ fallback, id }) {
-	const [user] = useUser();
-	const { data, error } = useSWR(`/api/elpers/${id}`, fetcher);
+
+function PostDetails() {
+	const { id } = useRouter().query;
+	const [data, { mutate, loading }] = useElpersById(id);
+
 	const [size, setSize] = useState(true);
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -23,94 +24,23 @@ function PostDetails({ fallback, id }) {
 	}, []);
 
 	return (
-		<SWRConfig fallback={fallback}>
-			{!data ? (
+		<>
+			{loading ? (
 				<div className="overlay">
 					<div className="loader middle-load" />
 				</div>
-			) : error ? (
-				<div>error </div>
 			) : (
-				<div className={styles.container}>
-					<div className={styles.card}>
-						<div className={styles.imageCtrl}>
-							<Image
-								className={styles.image}
-								layout="fill"
-								src={data.images[0].url}
-								alt="post describing"
-							/>
-						</div>
-						<div className={styles.content}>
-							<h5 className={styles.title}>
-								{data.title} By {data.user.username}{" "}
-								{user && user.userObj?._id === data.user._id && (
-									<span className={styles.btnEdit}>
-										<Link href={`/elpers/${data._id}/edit`} passHref>
-											<button className={btnInfo}>Edit</button>
-										</Link>
-									</span>
-								)}
-							</h5>
-
-							<div className={styles.textContent}>{data.description}</div>
-							<div className={styles.bottom}>
-								<div className={styles.price}>
-									AVG Price:{" "}
-									<span className={styles.muted}>
-										{data.price}
-										<b>₹</b>
-									</span>
-								</div>
-								<div className={styles.location}>
-									ElpCamp Location:{" "}
-									<span className={styles.muted}>{data.location}</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className={styles.map}>
-						<DetailedMap
-							elpers={data}
-							width={size ? "36vw" : "100vw"}
-							height={size ? "40.6vh" : "30vh"}
-							token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-						/>
-					</div>
-					<div className={styles.reviews}>
-						<h5 className={styles.title}>Reviews</h5>
-						{data.review.map((el) => (
-							<span key={el._id}>{el.review}</span>
-						))}
-					</div>
-				</div>
+				<CampDetails data={data} mutate={mutate}>
+					<DetailedMap
+						elpers={data}
+						width={size ? "36vw" : "100vw"}
+						height={size ? "40.6vh" : "30vh"}
+						token={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+					/>
+				</CampDetails>
 			)}
-		</SWRConfig>
+		</>
 	);
-}
-
-export async function getServerSideProps({ params: { id }, req, res }) {
-	res.setHeader(
-		"Cache-Control",
-		"public, s-maxage=10, stale-while-revalidate=59"
-	);
-	try {
-		const elpCamp = await getElperById(id);
-		return {
-			props: {
-				id,
-				fallback: {
-					[`/api/elpers/${id}`]: elpCamp,
-				},
-			},
-		};
-	} catch (err) {
-		return {
-			props: {
-				err,
-			},
-		};
-	}
 }
 
 export default PostDetails;

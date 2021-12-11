@@ -1,8 +1,20 @@
 import Link from "next/link";
 import { btnPrimary } from "@/styles/btn.module.scss";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 function Camps({ styles, post }) {
+	const [reviews, setReviews] = useState(0);
+	useEffect(() => {
+		if (post && post.review.length) {
+			let total = 0;
+			let length = post.review.length;
+			post.review.forEach((review) => {
+				total += review.rating;
+			});
+			setReviews(Math.round(total / length));
+		}
+	}, [post]);
 	return (
 		<div className={styles.item}>
 			<div className={styles.imageCtrl}>
@@ -15,8 +27,15 @@ function Camps({ styles, post }) {
 			</div>
 			<div className={styles.content}>
 				<div className={styles.innerContent}>
-					<h5 className={styles.title}>{post.title}</h5>
-					<span className={styles.muted}>Location: {post.location}</span>
+					<h2 className={styles.title}>{post.title}</h2>
+
+					<span className={styles.muted}>
+						Location: {post.location}
+						<div
+							className="starability-result"
+							data-rating={reviews}
+						></div>{" "}
+					</span>
 					<span className={styles.description}>
 						<span>
 							<span className={styles.smText}>
