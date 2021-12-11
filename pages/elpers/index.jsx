@@ -27,11 +27,7 @@ function Post() {
 			<div className={styles.main}>
 				<h1 className={styles.mainTitle}>ElpCamps</h1>
 				{data && data.length > 0 ? (
-					data.map((post, i) => (
-						<>
-							<Camps key={i} styles={styles} post={post} />
-						</>
-					))
+					data.map((post, i) => <Camps key={i} styles={styles} post={post} />)
 				) : (
 					<>{!hide && <div>Not Found</div>}</>
 				)}

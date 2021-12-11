@@ -4,7 +4,7 @@ import MapGL, { Marker, Popup } from "react-map-gl";
 import styles from "./mapbox.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-function Map({ elpers, token }) {
+function Map({ elpers, token, viewport, setViewport }) {
 	const [size, setSize] = useState(true);
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -12,14 +12,10 @@ function Map({ elpers, token }) {
 		}
 	}, []);
 	const [popupInfo, setPopupInfo] = useState(null);
-	const [viewport, setViewport] = useState({
-		latitude: elpers[0].geometry.coordinates[1],
-		longitude: elpers[0].geometry.coordinates[0],
-		zoom: 8,
-	});
 
 	const markers = useMemo(
 		() =>
+			elpers &&
 			elpers.map((camp) => (
 				<div key={camp._id}>
 					<Marker
@@ -39,10 +35,12 @@ function Map({ elpers, token }) {
 			<MapGL
 				mapboxApiAccessToken={token}
 				{...viewport}
-				width="98.8vw"
-				height={size ? "65vh" : "33.5vh"}
+				width={size ? "40.8vw" : "79.8vw"}
+				height={size ? "45vh" : "33.5vh"}
 				onViewportChange={setViewport}
-				mapStyle="mapbox://styles/mapbox/dark-v10?optimize=true"
+				mapStyle="mapbox://styles/mapbox/streets-v11?optimize=true"
+				minZoom={3}
+				maxZoom={40}
 			>
 				{markers}
 				{popupInfo && (
@@ -59,8 +57,8 @@ function Map({ elpers, token }) {
 								<b>{popupInfo.title}</b>
 							</div>
 							<Image
-								width={50}
-								height={50}
+								width={25}
+								height={25}
 								layout={"responsive"}
 								src={popupInfo.images[0].url}
 								alt="location"

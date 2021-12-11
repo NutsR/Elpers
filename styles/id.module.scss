@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	flex-direction: column-reverse;
+	padding-bottom: 6rem;
 }
 
 .card {
@@ -10,13 +11,13 @@
 .content {
 	background-color: #e1e2e3;
 	border-radius: 5px;
-	color: rgba(110, 112, 114, 1);
+	color: black;
 	text-align: center;
 	width: 98vw;
 }
 .title {
 	> h5 {
-		color: rgba(78, 78, 78, 1);
+		color: black;
 		font-size: 18px;
 		font-weight: 600;
 	}
@@ -34,7 +35,7 @@
 }
 .muted {
 	font-weight: 600;
-	color: #696f78;
+	color: black;
 }
 .imageCtrl {
 	width: 95vw !important;

@@ -1,12 +1,13 @@
-.footer{
-    text-align: center;
-    font-size: 17px;
-    color: #accdf2;
+.footer {
+	text-align: center;
+	font-size: 17px;
+	color: #accdf2;
+	padding: 6px;
 
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 6px;
-    background-image: linear-gradient(to right, #007bff, #0037ff);
+	position: absolute;
+	right: 0;
+	bottom: -10px;
+	left: 0;
+
+	background-image: linear-gradient(to right, #007bff, #0037ff);
 }

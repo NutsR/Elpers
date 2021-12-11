@@ -2,6 +2,7 @@
 	display: grid;
 	margin-left: 20px;
 	margin-right: 20px;
+	padding-bottom: 6rem;
 }
 
 .mainTitle {
@@ -46,13 +47,13 @@
 }
 .description {
 	display: block;
-	color: #555759;
+	color: black;
 	font-size: 16.4px;
 	height: 21vh;
 }
 
 .decroLink {
-	color: #0fadcc;
+	color: #0b6172;
 }
 .btnCtrl {
 	bottom: 0;
@@ -67,7 +68,7 @@
 
 .muted {
 	font-weight: 600;
-	color: #474b52;
+	color: black;
 	display: block;
 	width: 100%;
 	border-bottom: 2.95px solid rgba(0, 0, 0, 0.2);
