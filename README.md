@@ -21,7 +21,5 @@ Will be learning typescript on the way aswell and more on styling it better
 
 
 
-## You can also help me get better
-reach out to me via issues or probably discord my username is Nuts#4008 if you like to help me learn more about optimizing the code 
-Thank you if you reach out to me 
+
 
